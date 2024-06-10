@@ -14,6 +14,7 @@ class Category(models.Model):
 
 class Business(models.Model):
     # Model that represents a business
+    business_id = models.AutoField(primary_key=True, default=0)
     name = models.CharField(max_length=255)
     owner = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='business')
     address = models.CharField(max_length=255)
@@ -21,8 +22,8 @@ class Business(models.Model):
     email = models.EmailField(max_length=255)
     website = models.URLField(max_length=255)
     description = models.TextField()
-    logo = models.ImageField(upload_to='business_logos/')
-    categories = models.ManyToManyField(Category, related_name='businesses')
+    logo = models.ImageField(upload_to='business_logos/', blank=True, null=True)
+    categories = models.ManyToManyField(Category, related_name='businesses', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     archived = models.BooleanField(default=False)

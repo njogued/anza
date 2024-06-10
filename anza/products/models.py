@@ -3,6 +3,7 @@ from business.models import Business, Category
 from users.models import CustomUser
 
 class Product(models.Model):
+    product_id = models.AutoField(primary_key=True, default=0)
     name = models.CharField(max_length=255)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
