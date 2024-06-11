@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, views
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from django.views.generic.detail import DetailView
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .models import CustomUser
+from django.http import Http404
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
@@ -25,3 +28,15 @@ class LoginView(views.LoginView):
                 login(request, user)
                 return redirect("home")
         return render(request, self.template_name, {"form": form})
+    
+class UserDetailView(DetailView):
+    model = CustomUser
+    template_name = "user_details.html"
+    context_object_name = 'user_profile'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    def get_object(self, queryset=None):
+        try:
+            return super().get_object(queryset)
+        except CustomUser.DoesNotExist:
+            raise Http404("User not found")
