@@ -2,10 +2,10 @@
 A Django web app.
 
 ### Apps
-Users  
-Business  
-Orders  
-Products  
+- Users  
+- Business  
+- Orders  
+- Products  
 
 ### Users
 - Handles user registration, login & logout
