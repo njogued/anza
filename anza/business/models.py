@@ -24,7 +24,7 @@ class Business(models.Model):
     description = models.TextField()
     logo = models.ImageField(upload_to='business_logos/', blank=True, null=True)
     categories = models.ManyToManyField(Category, related_name='businesses', blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
     archived = models.BooleanField(default=False)
 
