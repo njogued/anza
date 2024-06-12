@@ -1,2 +1,2 @@
 anza/media/*
-../dbsqlite3
+../db.sqlite3
