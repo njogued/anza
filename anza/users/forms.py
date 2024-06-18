@@ -11,14 +11,14 @@ class CustomUserCreationForm(UserCreationForm):
     # password = forms.CharField(max_length=255, required=True, widget=forms.PasswordInput)
     class Meta:
         model = CustomUser
-        fields = ('email', 'first_name', 'last_name', 'username', 'phone_number', 'profile_picture', 'business_name')
+        fields = ('email', 'first_name', 'last_name', 'username', 'phone_number', 'profile_picture')
 
 
 class CustomUserChangeForm(UserChangeForm):
     # A custom user form to handle user changes
     class Meta:
         model = CustomUser
-        fields = ('first_name', 'last_name', 'username', 'phone_number', 'profile_picture', 'business_name')
+        fields = ('first_name', 'last_name', 'username', 'phone_number', 'profile_picture')
 
 class CustomAuthenticationForm(forms.ModelForm):
     # A custom user form to handle user login

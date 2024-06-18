@@ -7,3 +7,9 @@ Creating user models - https://learndjango.com/tutorials/django-custom-user-mode
 
 Authentication views: https://docs.djangoproject.com/en/5.0/topics/auth/default/
 
+Resetting database on model update:
+- Delete db.sqlite3 file
+- Run: find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+        # find . -path "*/migrations/*.pyc"  -delete  
+- python manage.py makemigrations 
+- python manage.py migrate

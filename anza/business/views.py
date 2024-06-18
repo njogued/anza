@@ -14,7 +14,9 @@ class CreateBusinessView(LoginRequiredMixin, CreateView):
         curr_user = request.user
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            form.save(curr_user)
+            business = form.save(commit=False)
+            business.owner = curr_user
+            business.save()
             return redirect(self.success_url)
         return render(request, self.template_name, {"form": form})
     model = Business

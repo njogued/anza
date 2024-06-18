@@ -16,7 +16,7 @@ class Business(models.Model):
     # Model that represents a business
     business_id = models.AutoField(primary_key=True, default=0)
     name = models.CharField(max_length=255)
-    owner = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='business')
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='businesses')
     address = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
     email = models.EmailField(max_length=255)
