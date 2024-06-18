@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
+from django.urls import reverse
 from .models import Business
 from .forms import CreateBusinessForm
 from django.urls import reverse_lazy
@@ -18,7 +19,8 @@ class CreateBusinessView(LoginRequiredMixin, CreateView):
             business = form.save(commit=False)
             business.owner = curr_user
             business.save()
-            return redirect(self.success_url)
+            success_url = reverse('detail_business', kwargs={'business_id': business.business_id})
+            return redirect(success_url)
         return render(request, self.template_name, {"form": form})
     model = Business
     form_class = CreateBusinessForm
@@ -30,6 +32,7 @@ class BusinessDetailView(DetailView):
     model = Business
     template_name = "detail_business.html"
     context_object_name = "business"
+    pk_url_kwarg = 'business_id'
 
 class BusinessUpdateView(CreateView):
     model = Business

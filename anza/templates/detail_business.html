@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Create Business{% endblock %}
+
+{% block content %}
+<p>Address: {{ business.address }}</p>
+<p>Phone Number: {{ business.phone_number }}</p>
+<p>Email: {{ business.email }}</p>
+<p>Website: <a href="{{ business.website }}">{{ business.website }}</a></p>
+<p>Description: {{ business.description }}</p>
+{% if business.logo %}
+<p><img src="{{ business.logo.url }}" alt="{{ business.name }} Logo"></p>
+{% endif %}
+<p>Categories: 
+    {% for category in business.categories.all %}
+    {{ category.name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+<p>Created At: {{ business.created_at }}</p>
+<p>Updated At: {{ business.updated_at }}</p>
+<p>Archived: {{ business.archived }}</p>
+
+<h1>{{ business.name }}</h1>
+{% endblock %}
