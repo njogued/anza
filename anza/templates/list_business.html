@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Create Business{% endblock %}
+
+{% block content %}
+
+<h2>List of Businesses</h2>
+<ul>
+  {% for business in businesses %}
+    <li>{{ business.name }}</li>
+  {% endfor %}
+
+{% endblock %}

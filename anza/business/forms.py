@@ -13,3 +13,9 @@ class CreateBusinessForm(forms.ModelForm):
     #     if commit:
     #         business.save()
     #     return business
+
+class BusinessUpdateForm(forms.ModelForm):
+    # A custom form to handle business updates
+    class Meta:
+        model = Business
+        fields = ('name', 'address', 'phone_number', 'email', 'website', 'description', 'logo', 'categories')
