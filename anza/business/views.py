@@ -9,6 +9,8 @@ from django.views.generic.list import ListView
 from django.http import HttpResponseForbidden, HttpResponse, HttpResponseRedirect
 from .models import Business
 from .forms import CreateBusinessForm, BusinessUpdateForm
+from products.models import Product, ProductImage
+from products.forms import CreateProductForm, ProductImageForm
 
 # Create your views here.
 class CreateBusinessView(LoginRequiredMixin, CreateView):
@@ -86,9 +88,7 @@ class BusinessUpdateView(UpdateView):
         return super().dispatch(request, *args, **kwargs)
     
     def form_valid(self, form):
-        curr_user = self.request.user
-        business = form.save(commit=False)
-        business.owner = curr_user
+        business = form.save()
         business.save()
         return redirect(self.get_success_url())
 
@@ -115,3 +115,32 @@ class BusinessDeleteView(View):
         business.archived = True
         business.save()
         return redirect(self.success_url)
+    
+class CreateProductView(LoginRequiredMixin, CreateView):
+    def get(self, request):
+        # Provide the user with a form to create a new product
+        product_form = self.form_class()
+        image_form = ProductImageForm()
+        return render(request, self.template_name, {"product_form": product_form, "image_form": image_form})
+    
+    def post(self, request):
+        # Handle the form submission
+        curr_user = request.user
+        business_id = self.kwargs.get('business_id')
+        business = Business.objects.get(business_id=business_id)
+        product_form = self.form_class(request.POST, request.FILES)
+        if business.owner != curr_user:
+            return HttpResponseForbidden("You are not allowed to create product for this business")
+        if product_form.is_valid():
+            product = product_form.save()
+            images = request.FILES.getlist('image')
+            for image in images:
+                ProductImage.objects.create(product=product, image=image)
+            success_url = reverse('detail_product', kwargs={'product_id': product.product_id})
+            return redirect(success_url)
+        return render(request, self.template_name, {"product_form": product_form, "image_form": ProductImageForm()})
+    model = Product
+    form_class = CreateProductForm
+    success_url = reverse_lazy("home")
+    template_name = "create_product.html"
+    login_url = "/users/login"
