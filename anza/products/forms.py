@@ -1,5 +1,6 @@
 from .models import Product
 from django import forms
+from .widgets import CustomClearableFileInput
 
 class CreateProductForm(forms.ModelForm):
     # A custom form to handle product creation
@@ -17,6 +18,9 @@ class ProductImageForm(forms.ModelForm):
     # A custom form to handle product image uploads
     class Meta:
         model = Product
-        fields = ('image',)
+        fields = ['image']
+        widgets = {
+            'image': CustomClearableFileInput(),
+        }
 
-    image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    image = forms.ImageField(widget=CustomClearableFileInput())
