@@ -7,11 +7,11 @@
 <h1>{{ user_profile.name }}</h1>
 <p>Email: {{ user_profile.email }}</p>
 {% if user_profile.profile_picture %}
-<img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture">
+<img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" style="max-height: 40px">
 {% else %}
 <img src="../media/profile_pictures/default.jpeg" alt="Profile Picture" style="max-height: 40px">
 {% endif %}
-<p>Businesses owned: {{ user_profile.businesses.count }}</p>
+<p>Businesses created: {{ user_profile.businesses.count }}</p>
 <p>First Name: {{ user_profile.first_name }}</p>
 
 {% endblock %}
