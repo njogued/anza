@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Product Details{% endblock %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<p>Price: {{ product.price }}</p>
+<h2>Images</h2>
+{% for image in product.images.all %}
+    <img src="{{ image.image.url }}" alt="Image for {{ product.name }}">
+{% endfor %}
+{% for review in reviews %}
+    <p>{{ review }}</p>
+{% endfor %}
+{% endblock %}
