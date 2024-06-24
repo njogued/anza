@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.http import HttpResponseForbidden, HttpResponse, HttpResponseRedirect
-from .models import Business
+from .models import Business, Category
 from .forms import CreateBusinessForm, BusinessUpdateForm
 from products.models import Product, ProductImage
 from products.forms import CreateProductForm, ProductImageForm
@@ -117,13 +117,13 @@ class BusinessDeleteView(View):
         return redirect(self.success_url)
     
 class CreateProductView(LoginRequiredMixin, CreateView):
-    def get(self, request):
+    def get(self, request, business_id):
         # Provide the user with a form to create a new product
         product_form = self.form_class()
         image_form = ProductImageForm()
         return render(request, self.template_name, {"product_form": product_form, "image_form": image_form})
     
-    def post(self, request):
+    def post(self, request, business_id):
         # Handle the form submission
         curr_user = request.user
         business_id = self.kwargs.get('business_id')
@@ -132,8 +132,10 @@ class CreateProductView(LoginRequiredMixin, CreateView):
         if business.owner != curr_user:
             return HttpResponseForbidden("You are not allowed to create product for this business")
         if product_form.is_valid():
-            product = product_form.save()
+            product = product_form.save(commit=False)
             images = request.FILES.getlist('image')
+            product.business = business
+            product.save()
             for image in images:
                 ProductImage.objects.create(product=product, image=image)
             success_url = reverse('detail_product', kwargs={'product_id': product.product_id})
@@ -144,3 +146,4 @@ class CreateProductView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("home")
     template_name = "create_product.html"
     login_url = "/users/login"
+    pk_url_kwarg = 'business_id'

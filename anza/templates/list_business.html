@@ -7,7 +7,7 @@
 <h2>List of Businesses</h2>
 <ul>
   {% for business in businesses %}
-    <li>{{ business.name }}</li>
+    <li><a href=/business/{{ business.business_id }}>{{ business.name }}</a></li>
   {% endfor %}
 
 {% endblock %}
