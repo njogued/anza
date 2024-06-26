@@ -1,4 +1,4 @@
-from .models import Product
+from .models import Product, Review
 from django import forms
 from .widgets import CustomClearableFileInput
 
@@ -24,3 +24,9 @@ class ProductImageForm(forms.ModelForm):
         }
 
     image = forms.ImageField(widget=CustomClearableFileInput())
+
+class CreateReviewForm(forms.ModelForm):
+    # Custom form to handle creating reviews
+    class Meta:
+        model = Review
+        fields = ('rating', 'review')
