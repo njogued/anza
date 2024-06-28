@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.views import View
 from django.urls import reverse_lazy
+from django.db.models import Avg, Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView
@@ -9,7 +10,7 @@ from django.views.generic.list import ListView
 from django.http import HttpResponseForbidden, HttpResponse, HttpResponseRedirect
 from .models import Business, Category
 from .forms import CreateBusinessForm, BusinessUpdateForm
-from products.models import Product, ProductImage
+from products.models import Product, ProductImage, Review
 from products.forms import CreateProductForm, ProductImageForm
 
 # Create your views here.
@@ -48,11 +49,25 @@ class BusinessDetailView(DetailView):
     def get_context_data(self, **kwargs):
         # Get the existing context data from the parent class
         context = super().get_context_data(**kwargs)
+        business = self.object
         # If the business object is None, add a flag to the context
         if self.object is None:
             context['business_deleted'] = True
         else:
             context['business_deleted'] = False
+            products = business.products.all()
+            num_products = products.count()
+            reviews = Review.objects.filter(product__in=products)
+            rating_info = reviews.aggregate(
+                avg_rating=Avg('rating'),
+                num_reviews=Count('id')
+            )
+            avg_rating = rating_info['avg_rating'] or 0
+            num_reviews = rating_info['num_reviews'] or 0
+            context['num_products'] = num_products
+            context['num_reviews'] = num_reviews
+            context['avg_rating'] = avg_rating
+            context['reviews'] = reviews
         return context
     
     def render_to_response(self, context, **response_kwargs):
