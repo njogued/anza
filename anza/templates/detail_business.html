@@ -19,13 +19,26 @@
 </p>
 <h2>Products</h2>
 <p>Number of Products: {{ num_products }}</p>
+{% if num_products > 0 %}
+    <ul>
+        {% for product in products %}
+            <li>
+                <strong>Product:</strong> <a href="/products/{{product.product_id}}">{{ product.name }}</a><br>
+                <strong>Description:</strong> {{ product.description }}<br>
+                <strong>Price:</strong> {{ product.price }}<br>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No products available.</p>
+{% endif %}
 <h2>Reviews</h2>
 <p>Average Rating: {{ avg_rating|floatformat:1 }} / 5 ({{ num_reviews }} reviews)</p>
 {% if reviews %}
     <ul>
         {% for review in reviews %}
             <li>
-                <strong>Product:</strong> {{ review.product.name }}<br>
+                <strong>Product:</strong> <a href="/products/{{review.product.product_id}}">{{ review.product.name }}</a><br>
                 <strong>Rating:</strong> {{ review.rating }}<br>
                 <strong>Comment:</strong> {{ review.comment }}<br>
                 <strong>Date:</strong> {{ review.created_at }}
