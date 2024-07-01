@@ -37,3 +37,19 @@ class Review(models.Model):
 
     def __str__(self):
         return self.product.name + ' - ' + self.reviewer.email
+    
+class Upvote(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name='upvotes')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        # Ensure that a user can only upvote a review once
+        # db_table = 'upvotes'
+        constraints = [
+            models.UniqueConstraint(fields=['review', 'user'], name='unique_review_user_upvote')
+        ]
+
+    def __str__(self):
+        return self.review.product.name + ' - ' + self.user.email
