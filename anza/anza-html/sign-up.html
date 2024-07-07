@@ -174,13 +174,13 @@
                   feedback, and reaching more customers.
                 </span>
               </span>
-              <form class="sign-up4-form1" method="post">
+              <form class="sign-up4-form1" method="post" action="{% url 'signup' %}">
                 {% csrf_token %}
                 <div class="sign-up4-email">
                   <input
                     type="email"
                     name="{{ form.email.name }}"
-                    id="thq-sign-up-4-email"
+                    id="id_email"
                     required="true"
                     placeholder="Email address"
                     class="sign-up4-textinput thq-input thq-body-large"
@@ -189,7 +189,7 @@
                   <input
                     type="text"
                     name="{{ form.username.name }}"
-                    id="thq-sign-up-4-username"
+                    id="id_username"
                     required="true"
                     placeholder="Username"
                     class="sign-up4-textinput1 thq-input thq-body-large"
@@ -197,14 +197,16 @@
                   />
                   <input
                     type="password"
-                    id="thq-sign-up-4-pass1"
+                    name="password1"
+                    id="id_password1"
                     required="true"
                     placeholder="Password"
                     class="sign-up4-textinput2 thq-input thq-body-large"
                   />
                   <input
                     type="password"
-                    id="thq-sign-up-4-pass2"
+                    name="password2"
+                    id="id_password2"
                     required="true"
                     placeholder="Re-enter Password"
                     class="sign-up4-textinput3 thq-input thq-body-large"

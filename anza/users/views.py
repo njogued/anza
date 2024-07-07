@@ -13,9 +13,18 @@ class SignUpView(CreateView):
     success_url = reverse_lazy("login")
     template_name = "sign-up.html"
 
-    def form_valid(self, form):
-        # You can add additional logic here if needed
-        return super().form_valid(form)
+    def get(self, request):
+        print("New GET REQUEST")
+        return render(request, self.template_name, {"form": self.form_class})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+            print("New post request")
+            return redirect("login")
+        return render(request, self.template_name, {"form": form})
 
 class LoginView(views.LoginView):
     form_class = CustomAuthenticationForm
