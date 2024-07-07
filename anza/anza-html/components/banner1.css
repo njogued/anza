@@ -1,0 +1,38 @@
+.banner1-container {
+  gap: var(--dl-space-space-unit);
+  display: flex;
+  padding: var(--dl-space-space-twounits);
+  z-index: 100;
+  position: relative;
+  box-shadow: 5px 5px 10px 0px #d4d4d4;
+  align-items: center;
+  padding-top: var(--dl-space-space-threeunits);
+  border-color: var(--dl-color-theme-neutral-dark);
+  border-width: 0px;
+  padding-left: var(--dl-space-space-threeunits);
+  padding-right: var(--dl-space-space-threeunits);
+  padding-bottom: var(--dl-space-space-threeunits);
+  border-bottom-width: 0px;
+}
+.banner1-max-width {
+  gap: var(--dl-space-space-oneandhalfunits);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.banner1-container1 {
+  gap: var(--dl-space-space-halfunit);
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.banner1-title {
+  text-align: center;
+  font-family: "STIX Two Text";
+}
+.banner1-text {
+  text-align: center;
+  font-family: "STIX Two Text";
+}

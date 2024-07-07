@@ -8,9 +8,14 @@ from .models import CustomUser
 from django.http import Http404
 
 class SignUpView(CreateView):
+    model = CustomUser
     form_class = CustomUserCreationForm
     success_url = reverse_lazy("login")
-    template_name = "signup.html"
+    template_name = "sign-up.html"
+
+    def form_valid(self, form):
+        # You can add additional logic here if needed
+        return super().form_valid(form)
 
 class LoginView(views.LoginView):
     form_class = CustomAuthenticationForm

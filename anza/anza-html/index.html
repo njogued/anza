@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Anza</title>
+    <meta property="og:title" content="Anza" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-theme-neutral-dark);
+        background-color: var(--dl-color-theme-neutral-light);
+
+        fill: var(--dl-color-theme-neutral-dark);
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+    />
+  </head>
+  <body>
+    <link rel="stylesheet" href="./style.css" />
+    <div>
+      <link href="./index.css" rel="stylesheet" />
+
+      <div class="home-container">
+        <header class="navbar44-container">
+          <header data-thq="thq-navbar" class="navbar44-navbar-interactive">
+            <img
+              alt="E-Commerce Platform Logo"
+              src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&amp;force_format=original"
+              class="navbar44-image1"
+            />
+            <div data-thq="thq-navbar-nav" class="navbar44-desktop-menu">
+              <nav class="navbar44-links">
+                <span class="thq-body-small thq-link"><span>About</span></span>
+                <span class="thq-body-small thq-link">
+                  <span>Contact Us</span>
+                </span>
+                <span class="thq-body-small thq-link">
+                  <span>Businesses</span>
+                </span>
+                <span class="thq-body-small thq-link">
+                  <span>Products</span>
+                </span>
+              </nav>
+              <div class="navbar44-buttons">
+                <button
+                  class="navbar44-action1 thq-button-filled thq-button-animated"
+                >
+                  <span class="thq-body-small">
+                    <span>List Business</span>
+                    <br />
+                  </span>
+                </button>
+                <svg viewBox="0 0 1024 1024" class="navbar44-icon">
+                  <path
+                    d="M512 598q108 0 225 47t117 123v86h-684v-86q0-76 117-123t225-47zM512 512q-70 0-120-50t-50-120 50-121 120-51 120 51 50 121-50 120-120 50z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div data-thq="thq-burger-menu" class="navbar44-burger-menu">
+              <svg viewBox="0 0 1024 1024" class="navbar44-icon2">
+                <path
+                  d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+                ></path>
+              </svg>
+            </div>
+            <div data-thq="thq-mobile-menu" class="navbar44-mobile-menu">
+              <div class="navbar44-nav">
+                <div class="navbar44-top">
+                  <img
+                    alt="E-Commerce Platform Logo"
+                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&amp;force_format=original"
+                    class="navbar44-logo"
+                  />
+                  <div data-thq="thq-close-menu" class="navbar44-close-menu">
+                    <svg viewBox="0 0 1024 1024" class="navbar44-icon4">
+                      <path
+                        d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <nav class="navbar44-links1">
+                  <span class="thq-body-small thq-link">
+                    <span>About</span>
+                  </span>
+                  <span class="thq-body-small thq-link">
+                    <span>Contact Us</span>
+                  </span>
+                  <span class="thq-body-small thq-link">
+                    <span>Businesses</span>
+                  </span>
+                  <span class="thq-body-small thq-link">
+                    <span>/list-pd</span>
+                  </span>
+                  <span class="thq-body-small thq-link">
+                    <span>Products</span>
+                  </span>
+                </nav>
+              </div>
+              <div class="navbar44-buttons1">
+                <button class="thq-button-filled">Login</button>
+                <button class="thq-button-outline">Register</button>
+              </div>
+            </div>
+          </header>
+        </header>
+        <div class="hero17-header78">
+          <div class="hero17-column thq-section-max-width thq-section-padding">
+            <div class="hero17-content">
+              <h1 class="hero17-text thq-heading-1">
+                <span>Welcome to Anza</span>
+              </h1>
+            </div>
+            <div class="hero17-actions">
+              <button class="thq-button-filled hero17-button">
+                <span class="thq-body-small"><span>List a Business</span></span>
+              </button>
+              <button class="thq-button-outline hero17-button1">
+                <span class="thq-body-small"><span>Leave a Review</span></span>
+              </button>
+            </div>
+          </div>
+          <p class="hero17-text3 thq-body-large">
+            <span>
+              Discover the different brands on our platform and their services
+            </span>
+          </p>
+          <div class="hero17-content1">
+            <div
+              class="hero17-row-container thq-animated-group-container-horizontal thq-mask-image-horizontal"
+            ></div>
+            <div
+              class="hero17-row-container1 thq-animated-group-container-horizontal thq-mask-image-horizontal"
+            >
+              <div class="thq-animated-group-horizontal-reverse">
+                <div
+                  class="hero17-strip1 thq-animated-group-horizontal-reverse"
+                >
+                  <img
+                    alt="Hero Image"
+                    src="https://images.unsplash.com/photo-1543511309-c666bcdec9dc?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
+                    class="hero17-placeholder-image thq-img-ratio-1-1 thq-img-scale"
+                  />
+                  <img
+                    alt="Hero Image"
+                    src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMnw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
+                    class="hero17-placeholder-image1 thq-img-ratio-1-1 thq-img-scale"
+                  />
+                  <img
+                    alt="Hero Image"
+                    src="https://images.unsplash.com/photo-1554895345-0be37fe1bc04?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
+                    class="hero17-placeholder-image2 thq-img-ratio-1-1 thq-img-scale"
+                  />
+                  <img
+                    alt="Hero Image"
+                    src="https://images.unsplash.com/photo-1536765020055-a6b775a271a0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxM3w&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
+                    class="hero17-placeholder-image3 thq-img-ratio-1-1 thq-img-scale"
+                  />
+                  <img
+                    alt="Hero Image"
+                    src="https://images.unsplash.com/photo-1526178613552-2b45c6c302f0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
+                    class="hero17-placeholder-image4 thq-img-ratio-1-1 thq-img-scale"
+                  />
+                  <img
+                    alt="Hero Image"
+                    src="https://images.unsplash.com/photo-1491956398797-69cc68e54362?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
+                    class="hero17-placeholder-image5 thq-img-ratio-1-1 thq-img-scale"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="hero17-container1">
+              <style>
+                @keyframes scroll-x {
+                  from {
+                    transform: translateX(0);
+                  }
+                  to {
+                    transform: translateX(calc(-100% - 16px));
+                  }
+                }
+
+                @keyframes scroll-y {
+                  from {
+                    transform: translateY(0);
+                  }
+                  to {
+                    transform: translateY(calc(-100% - 16px));
+                  }
+                }
+              </style>
+            </div>
+          </div>
+        </div>
+        <div class="thq-section-padding">
+          <div class="features25-container1 thq-section-max-width">
+            <div class="features25-tabs-menu">
+              <div class="features25-tab-horizontal">
+                <div class="features25-divider-container">
+                  <div class="features25-container2"></div>
+                </div>
+                <div class="features25-content">
+                  <h2 class="thq-heading-2">
+                    <span>List Your Business and Products</span>
+                  </h2>
+                  <span class="thq-body-small">
+                    <span>
+                      Easily create a profile for your business and showcase
+                      your products to a wide audience.
+                    </span>
+                  </span>
+                </div>
+              </div>
+              <div class="features25-tab-horizontal1">
+                <div class="features25-divider-container1">
+                  <div class="features25-container3"></div>
+                </div>
+                <div class="features25-content1">
+                  <h2 class="thq-heading-2">
+                    <span>Receive Reviews for Your Products</span>
+                  </h2>
+                  <span class="thq-body-small">
+                    <span>
+                      Get valuable feedback from customers through reviews and
+                      improve your products based on their suggestions.
+                    </span>
+                  </span>
+                </div>
+              </div>
+              <div class="features25-tab-horizontal2">
+                <div class="features25-divider-container2">
+                  <div class="features25-container4"></div>
+                </div>
+                <div class="features25-content2">
+                  <h2 class="thq-heading-2">
+                    <span>Shop Directly from the Site</span>
+                  </h2>
+                  <span class="thq-body-small">
+                    <span>
+                      Conveniently shop for a variety of products from different
+                      businesses all in one place.
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="features25-image-container">
+              <img
+                alt="List Your Business and Products Image Alt Text"
+                src="https://images.unsplash.com/photo-1524323599945-b9b2e5a44e73?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                class="features25-image thq-img-ratio-16-9"
+              />
+              <img
+                alt="Receive Reviews for Your Products Image Alt Text"
+                src="https://images.unsplash.com/photo-1707553513157-4dfd44e857e8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMnw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                class="features25-image1 thq-img-ratio-16-9"
+              />
+              <img
+                alt="Shop Directly from the Site Image Alt Text"
+                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                class="features25-image2 thq-img-ratio-16-9"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="thq-section-padding">
+          <div class="thq-section-max-width">
+            <div class="cta26-accent2-bg">
+              <div class="cta26-accent1-bg">
+                <div class="cta26-container1">
+                  <div class="cta26-content">
+                    <span class="thq-heading-2">
+                      <span>Start Selling Your Products Today!</span>
+                    </span>
+                    <p class="thq-body-large">
+                      <span>
+                        Join our platform to showcase your business and products
+                        to a wide audience.
+                      </span>
+                    </p>
+                  </div>
+                  <div class="cta26-actions">
+                    <button
+                      type="button"
+                      class="thq-button-filled cta26-button"
+                    >
+                      <span>Sign Up Now</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="steps2-container thq-section-padding">
+          <div class="steps2-max-width thq-section-max-width">
+            <div class="steps2-container1 thq-grid-2">
+              <div class="steps2-section-header">
+                <h2 class="thq-heading-2">
+                  Discover the Power of Our Products
+                </h2>
+                <p class="thq-body-large">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Suspendisse varius enim in eros elementum tristique. Duis
+                  cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
+                  commodo diam libero vitae erat.
+                </p>
+                <div class="steps2-actions">
+                  <button
+                    class="thq-button-filled thq-button-animated steps2-button"
+                  >
+                    <span class="thq-body-small">Main action</span>
+                  </button>
+                </div>
+              </div>
+              <div class="steps2-container2">
+                <div class="steps2-container3 thq-card">
+                  <h2 class="thq-heading-2">
+                    <span>Create Your Account</span>
+                  </h2>
+                  <span class="steps2-text04 thq-body-small">
+                    <span>
+                      Sign up and create your account to start listing your
+                      business and products on our platform.
+                    </span>
+                  </span>
+                  <label class="steps2-text05 thq-heading-3">01</label>
+                </div>
+                <div class="steps2-container4 thq-card">
+                  <h2 class="thq-heading-2"><span>List Your Products</span></h2>
+                  <span class="steps2-text07 thq-body-small">
+                    <span>
+                      Add detailed information about your products, including
+                      images, prices, and descriptions to attract potential
+                      customers.
+                    </span>
+                  </span>
+                  <label class="steps2-text08 thq-heading-3">02</label>
+                </div>
+                <div class="steps2-container5 thq-card">
+                  <h2 class="thq-heading-2"><span>Receive Reviews</span></h2>
+                  <span class="steps2-text10 thq-body-small">
+                    <span>
+                      Get valuable feedback from customers through reviews and
+                      ratings to improve your products and services.
+                    </span>
+                  </span>
+                  <label class="steps2-text11 thq-heading-3">03</label>
+                </div>
+                <div class="steps2-container6 thq-card">
+                  <h2 class="thq-heading-2"><span>Start Selling</span></h2>
+                  <span class="steps2-text13 thq-body-small">
+                    <span>
+                      Once your products are listed and reviewed, start selling
+                      directly through our platform to reach a wider audience.
+                    </span>
+                  </span>
+                  <label class="steps2-text14 thq-heading-3">04</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="thq-section-padding">
+          <div class="testimonial17-max-width thq-section-max-width">
+            <div class="testimonial17-container">
+              <h2 class="thq-heading-2"><span>Customer Testimonials</span></h2>
+              <span class="testimonial17-text01 thq-body-small">
+                <span>
+                  I have been using this platform for my business for over a
+                  year now, and I have seen a significant increase in sales. The
+                  user-friendly interface and excellent customer service make it
+                  a top choice for any business owner.
+                </span>
+              </span>
+            </div>
+            <div class="thq-grid-2">
+              <div class="thq-animated-card-bg-2">
+                <div class="thq-animated-card-bg-1">
+                  <div data-animated="true" class="thq-card testimonial17-card">
+                    <div class="testimonial17-container02">
+                      <img
+                        alt="Image of John Doe"
+                        src="https://images.unsplash.com/photo-1528892952291-009c663ce843?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkwOXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                        class="testimonial17-image"
+                      />
+                      <div class="testimonial17-container03">
+                        <strong class="thq-body-large">
+                          <span>John Doe</span>
+                        </strong>
+                        <span class="thq-body-small">
+                          <span>CEO, ABC Company</span>
+                        </span>
+                      </div>
+                    </div>
+                    <span class="testimonial17-text04 thq-body-small">
+                      <span>5 stars</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="thq-animated-card-bg-2">
+                <div class="thq-animated-card-bg-1">
+                  <div
+                    data-animated="true"
+                    class="thq-card testimonial17-card1"
+                  >
+                    <div class="testimonial17-container04">
+                      <img
+                        alt="Image of Jane Smith"
+                        src="https://images.unsplash.com/photo-1641288883869-c463bc6c2a58?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                        class="testimonial17-image1"
+                      />
+                      <div class="testimonial17-container05">
+                        <strong class="thq-body-large">
+                          <span>Jane Smith</span>
+                        </strong>
+                        <span class="thq-body-small">
+                          <span>Owner, XYZ Store</span>
+                        </span>
+                      </div>
+                    </div>
+                    <span class="testimonial17-text07 thq-body-small">
+                      <span>
+                        I love how easy it is to list my products on this
+                        platform. The visibility it provides has helped me reach
+                        a wider audience and grow my business exponentially.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="thq-animated-card-bg-2">
+                <div class="thq-animated-card-bg-1">
+                  <div
+                    data-animated="true"
+                    class="thq-card testimonial17-card2"
+                  >
+                    <div class="testimonial17-container06">
+                      <img
+                        alt="Image of David Johnson"
+                        src="https://images.unsplash.com/photo-1430155336069-457cf8a8c6e5?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                        class="testimonial17-image2"
+                      />
+                      <div class="testimonial17-container07">
+                        <strong class="thq-body-large">
+                          <span>David Johnson</span>
+                        </strong>
+                        <span class="thq-body-small">
+                          <span>Founder, 123 Boutique</span>
+                        </span>
+                      </div>
+                    </div>
+                    <span class="testimonial17-text10 thq-body-small">
+                      <span>
+                        Great platform for both sellers and buyers. The reviews
+                        and ratings system helps build trust, and I have
+                        discovered many unique products through this site.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="thq-animated-card-bg-2">
+                <div class="thq-animated-card-bg-1">
+                  <div
+                    data-animated="true"
+                    class="thq-card testimonial17-card3"
+                  >
+                    <div class="testimonial17-container08">
+                      <img
+                        alt="Image of Sarah Lee"
+                        src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                        class="testimonial17-image3"
+                      />
+                      <div class="testimonial17-container09">
+                        <strong class="thq-body-large">
+                          <span>Sarah Lee</span>
+                        </strong>
+                        <span class="thq-body-small">
+                          <span>Manager, Best Deals Co.</span>
+                        </span>
+                      </div>
+                    </div>
+                    <span class="testimonial17-text13 thq-body-small">
+                      <span>
+                        I highly recommend this platform to anyone looking to
+                        expand their online presence. The support team is always
+                        available to assist, and the seamless shopping
+                        experience keeps customers coming back.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer4-footer7 thq-section-padding">
+          <div class="footer4-max-width thq-section-max-width">
+            <div class="footer4-content">
+              <div class="footer4-logo">
+                <img
+                  alt="E-commerce Platform Logo"
+                  src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
+                  class="footer4-logo1"
+                />
+              </div>
+              <div class="footer4-links">
+                <span class="thq-body-small"><span>About Us</span></span>
+                <span class="thq-body-small"><span>Contact Us</span></span>
+                <span class="thq-body-small"><span>FAQs</span></span>
+                <span class="thq-body-small">
+                  <span>Terms and Conditions</span>
+                </span>
+                <span class="thq-body-small"><span>Privacy Policy</span></span>
+              </div>
+            </div>
+            <div class="footer4-credits">
+              <div class="thq-divider-horizontal"></div>
+              <div class="footer4-row">
+                <div class="footer4-container">
+                  <span class="thq-body-small">© 2024 TeleportHQ</span>
+                </div>
+                <div class="footer4-footer-links">
+                  <span class="footer4-text6 thq-body-small">
+                    <span>Privacy Policy</span>
+                  </span>
+                  <span class="thq-body-small">
+                    <span>Terms and Conditions</span>
+                  </span>
+                  <span class="thq-body-small">
+                    <span>Cookies Policy</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script
+      defer=""
+      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+    ></script>
+  </body>
+</html>

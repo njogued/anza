@@ -1,0 +1,194 @@
+.features4-layout301 {
+  gap: var(--dl-space-space-fiveunits);
+  width: 100%;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: var(--dl-space-space-threeunits);
+  padding-left: var(--dl-space-space-threeunits);
+  padding-right: var(--dl-space-space-threeunits);
+  flex-direction: column;
+  padding-bottom: var(--dl-space-space-threeunits);
+  justify-content: center;
+}
+.features4-max-width {
+  gap: var(--dl-space-space-threeunits);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.features4-row {
+  width: 100%;
+}
+.features4-feature1 {
+  gap: var(--dl-space-space-twounits);
+  flex: 1;
+  width: auto;
+  display: flex;
+  overflow: hidden;
+  max-width: 600px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.features4-content {
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+}
+.features4-section-title {
+  height: 250px;
+  align-self: stretch;
+  align-items: center;
+}
+.features4-title1 {
+  text-align: center;
+  font-family: "STIX Two Text";
+  border-color: var(--dl-color-theme-neutral-dark);
+  border-width: 0px;
+}
+.features4-text {
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: normal;
+  font-family: "STIX Two Text";
+  font-weight: 700;
+}
+.features4-text1 {
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: normal;
+  font-family: "STIX Two Text";
+  font-weight: 600;
+}
+.features4-text2 {
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: normal;
+  font-family: "STIX Two Text";
+  font-weight: 600;
+  border-color: var(--dl-color-theme-neutral-dark);
+  border-width: 0px;
+}
+.features4-feature2 {
+  gap: var(--dl-space-space-twounits);
+  flex: 1;
+  width: auto;
+  display: flex;
+  overflow: hidden;
+  max-width: 600px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.features4-section-title1 {
+  height: 250px;
+  align-self: stretch;
+  align-items: center;
+}
+.features4-title11 {
+  text-align: center;
+  font-family: "STIX Two Text";
+  border-color: var(--dl-color-theme-neutral-dark);
+  border-width: 0px;
+}
+.features4-text3 {
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: normal;
+  font-family: "STIX Two Text";
+  font-weight: 700;
+}
+.features4-text4 {
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: normal;
+  font-family: "STIX Two Text";
+  font-weight: 600;
+}
+.features4-text5 {
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: normal;
+  font-family: "STIX Two Text";
+  font-weight: 600;
+  border-color: var(--dl-color-theme-neutral-dark);
+  border-width: 0px;
+}
+.features4-feature3 {
+  gap: var(--dl-space-space-twounits);
+  flex: 1;
+  width: auto;
+  display: flex;
+  overflow: hidden;
+  max-width: 600px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.features4-content1 {
+  align-self: stretch;
+  align-items: center;
+}
+.features4-section-title2 {
+  align-self: stretch;
+  align-items: center;
+}
+.features4-section-title3 {
+  height: 250px;
+  align-self: stretch;
+  align-items: center;
+}
+.features4-title12 {
+  text-align: center;
+  font-family: "STIX Two Text";
+  border-color: var(--dl-color-theme-neutral-dark);
+  border-width: 0px;
+}
+.features4-text6 {
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: normal;
+  font-family: "STIX Two Text";
+  font-weight: 700;
+}
+.features4-text7 {
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: normal;
+  font-family: "STIX Two Text";
+  font-weight: 600;
+}
+.features4-text8 {
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: normal;
+  font-family: "STIX Two Text";
+  font-weight: 600;
+  border-color: var(--dl-color-theme-neutral-dark);
+  border-width: 0px;
+}
+@media(max-width: 991px) {
+  .features4-row {
+    width: auto;
+    align-items: center;
+    flex-direction: column;
+  }
+  .features4-feature1 {
+    width: 100%;
+  }
+  .features4-feature2 {
+    width: 100%;
+  }
+  .features4-feature3 {
+    width: 100%;
+  }
+}
+@media(max-width: 479px) {
+  .features4-max-width {
+    gap: var(--dl-space-space-oneandhalfunits);
+  }
+}

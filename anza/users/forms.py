@@ -3,15 +3,10 @@ from django import forms
 from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):
-    # A custom user form to handle user creation
-    # first_name = forms.CharField(max_length=255, required=True)
-    # username = forms.CharField(max_length=255, required=True)
-    # last_name = forms.CharField(max_length=255, required=True)
-    # email = forms.EmailField(max_length=255, required=True)
-    # password = forms.CharField(max_length=255, required=True, widget=forms.PasswordInput)
+    # A custom user form to handle user
     class Meta:
         model = CustomUser
-        fields = ('email', 'first_name', 'last_name', 'username', 'phone_number', 'profile_picture')
+        fields = ('email', 'username' )
 
 
 class CustomUserChangeForm(UserChangeForm):
