@@ -5,8 +5,7 @@ from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from .models import CustomUser
-from django.http import Http404
-
+from django.http import Http404, JsonResponse
 class SignUpView(CreateView):
     model = CustomUser
     form_class = CustomUserCreationForm
@@ -21,7 +20,10 @@ class SignUpView(CreateView):
         if form.is_valid():
             form.save()
             return redirect("login")
-        return render(request, self.template_name, {"form": form})
+        else:
+            errors = form.errors.as_json()
+            print(errors)
+            return JsonResponse(errors, status=400, safe=False)
 
 class LoginView(views.LoginView):
     form_class = CustomAuthenticationForm
