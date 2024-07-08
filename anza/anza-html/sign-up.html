@@ -119,9 +119,6 @@
                   <span class="thq-body-small thq-link">
                     <span>About</span>
                   </span>
-                  <span class="thq-body-small thq-link">
-                    <span>Link5</span>
-                  </span>
                 </nav>
               </div>
               <div class="navbar41-buttons1">
@@ -145,7 +142,7 @@
                   <span>Join Anza Today</span>
                 </h2>
                 <p class="thq-body-large sign-up4-text1">
-                  Already have an account? Sign in
+                  Already have an account? <a href="{% url 'login' %}">Sign in</a>
                 </p>
               </div>
               <div class="sign-up4-container2">
@@ -280,5 +277,19 @@
       defer=""
       src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
     ></script>
+    <script>
+      const showpassword = document.getElementById('thq-sign-up-4-terms');
+      const password = document.getElementById('id_password1');
+      const password2 = document.getElementById('id_password2');
+      showpassword.addEventListener('change', () => {
+        if (showpassword.checked) {
+          password.type = 'text';
+          password2.type = 'text';
+        } else {
+          password.type = 'password';
+          password2.type = 'password';
+        }
+      });
+    </script>
   </body>
 </html>
