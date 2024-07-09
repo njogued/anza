@@ -31,4 +31,4 @@ class CustomAuthenticationForm(forms.ModelForm):
     # A custom user form to handle user login
     class Meta:
         model = CustomUser
-        fields = ('username', 'password')
+        fields = ('email', 'password')
