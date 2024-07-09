@@ -33,31 +33,32 @@ class SignUpView(CreateView):
                 return render(request, self.template_name, {"form": form})
 
 class LoginView(auth_views.LoginView):
+    # view to handle user login
     form_class = CustomAuthenticationForm
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy("home")
     template_name = "sign-in.html"
+
+    def get(self, request):
+        return render(request, self.template_name, {"form": self.form_class})
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect("home")
+        return super().dispatch(request, *args, **kwargs)
+    
     def form_valid(self, form):
-        return super().form_valid(form)
+        login(self.request, form.get_user())
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({"message": "Success"}, status=200)
+        else:
+            return redirect("home")
     
     def form_invalid(self, form):
         if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            errors = form.errors.get_json_data(escape_html=False)
+            errors = form.errors.get_json_data()
             return JsonResponse(errors, status=400, safe=False)
         else:
             return super().form_invalid(form)
-
-    # def get(self, request):
-    #     return render(request, self.template_name, {"form": self.form_class})
-    # def post(self, request):
-    #     form = self.form_class(request.POST)
-    #     if form.is_valid():
-    #         email = form.cleaned_data.get("email")
-    #         password = form.cleaned_data.get("password")
-    #         user = authenticate(email=email, password=password)
-    #         if user is not None:
-    #             login(request, user)
-    #             return redirect("home")
-    #     return render(request, self.template_name, {"form": form})
     
 class UserDetailView(DetailView):
     model = CustomUser
