@@ -27,7 +27,9 @@ urlpatterns = [
     path('users/', include('users.urls')), 
     path('business/', include('business.urls')),
     path('products/', include('products.urls')),
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path("", TemplateView.as_view(template_name="index.html"), name="home"),
+    path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
+    path("contact/", TemplateView.as_view(template_name="contact.html"), name="contact"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

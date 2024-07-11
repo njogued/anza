@@ -59,10 +59,10 @@
     />
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static './style.css' %}" />
     <div>
-      <link href="./index.css" rel="stylesheet" />
-
+      <link href="{% static './index.css' %}" rel="stylesheet" />
       <div class="home-container">
         <header class="navbar44-container">
           <header data-thq="thq-navbar" class="navbar44-navbar-interactive">
@@ -73,9 +73,9 @@
             />
             <div data-thq="thq-navbar-nav" class="navbar44-desktop-menu">
               <nav class="navbar44-links">
-                <span class="thq-body-small thq-link"><span>About</span></span>
+                <span class="thq-body-small thq-link"><a href="/about">About</a></span>
                 <span class="thq-body-small thq-link">
-                  <span>Contact Us</span>
+                  <a href="/contact">Contact Us</a>
                 </span>
                 <span class="thq-body-small thq-link">
                   <span>Businesses</span>
@@ -84,21 +84,35 @@
                   <span>Products</span>
                 </span>
               </nav>
+              {% if user.is_authenticated %}
               <div class="navbar44-buttons">
                 <button
                   class="navbar44-action1 thq-button-filled thq-button-animated"
                 >
                   <span class="thq-body-small">
-                    <span>List Business</span>
+                    <a href="/business/create">List Business</a>
                     <br />
                   </span>
                 </button>
-                <svg viewBox="0 0 1024 1024" class="navbar44-icon">
-                  <path
-                    d="M512 598q108 0 225 47t117 123v86h-684v-86q0-76 117-123t225-47zM512 512q-70 0-120-50t-50-120 50-121 120-51 120 51 50 121-50 120-120 50z"
-                  ></path>
-                </svg>
+                <button
+                  class="navbar44-action1 thq-button-filled thq-button-animated"
+                >
+                  <span class="thq-body-small">
+                    <a href="/users/{{ user.username }}">Profile</a>
+                    <br />
+                  </span>
+                </button>
               </div>
+              {% else %}
+              <div class="navbar8-buttons">
+                <button class="navbar8-action1 thq-button-filled thq-button-animated">
+                  <span class="thq-body-small"><a href="{% url 'signup' %}">Sign Up</a></span>
+                </button>
+                <button class="navbar8-action2 thq-button-animated thq-button-outline">
+                  <span class="thq-body-small"><a href="{% url 'login' %}">Log In</a></span>
+                </button>
+              </div>
+              {% endif %}
             </div>
             <div data-thq="thq-burger-menu" class="navbar44-burger-menu">
               <svg viewBox="0 0 1024 1024" class="navbar44-icon2">
@@ -169,51 +183,6 @@
               Discover the different brands on our platform and their services
             </span>
           </p>
-          <div class="hero17-content1">
-            <div
-              class="hero17-row-container thq-animated-group-container-horizontal thq-mask-image-horizontal"
-            ></div>
-            <div
-              class="hero17-row-container1 thq-animated-group-container-horizontal thq-mask-image-horizontal"
-            >
-              <div class="thq-animated-group-horizontal-reverse">
-                <div
-                  class="hero17-strip1 thq-animated-group-horizontal-reverse"
-                >
-                  <img
-                    alt="Hero Image"
-                    src="https://images.unsplash.com/photo-1543511309-c666bcdec9dc?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
-                    class="hero17-placeholder-image thq-img-ratio-1-1 thq-img-scale"
-                  />
-                  <img
-                    alt="Hero Image"
-                    src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMnw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
-                    class="hero17-placeholder-image1 thq-img-ratio-1-1 thq-img-scale"
-                  />
-                  <img
-                    alt="Hero Image"
-                    src="https://images.unsplash.com/photo-1554895345-0be37fe1bc04?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
-                    class="hero17-placeholder-image2 thq-img-ratio-1-1 thq-img-scale"
-                  />
-                  <img
-                    alt="Hero Image"
-                    src="https://images.unsplash.com/photo-1536765020055-a6b775a271a0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxM3w&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
-                    class="hero17-placeholder-image3 thq-img-ratio-1-1 thq-img-scale"
-                  />
-                  <img
-                    alt="Hero Image"
-                    src="https://images.unsplash.com/photo-1526178613552-2b45c6c302f0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
-                    class="hero17-placeholder-image4 thq-img-ratio-1-1 thq-img-scale"
-                  />
-                  <img
-                    alt="Hero Image"
-                    src="https://images.unsplash.com/photo-1491956398797-69cc68e54362?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcyMDAwNzkxMXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1500"
-                    class="hero17-placeholder-image5 thq-img-ratio-1-1 thq-img-scale"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
           <div>
             <div class="hero17-container1">
               <style>

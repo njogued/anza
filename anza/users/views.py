@@ -16,6 +16,11 @@ class SignUpView(CreateView):
 
     def get(self, request):
         return render(request, self.template_name, {"form": self.form_class})
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect("home")
+        return super().dispatch(request, *args, **kwargs)
 
     def post(self, request):
         form = self.form_class(request.POST)

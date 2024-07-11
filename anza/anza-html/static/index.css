@@ -132,7 +132,7 @@
 .hero17-header78 {
   gap: var(--dl-space-space-threeunits);
   width: 100%;
-  height: 615px;
+  height: auto;
   display: flex;
   overflow: hidden;
   position: relative;

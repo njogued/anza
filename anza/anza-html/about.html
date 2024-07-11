@@ -59,9 +59,10 @@
     />
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static './style.css' %}"/>
     <div>
-      <link href="./about.css" rel="stylesheet" />
+      <link href="{% static './about.css' %}" rel="stylesheet" />
 
       <div class="about-container">
         <header class="navbar8-container">
