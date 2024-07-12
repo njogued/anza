@@ -80,7 +80,7 @@ class BusinessDetailView(DetailView):
 
 class BusinessListView(ListView):
     model = Business
-    template_name = "list_business.html"
+    template_name = "list-businesses.html"
     context_object_name = "businesses"
     # paginate_by = 10
     # ordering = ['name']
