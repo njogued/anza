@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
 from django.views import View
 from .models import Product, Review, ProductImage
 from .forms import UpdateProductForm, CreateReviewForm
@@ -100,3 +101,11 @@ class DeleteReviewView(DeleteView):
     context_object_name = 'review'
     success_url = reverse_lazy('home')
     pk_url_kwarg = 'review_id'
+
+class ProductListView(ListView):
+    # A view to list all products
+    model = Product
+    template_name = 'list-products.html'
+    context_object_name = 'products'
+    def queryset(self):
+        return Product.objects.all()

@@ -59,9 +59,10 @@
     />
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static './style.css' %}" />
     <div>
-      <link href="./list-businesses.css" rel="stylesheet" />
+      <link href="{% static './list-businesses.css' %}" rel="stylesheet" />
 
       <div class="list-businesses-container">
         <header class="navbar43-container">
@@ -153,48 +154,21 @@
             <h2 class="thq-heading-2"><span>Top Businesses</span></h2>
           </div>
         </div>
+        {% for business in businesses %}
         <div class="list-businesses-container1">
           <img
             alt="business-logo"
-            src="https://images.unsplash.com/photo-1635756837851-d3b6edbaa11c?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDN8fGxvZ29zfGVufDB8fHx8MTcyMDA5OTc2M3ww&amp;ixlib=rb-4.0.3&amp;w=300"
+            src="/media/{{ business.logo }}"
             class="list-businesses-image"
           />
           <div class="list-businesses-container2">
-            <h1 class="list-businesses-text">Business 1</h1>
-            <span class="list-businesses-text01">Rating:&nbsp;</span>
-            <span class="list-businesses-text02">Reviews:&nbsp;</span>
-            <span class="list-businesses-text03">Description:&nbsp;</span>
+            <h1 class="list-businesses-text"><a href=/business/{{ business.business_id }}>{{ business.name }}</a></h1>
+            <span class="list-businesses-text01">Rating: {{ business.rating }}</span>
+            <span class="list-businesses-text02">Reviews:</span>
+            <span class="list-businesses-text03">Description: {{ business.description }}</span>
           </div>
         </div>
-        <div class="list-businesses-container3">
-          <img
-            alt="business-logo"
-            src="https://images.unsplash.com/photo-1572094382897-21abe88fb269?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE4fHxsb2dvc3xlbnwwfHx8fDE3MjAwOTk3NjN8MA&amp;ixlib=rb-4.0.3&amp;w=300"
-            class="list-businesses-image1"
-          />
-          <div class="list-businesses-container4">
-            <h1 class="list-businesses-text04">Business 2</h1>
-            <span class="list-businesses-text05">Rating:&nbsp;</span>
-            <span class="list-businesses-text06">Reviews:&nbsp;</span>
-            <span class="list-businesses-text07">Description:&nbsp;</span>
-          </div>
-        </div>
-        <div class="list-businesses-container5">
-          <img
-            alt="business-logo"
-            src="https://images.unsplash.com/photo-1563694983011-6f4d90358083?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDl8fGxvZ29zfGVufDB8fHx8MTcyMDA5OTc2M3ww&amp;ixlib=rb-4.0.3&amp;w=300"
-            class="list-businesses-image2"
-          />
-          <div class="list-businesses-container6">
-            <h1 class="list-businesses-text08">
-              <span>Business 3</span>
-              <br />
-            </h1>
-            <span class="list-businesses-text11">Rating:&nbsp;</span>
-            <span class="list-businesses-text12">Reviews:&nbsp;</span>
-            <span class="list-businesses-text13">Description:&nbsp;</span>
-          </div>
-        </div>
+        {% endfor %}
         <footer class="footer43-footer7 thq-section-padding">
           <div class="footer43-max-width thq-section-max-width">
             <div class="footer43-content">

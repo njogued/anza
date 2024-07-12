@@ -59,10 +59,10 @@
     />
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static './style.css' %}" />
     <div>
-      <link href="./list-products.css" rel="stylesheet" />
-
+      <link href="{% static './list-products.css' %}" rel="stylesheet" />
       <div class="list-products-container">
         <header class="navbar42-container">
           <header data-thq="thq-navbar" class="navbar42-navbar-interactive">
@@ -147,6 +147,7 @@
             </h2>
           </div>
         </div>
+        {% for product in products %}
         <div class="list-products-container1">
           <img
             alt="business-logo"
@@ -154,41 +155,14 @@
             class="list-products-image"
           />
           <div class="list-products-container2">
-            <h1 class="list-products-text">Product 1 | Ksh. 6500</h1>
-            <span class="list-products-text01">Rating:&nbsp;</span>
-            <span class="list-products-text02">Reviews:&nbsp;</span>
-            <span class="list-products-text03">Description:&nbsp;</span>
+            <h1 class="list-products-text"><a href=/products/{{ product.product_id }}>{{ product.name }}</a> | Ksh. {{ product.price }}</h1>
+            <span class="list-products-text01">Rating: TBD</span>
+            <span class="list-products-text02">Reviews: TBD</span>
+            <span class="list-products-text02">Business: {{ product.business }}</span>
+            <!-- <span class="list-products-text03">Description: {{ product.description }}</span> -->
           </div>
         </div>
-        <div class="list-products-container3">
-          <img
-            alt="business-logo"
-            src="https://images.unsplash.com/photo-1564466809058-bf4114d55352?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE3fHxwcm9kdWN0fGVufDB8fHx8MTcyMDEwMDQwOXww&amp;ixlib=rb-4.0.3&amp;w=300"
-            class="list-products-image1"
-          />
-          <div class="list-products-container4">
-            <h1 class="list-products-text04">Product 2 | Ksh. 30000</h1>
-            <span class="list-products-text05">Rating:&nbsp;</span>
-            <span class="list-products-text06">Reviews:&nbsp;</span>
-            <span class="list-products-text07">Description:&nbsp;</span>
-          </div>
-        </div>
-        <div class="list-products-container5">
-          <img
-            alt="business-logo"
-            src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDN8fHByb2R1Y3R8ZW58MHx8fHwxNzIwMTAwNDA5fDA&amp;ixlib=rb-4.0.3&amp;w=300"
-            class="list-products-image2"
-          />
-          <div class="list-products-container6">
-            <h1 class="list-products-text08">
-              <span>Product 3 | Ksh. 1200</span>
-              <br />
-            </h1>
-            <span class="list-products-text11">Rating:&nbsp;</span>
-            <span class="list-products-text12">Reviews:&nbsp;</span>
-            <span class="list-products-text13">Description:&nbsp;</span>
-          </div>
-        </div>
+        {% endfor %}
         <footer class="footer43-footer7 thq-section-padding">
           <div class="footer43-max-width thq-section-max-width">
             <div class="footer43-content">
