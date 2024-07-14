@@ -181,13 +181,14 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 }
 .banner1-title {
   text-align: center;
   font-family: "STIX Two Text";
 }
 .banner1-text {
-  text-align: center;
+  text-align: left;
   font-family: "STIX Two Text";
 }
 
@@ -487,4 +488,39 @@
 }
 .detail-product-text14 {
   font-family: "STIX Two Text";
+}
+
+.banner1-container3,
+.banner1-container4,
+.banner1-container5 {
+  display: flex;
+  margin-bottom: 10px;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center;
+  height: 100vh; */
+}
+
+#review-form {
+  text-align: left;
+  width: 100%;
+}
+
+#id_review, #id_review_description {
+  max-width: 100%;
+
+}
+
+.banner1-container2 {
+  width: 100%;
+}
+
+.banner1-input1 {
+  text-align: left;
+}
+
+.banner1-input1 select {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
 }
