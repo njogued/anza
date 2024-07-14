@@ -30,3 +30,15 @@ class CreateReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('rating', 'review', 'review_description')
+
+    def clean_review(self):
+        review = self.cleaned_data.get('review')
+        if not review:
+            return ' '  # or return None if you prefer null
+        return review
+
+    def clean_review_description(self):
+        review_description = self.cleaned_data.get('review_description')
+        if not review_description:
+            return ' '  # or return None if you prefer null
+        return review_description
