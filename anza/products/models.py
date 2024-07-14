@@ -17,14 +17,27 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
+    def is_cover_image(self):
+        if self.images.filter(is_cover=True).exists():
+            return self.images.filter(is_cover=True).first()
+        return self.images.first()
+    
+    
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='product_images/')
+    is_cover = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.product.name + ' - ' + self.image.name
+    
+    def save(self, *args, **kwargs):
+        # Ensure that only one image is set as the cover image
+        if self.is_cover:
+            ProductImage.objects.filter(product=self.product).update(is_cover=False)
+        super(ProductImage, self).save(*args, **kwargs)
 
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')

@@ -149,11 +149,18 @@
         </div>
         {% for product in products %}
         <div class="list-products-container1">
+          {% with product.is_cover_image as cover_img %}
           <img
+            alt="business-logo"
+            src="{{ cover_img.image.url|default:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDh8fHByb2R1Y3R8ZW58MHx8fHwxNzIwMTAwNDA5fDA&amp;ixlib=rb-4.0.3&amp;w=300' }}"
+            class="list-products-image"
+          />
+          {% endwith %}
+          <!-- <img
             alt="business-logo"
             src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDh8fHByb2R1Y3R8ZW58MHx8fHwxNzIwMTAwNDA5fDA&amp;ixlib=rb-4.0.3&amp;w=300"
             class="list-products-image"
-          />
+          /> -->
           <div class="list-products-container2">
             <h1 class="list-products-text"><a href=/products/{{ product.product_id }}>{{ product.name }}</a> | Ksh. {{ product.price }}</h1>
             <span class="list-products-text01">Rating: TBD</span>

@@ -1,4 +1,4 @@
-from .models import Product, Review
+from .models import Product, Review, ProductImage
 from django import forms
 from .widgets import CustomClearableFileInput
 
@@ -17,8 +17,8 @@ class UpdateProductForm(forms.ModelForm):
 class ProductImageForm(forms.ModelForm):
     # A custom form to handle product image uploads
     class Meta:
-        model = Product
-        fields = ['image']
+        model = ProductImage
+        fields = ['image', 'is_cover']
         widgets = {
             'image': CustomClearableFileInput(),
         }
