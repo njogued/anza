@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Detail-Businesses - Anza</title>
+    <title>Detail Businesses - Anza</title>
     <meta property="og:title" content="Detail-Businesses - Anza" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
@@ -59,9 +59,10 @@
     />
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static './style.css' %}" />
     <div>
-      <link href="./detail-businesses.css" rel="stylesheet" />
+      <link href="{% static './detail-businesses.css' %}" rel="stylesheet" />
 
       <div class="detail-businesses-container">
         <header class="navbar43-container">
@@ -150,14 +151,23 @@
         </header>
         <div class="detail-businesses-container01">
           <div class="detail-businesses-container02">
-            <img
-              alt="image"
-              src="https://images.unsplash.com/photo-1602934445884-da0fa1c9d3b3?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE0fHxMT0dPfGVufDB8fHx8MTcyMDEwMzMxOHww&amp;ixlib=rb-4.0.3&amp;w=200"
-              class="detail-businesses-image"
+            {% if business.logo %}
+              <img
+                alt="image"
+                src="{{ business.logo.url|default:'https://images.unsplash.com/photo-1602934445884-da0fa1c9d3b3?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE0fHxMT0dPfGVufDB8fHx8MTcyMDEwMzMxOHww&amp;ixlib=rb-4.0.3&amp;w=200' }}"
+                class="detail-businesses-image"
             />
+              {% else %}
+              <img
+                alt="image"
+                src="https://images.unsplash.com/photo-1602934445884-da0fa1c9d3b3?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE0fHxMT0dPfGVufDB8fHx8MTcyMDEwMzMxOHww&amp;ixlib=rb-4.0.3&amp;w=200"
+                class="detail-businesses-image"
+            />
+            {% endif %}
+              
           </div>
           <div class="detail-businesses-container03">
-            <h1 class="detail-businesses-text">Business X</h1>
+            <h1 class="detail-businesses-text">{{ business.name }}</h1>
             <div class="detail-businesses-container04">
               <div class="detail-businesses-container05">
                 <svg viewBox="0 0 1024 1024" class="detail-businesses-icon">
@@ -165,7 +175,7 @@
                     d="M512 640q52 0 90-38t38-90-38-90-90-38-90 38-38 90 38 90 90 38zM512 86q176 0 301 125t125 301v62q0 64-43 108t-105 44q-78 0-126-64-64 64-152 64t-151-63-63-151 63-151 151-63 151 63 63 151v62q0 26 19 46t45 20 45-20 19-46v-62q0-140-101-241t-241-101-241 101-101 241 101 241 241 101h214v84h-214q-176 0-301-125t-125-301 125-301 301-125z"
                   ></path>
                 </svg>
-                <span class="detail-businesses-text1">businessx@bsx.com</span>
+                <span class="detail-businesses-text1">{{ business.email }}</span>
               </div>
               <div class="detail-businesses-container06">
                 <svg viewBox="0 0 1024 1024" class="detail-businesses-icon02">
@@ -173,7 +183,7 @@
                     d="M768 598v-86h-234l-86 86h320zM256 598h106l294-294q16-16 0-30l-76-76q-16-14-30 0l-294 294v106zM854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z"
                   ></path>
                 </svg>
-                <span class="detail-businesses-text2">Reviews: 72</span>
+                <span class="detail-businesses-text2">Reviews: TBD</span>
               </div>
             </div>
             <div class="detail-businesses-container07">
@@ -184,7 +194,7 @@
                   ></path>
                 </svg>
                 <span class="detail-businesses-text3">
-                  <span>www.bsx.com</span>
+                  <span><a href="{{ business.website }}">{{ business.website }}</a></span>
                   <br />
                 </span>
               </div>
@@ -197,7 +207,7 @@
                     d="M649.714 573.714l174.857-169.714-241.143-35.429-108-218.286-108 218.286-241.143 35.429 174.857 169.714-41.714 240.571 216-113.714 215.429 113.714zM950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 15.429-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
                   ></path>
                 </svg>
-                <span class="detail-businesses-text6">Rating: 4.3</span>
+                <span class="detail-businesses-text6">Rating: TBD</span>
               </div>
             </div>
             <div class="detail-businesses-container10">
@@ -207,7 +217,7 @@
                     d="M282 460q96 186 282 282l94-94q20-20 44-10 72 24 152 24 18 0 30 12t12 30v150q0 18-12 30t-30 12q-300 0-513-213t-213-513q0-18 12-30t30-12h150q18 0 30 12t12 30q0 80 24 152 8 26-10 44z"
                   ></path>
                 </svg>
-                <span class="detail-businesses-text7">+254738299443</span>
+                <span class="detail-businesses-text7">{{ business.phone_number }}</span>
               </div>
               <div class="detail-businesses-container12">
                 <svg viewBox="0 0 1024 1024" class="detail-businesses-icon10">
@@ -216,7 +226,7 @@
                   ></path>
                 </svg>
                 <span class="detail-businesses-text8">
-                  Location: Nairobi, Kenya
+                  Location: {{ business.address }}
                 </span>
               </div>
             </div>
@@ -230,8 +240,7 @@
               </h2>
               <h3 class="banner1-text thq-heading-3">
                 <span>
-                  This is a totally useful product and is by no means a waste of
-                  your time.
+                  {{ business.description }}
                 </span>
               </h3>
             </div>
@@ -245,57 +254,27 @@
         <div class="features4-layout301 thq-section-padding">
           <div class="features4-max-width thq-section-max-width">
             <div class="features4-row thq-grid-auto-300">
+              {% for product in products %}
               <div class="features4-feature1">
+                {% with product.is_cover_image as cover_img %}
                 <img
                   alt="Product Listing Image"
-                  src="https://images.unsplash.com/photo-1602810316693-3667c854239a?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE5fHxzaGlydHxlbnwwfHx8fDE3MjAxMDY2ODF8MA&amp;ixlib=rb-4.0.3&amp;w=600"
+                  src="{{ cover_img.image.url|default:'https://images.unsplash.com/photo-1602810316693-3667c854239a?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE5fHxzaGlydHxlbnwwfHx8fDE3MjAxMDY2ODF8MA&amp;ixlib=rb-4.0.3&amp;w=600' }}"
                   class="thq-img-ratio-4-3"
                 />
+                {% endwith %}
                 <div class="features4-content thq-flex-column">
                   <div class="features4-section-title thq-flex-column">
                     <h3 class="features4-title1 thq-heading-3">
-                      <span>Product</span>
+                      <span><a href="/products/{{ product.product_id }}">{{ product.name }}</a></span>
                     </h3>
-                    <span class="features4-text"><span>Price:</span></span>
-                    <span class="features4-text1"><span>Rating:</span></span>
-                    <span class="features4-text2"><span>Reviews:</span></span>
+                    <span class="features4-text"><span>Price: {{ product.price }}</span></span>
+                    <span class="features4-text1"><span>Rating: {{ product.get_rating }}</span></span>
+                    <span class="features4-text2"><span>Reviews: {{ product.get_rev_count }}</span></span>
                   </div>
                 </div>
               </div>
-              <div class="features4-feature2">
-                <img
-                  alt="Customer Reviews Image"
-                  src="https://images.unsplash.com/photo-1595642527925-4d41cb781653?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDR8fGhhdHxlbnwwfHx8fDE3MjAxMDY2OTF8MA&amp;ixlib=rb-4.0.3&amp;w=600"
-                  class="thq-img-ratio-4-3"
-                />
-                <div class="features4-section-title1 thq-flex-column">
-                  <h3 class="features4-title11 thq-heading-3">
-                    <span>Product</span>
-                  </h3>
-                  <span class="features4-text3"><span>Price:</span></span>
-                  <span class="features4-text4"><span>Rating:</span></span>
-                  <span class="features4-text5"><span>Reviews:</span></span>
-                </div>
-              </div>
-              <div class="features4-feature3">
-                <img
-                  alt="Direct Selling Image"
-                  src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDR8fGJhZ3xlbnwwfHx8fDE3MjAxMDY3MjB8MA&amp;ixlib=rb-4.0.3&amp;w=600"
-                  class="thq-img-ratio-4-3"
-                />
-                <div class="features4-content1 thq-flex-column">
-                  <div class="features4-section-title2 thq-flex-column">
-                    <div class="features4-section-title3 thq-flex-column">
-                      <h3 class="features4-title12 thq-heading-3">
-                        <span>Product</span>
-                      </h3>
-                      <span class="features4-text6"><span>Price:</span></span>
-                      <span class="features4-text7"><span>Rating:</span></span>
-                      <span class="features4-text8"><span>Reviews:</span></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
             </div>
           </div>
         </div>

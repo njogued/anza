@@ -59,9 +59,10 @@
     />
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static './style.css' %}" />
     <div>
-      <link href="./detail-product.css" rel="stylesheet" />
+      <link href="{% static './detail-product.css'%}" rel="stylesheet" />
 
       <div class="detail-product-container">
         <header class="navbar43-container">
@@ -150,14 +151,16 @@
         </header>
         <div class="detail-product-container01">
           <div class="detail-product-container02">
+            {% with product.is_cover_image as cover_image %}
             <img
               alt="image"
-              src="https://images.unsplash.com/photo-1605548230624-8d2d0419c517?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE0fHxjb2tlfGVufDB8fHx8MTcyMDEwNzE5MHww&amp;ixlib=rb-4.0.3&amp;w=200"
+              src="{{ cover_image.image.url|default:'https://images.unsplash.com/photo-1605548230624-8d2d0419c517?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE0fHxjb2tlfGVufDB8fHx8MTcyMDEwNzE5MHww&amp;ixlib=rb-4.0.3&amp;w=200' }}"
               class="detail-product-image"
             />
+            {% endwith %}
           </div>
           <div class="detail-product-container03">
-            <h1 class="detail-product-text">Product X</h1>
+            <h1 class="detail-product-text">{{ product.name }}</h1>
             <div class="detail-product-container04">
               <div class="detail-product-container05">
                 <svg
@@ -168,7 +171,7 @@
                     d="M256 256c0-40.571-32.571-73.143-73.143-73.143s-73.143 32.571-73.143 73.143 32.571 73.143 73.143 73.143 73.143-32.571 73.143-73.143zM865.714 585.143c0 19.429-8 38.286-21.143 51.429l-280.571 281.143c-13.714 13.143-32.571 21.143-52 21.143s-38.286-8-51.429-21.143l-408.571-409.143c-29.143-28.571-52-84-52-124.571v-237.714c0-40 33.143-73.143 73.143-73.143h237.714c40.571 0 96 22.857 125.143 52l408.571 408c13.143 13.714 21.143 32.571 21.143 52z"
                   ></path>
                 </svg>
-                <span class="detail-product-text01">Price: Ksh. 100</span>
+                <span class="detail-product-text01">Price: Ksh. {{ product.price }}</span>
               </div>
               <div class="detail-product-container06">
                 <svg
@@ -179,7 +182,7 @@
                     d="M649.714 573.714l174.857-169.714-241.143-35.429-108-218.286-108 218.286-241.143 35.429 174.857 169.714-41.714 240.571 216-113.714 215.429 113.714zM950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 15.429-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
                   ></path>
                 </svg>
-                <span class="detail-product-text02">Rating: 3.2</span>
+                <span class="detail-product-text02">Average rating: {{ product.get_rating }}</span>
               </div>
             </div>
             <div class="detail-product-container07">
@@ -190,7 +193,7 @@
                   ></path>
                 </svg>
                 <span class="detail-product-text03">
-                  <span>Reviews: 72</span>
+                  <span>Reviews: {{ rev_count }}</span>
                   <br />
                 </span>
               </div>
@@ -226,44 +229,29 @@
               </h2>
               <h3 class="banner1-text thq-heading-3">
                 <span>
-                  This is a totally useful product and is by no means a waste of
-                  your time.
+                  {{ product.description }}
                 </span>
               </h3>
             </div>
           </div>
         </div>
+        {% for review in reviews %}
         <div class="detail-product-container10">
           <h1 class="detail-product-text06">
             <span class="detail-product-text07">
-              Not the worst product. |&nbsp;Rated: 3
+              {{ review.review }} | Rated: {{ review.rating }}
             </span>
             <br />
           </h1>
           <span class="detail-product-text09">
             <span class="detail-product-text10">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              {{ review.review_description }}
             </span>
             <span></span>
           </span>
         </div>
-        <div class="detail-product-container11">
-          <h1 class="detail-product-text12">
-            The worst product. |&nbsp;Rated: 1
-          </h1>
-          <span class="detail-product-text13">
-            <span class="detail-product-text14">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </span>
-            <span></span>
-          </span>
-        </div>
+
+        {% endfor %}
         <footer class="footer46-footer7 thq-section-padding">
           <div class="footer46-max-width thq-section-max-width">
             <div class="footer46-content">
