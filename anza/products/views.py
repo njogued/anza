@@ -14,7 +14,9 @@ class ProductDetailView(View):
         product = Product.objects.get(product_id=product_id)
         images = ProductImage.objects.filter(product=product)
         reviews = Review.objects.filter(product=product)
-        return render(request, "detail_product.html", {"product": product, "images": images, "reviews": reviews})
+        rev_count = reviews.count()
+
+        return render(request, "detail-product.html", {"product": product, "images": images, "reviews": reviews, "rev_count": rev_count})
     
 class ProductUpdateView(UpdateView):
     # A view to update a product

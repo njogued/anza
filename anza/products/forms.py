@@ -29,4 +29,4 @@ class CreateReviewForm(forms.ModelForm):
     # Custom form to handle creating reviews
     class Meta:
         model = Review
-        fields = ('rating', 'review')
+        fields = ('rating', 'review', 'review_description')

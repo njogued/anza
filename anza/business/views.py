@@ -36,7 +36,7 @@ class CreateBusinessView(LoginRequiredMixin, CreateView):
 
 class BusinessDetailView(DetailView):
     model = Business
-    template_name = "detail_business.html"
+    template_name = "detail-businesses.html"
     context_object_name = "business"
     pk_url_kwarg = 'business_id'
     

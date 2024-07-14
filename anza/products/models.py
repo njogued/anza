@@ -22,6 +22,19 @@ class Product(models.Model):
             return self.images.filter(is_cover=True).first()
         return self.images.first()
     
+    def get_rating(self):
+        reviews = self.reviews.filter(archived=False)
+        if reviews.count() > 0:
+            avg_rating = sum([review.rating for review in reviews]) / reviews.count()
+            return round(avg_rating, 2) 
+        return 0
+    
+    def get_rev_count(self):
+        reviews = self.reviews.filter(archived=False)
+        if reviews:
+            return reviews.count()
+        return 0
+    
     
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
@@ -43,7 +56,8 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     reviewer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     rating = models.IntegerField()
-    review = models.TextField()
+    review = models.TextField(default='')
+    review_description = models.TextField(default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     archived = models.BooleanField(default=False)
