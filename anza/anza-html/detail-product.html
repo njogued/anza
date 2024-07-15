@@ -231,7 +231,17 @@
             </div>
           </div>
         </div>
+        <div class="banner1-container thq-section-padding">
+          <div class="banner1-max-width thq-section-max-width">
+            <div class="banner1-container1">
+              <h2 class="banner1-title thq-heading-2">
+                <span>Reviews</span>
+              </h2>
+            </div>
+          </div>
+        </div>
         <div class="banner1-container" style="width: 100%">
+          {% if self_review_bool is not True %}
           <form method="post" id="review-form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="banner1-max-width thq-section-max-width">
@@ -296,6 +306,100 @@
               </div>
             </div>
           </form>
+          {% else %}
+          <div class="banner1-max-width thq-section-max-width">
+            <div class="banner1-container1">
+              <h2 class="banner1-title thq-heading-2">
+                <span>Your review:</span>
+              </h2>
+                <h1 class="detail-product-text06">
+                  <span class="detail-product-text07">
+                    {{ self_review.review }} | Rated: {{ self_review.rating }}
+                  </span>
+                  <br />
+                </h1>
+                <span class="detail-product-text09">
+                  <span class="detail-product-text10">
+                    {{ self_review.review_description }}
+                  </span>
+                  <span></span>
+                </span>
+                <div class="banner1-container5">
+                  <button
+                    class="banner1-action thq-button-filled thq-button-animated" id="edit-review-btn"
+                  >
+                    <span class="banner1-text1 thq-body-small">
+                      <span>Edit Review</span>
+                    </span>
+                  </button>
+                </div>
+            </div>
+            <div id="reviewModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="update-review-form" action="" method="post">
+                  {% csrf_token %}
+                  <!-- Form content here -->
+                  <div class="banner1-container2">
+                    <div class="banner1-container3">
+                      <label for="id_rating" class="banner1-text thq-heading-3">
+                        <span>Rating</span>
+                      </label>
+                      <select
+                        name="rating"
+                        id="id_rating"
+                        class="banner1-input thq-input"
+                        required
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                    </div>
+                    <div class="banner1-container4">
+                      <label for="id_review" class="banner1-text thq-heading-3">
+                        <span>Review Title</span>
+                      </label>
+                      <textarea
+                        name="review"
+                        id="id_review"
+                        class="banner1-input thq-input banner1-input1"
+                      ></textarea>
+                    </div>
+                    <div class="banner1-container4">
+                      <label for="id_review_description" class="banner1-text thq-heading-3">
+                        <span>Review Description</span>
+                      </label>
+                      <textarea
+                        name="review_description"
+                        id="id_review_description"
+                        class="banner1-input thq-input banner1-input1"
+                      ></textarea>
+                    </div>
+                    <input type="hidden" name="review_id" id="review_id" value="">
+                    <div class="banner1-container5">
+                      <button
+                        type="submit"
+                        class="banner1-action thq-button-filled thq-button-animated"
+                      >
+                        <span class="banner1-text1 thq-body-small">
+                          <span>Submit</span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            </div>
+          {% endif %}
         </div>
         {% for review in reviews %}
         <div class="detail-product-container10">
@@ -364,13 +468,74 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         var form = document.getElementById("review-form");
-        var currentUrl = window.location.pathname;
-        form.action = currentUrl + "review/create/";
+        if (form) {
+          form.action = window.location.pathname + "review/create/";
+        }
       });
     </script>
     <script>
       $(document).ready(function() {
         $("#review-form").submit(function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const formData = new FormData(this)
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+              console.log(response);
+              var currentUrl = window.location.pathname;
+              window.location = currentUrl;
+            },
+            error: function(error) {
+              console.log(error);
+            }
+          });
+        });
+      })
+    </script>
+    <script>
+      // Get the modal
+      var modal = document.getElementById("reviewModal");
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("edit-review-btn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the modal & update text fields
+      btn.onclick = function() {
+        modal.style.display = "block";
+        const id_rating = document.getElementById("id_rating");
+        id_rating.value = "{{ self_review.rating }}";
+        const id_review = document.getElementById("id_review");
+        id_review.value = "{{ self_review.review }}";
+        const id_review_description = document.getElementById("id_review_description");
+        id_review_description.value = "{{ self_review.review_description }}";
+        const review_id = document.getElementById("review_id");
+        review_id.value = "{{ self_review.id }}";
+        document.getElementById("update-review-form").action = "/products/review/{{ self_review.id }}/update/";
+      }
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    </script>
+    <script>
+      $(document).ready(function() {
+        $("#update-review-form").submit(function(e) {
           e.preventDefault();
           e.stopPropagation();
           const formData = new FormData(this)

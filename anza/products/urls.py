@@ -7,7 +7,7 @@ urlpatterns = [
     path("delete/<int:product_id>/", ProductDeleteView.as_view(), name="delete_product"),
     path("<int:product_id>/", ProductDetailView.as_view(), name="detail_product"),
     path("<int:product_id>/review/create/", CreateReviewView.as_view(), name="create_review"),
-    path("review/update/<int:review_id>/", UpdateReviewView.as_view(), name="update_review"),
-    path("review/delete/<int:review_id>/", DeleteReviewView.as_view(), name="delete_review"),
+    path("review/<int:review_id>/update/", UpdateReviewView.as_view(), name="update_review"),
+    path("review/<int:review_id>/delete/", DeleteReviewView.as_view(), name="delete_review"),
     path("all/", ProductListView.as_view(), name="list_product"),
 ]

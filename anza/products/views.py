@@ -4,9 +4,9 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.views import View
 from .models import Product, Review, ProductImage
-from .forms import UpdateProductForm, CreateReviewForm
+from .forms import UpdateProductForm, CreateReviewForm, UpdateReviewForm
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
 
 class ProductDetailView(View):
     # A view to display the details of a product
@@ -16,9 +16,17 @@ class ProductDetailView(View):
         product = Product.objects.get(product_id=product_id)
         images = ProductImage.objects.filter(product=product)
         reviews = Review.objects.filter(product=product)
+        self_review_bool = False
+        self_review = None
+        if request.user.is_authenticated:
+            self_review = reviews.filter(reviewer=request.user).first()
+            if self_review:
+                self.form_class = UpdateReviewForm
+                self_review_bool = True
         rev_count = reviews.count()
+        context = {"product": product, "images": images, "reviews": reviews, "rev_count": rev_count, "form": self.form_class, "self_review": self_review, "self_review_bool": self_review_bool}
 
-        return render(request, "detail-product.html", {"product": product, "images": images, "reviews": reviews, "rev_count": rev_count, "form": self.form_class})
+        return render(request, "detail-product.html", context)
     
 class ProductUpdateView(UpdateView):
     # A view to update a product
@@ -85,7 +93,7 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
 class UpdateReviewView(UpdateView):
     # A view to update a review
     model = Review
-    fields = ['rating', 'comment']
+    form_class = UpdateReviewForm
     template_name = 'update_review.html'
     context_object_name = 'review'
     pk_url_kwarg = 'review_id'
@@ -93,10 +101,22 @@ class UpdateReviewView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('detail_product', kwargs={'product_id': self.object.product.product_id})
     
-    def form_valid(self, form):
-        review = form.save()
-        review.save()
-        return redirect(self.get_success_url())
+    def form_invalid(self, form):
+        if form.errors:
+            if self.request.is_ajax():
+                return JsonResponse(form.errors, status=400)
+            return redirect(self.get_success_url())
+        
+    def post(self, request, review_id):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            review = form.save()
+            print(review)
+            # review.save()
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({"message": "Success"}, status=200)
+            return redirect(self.get_success_url())
+        return self.form_invalid(form)
     
 class DeleteReviewView(DeleteView):
     # A view to delete a review

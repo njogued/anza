@@ -34,11 +34,36 @@ class CreateReviewForm(forms.ModelForm):
     def clean_review(self):
         review = self.cleaned_data.get('review')
         if not review:
-            return ' '  # or return None if you prefer null
+            return ' '
         return review
 
     def clean_review_description(self):
         review_description = self.cleaned_data.get('review_description')
         if not review_description:
-            return ' '  # or return None if you prefer null
+            return ' '
         return review_description
+    
+
+class UpdateReviewForm(forms.ModelForm):
+    # Custom form to handle updating reviews
+    class Meta:
+        model = Review
+        fields = ('rating', 'review', 'review_description')
+
+    def clean_review(self):
+        review = self.cleaned_data.get('review')
+        if not review:
+            return ' ' 
+        return review
+
+    def clean_review_description(self):
+        review_description = self.cleaned_data.get('review_description')
+        if not review_description:
+            return ' ' 
+        return review_description
+    
+    def clean_rating(self):
+        rating = self.cleaned_data.get('rating')
+        if rating < 1 or rating > 10:
+            raise forms.ValidationError("Rating must be between 1 and 10")
+        return rating
