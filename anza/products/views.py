@@ -93,8 +93,6 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
 class UpdateReviewView(UpdateView):
     # A view to update a review
     model = Review
-    form_class = UpdateReviewForm
-    template_name = 'update_review.html'
     context_object_name = 'review'
     pk_url_kwarg = 'review_id'
     
@@ -108,15 +106,30 @@ class UpdateReviewView(UpdateView):
             return redirect(self.get_success_url())
         
     def post(self, request, review_id):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            review = form.save()
-            print(review)
-            # review.save()
+        # review = Review.objects.get(id=review_id)
+        review = self.get_object()
+        
+        rating = request.POST.get('rating')
+        review_text = request.POST.get('review')
+        review_description = request.POST.get('review_description')
+
+        # Validate the input data
+        errors = {}
+        if not rating or not rating.isdigit() or not (1 <= int(rating) <= 10):
+            errors['rating'] = ['Rating must be an integer between 1 and 10.']
+
+        if errors:
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                return JsonResponse({"message": "Success"}, status=200)
-            return redirect(self.get_success_url())
-        return self.form_invalid(form)
+                return JsonResponse(errors, status=400)
+            return self.form_invalid(None)
+
+        review.rating = rating
+        review.review = review_text
+        review.review_description = review_description
+        review.save()
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({"message": "Success"}, status=200)
+        return redirect(self.get_success_url())
     
 class DeleteReviewView(DeleteView):
     # A view to delete a review

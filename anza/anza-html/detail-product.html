@@ -383,7 +383,8 @@
                         class="banner1-input thq-input banner1-input1"
                       ></textarea>
                     </div>
-                    <input type="hidden" name="review_id" id="review_id" value="">
+                    <input type="hidden" name="review_id" id="id_review_id" value="">
+                    <input type="hidden" name="product_id" id="id_product_id" value="{{ product.product_id }}">
                     <div class="banner1-container5">
                       <button
                         type="submit"
@@ -516,7 +517,7 @@
         id_review.value = "{{ self_review.review }}";
         const id_review_description = document.getElementById("id_review_description");
         id_review_description.value = "{{ self_review.review_description }}";
-        const review_id = document.getElementById("review_id");
+        const review_id = document.getElementById("id_review_id");
         review_id.value = "{{ self_review.id }}";
         document.getElementById("update-review-form").action = "/products/review/{{ self_review.id }}/update/";
       }
