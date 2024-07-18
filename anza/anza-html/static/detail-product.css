@@ -559,3 +559,19 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+#confirm-delete-container {
+  display: grid;
+  grid-template-columns: 3fr 3fr;
+  gap: 10px;
+  margin: 20px 10px;
+}
+
+#delete-btn-1 {
+  color: #f43a0ced;
+}
+
+#delete-btn-1 {
+  color: #f43a0ced;
+  background: white;
+}
