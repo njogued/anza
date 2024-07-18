@@ -136,8 +136,26 @@ class DeleteReviewView(DeleteView):
     model = Review
     template_name = 'delete_review.html'
     context_object_name = 'review'
-    success_url = reverse_lazy('home')
     pk_url_kwarg = 'review_id'
+    product_id = None
+    
+    def post(self, request, review_id):
+        review = self.get_object()
+        self.product_id = review.product.product_id
+        success_url = reverse('detail_product', kwargs={'product_id': self.product_id})
+        review.delete()
+        return redirect(success_url)
+
+    # def post(self, request, review_id):
+    #     review = self.get_object()
+    #     review.archived = True
+    #     review.save()
+    #     return redirect(reverse('detail_product', kwargs={'product_id': review.product.product_id}))
+
+    
+    # def get_success_url(self):
+    #     reverse_lazy('detail_product', kwargs={'product_id': self.product_id})
+    
 
 class ProductListView(ListView):
     # A view to list all products
