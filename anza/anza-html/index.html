@@ -1,35 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Anza</title>
-    <meta property="og:title" content="Anza" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-    <meta property="twitter:card" content="summary_large_image" />
+{% extends 'basepage.html' %}
+{% load static %}
 
-    <style data-tag="reset-style-sheet">
-      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
-    </style>
-    <style data-tag="default-style-sheet">
-      html {
-        font-family: Inter;
-        font-size: 16px;
-      }
-
-      body {
-        font-weight: 400;
-        font-style:normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: var(--dl-color-theme-neutral-dark);
-        background-color: var(--dl-color-theme-neutral-light);
-
-        fill: var(--dl-color-theme-neutral-dark);
-      }
-    </style>
-    <link
+{% block title %}
+<title>Bizmob</title>
+{% endblock %}
+{% block meta %}
+<meta property="og:title" content="Bizmob" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+<meta property="twitter:card" content="summary_large_image" />
+{% endblock %}
+{% block link %}
+<link
       rel="stylesheet"
       href="https://unpkg.com/animate.css@4.1.1/animate.css"
     />
@@ -57,123 +39,52 @@
       rel="stylesheet"
       href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
     />
-  </head>
-  <body>
-    {% load static %}
     <link rel="stylesheet" href="{% static './style.css' %}" />
-    <div>
-      <link href="{% static './index.css' %}" rel="stylesheet" />
-      <div class="home-container">
-        <header class="navbar44-container">
-          <header data-thq="thq-navbar" class="navbar44-navbar-interactive">
-            <img
-              alt="E-Commerce Platform Logo"
-              src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&amp;force_format=original"
-              class="navbar44-image1"
-            />
-            <div data-thq="thq-navbar-nav" class="navbar44-desktop-menu">
-              <nav class="navbar44-links">
-                <span class="thq-body-small thq-link"><a href="/about">About</a></span>
-                <span class="thq-body-small thq-link">
-                  <a href="/contact">Contact Us</a>
-                </span>
-                <span class="thq-body-small thq-link">
-                  <a href="/business/all">Businesses</a>
-                </span>
-                <span class="thq-body-small thq-link">
-                  <a href="/products/all">Products</a>
-                </span>
-              </nav>
-              {% if user.is_authenticated %}
-              <div class="navbar44-buttons">
-                <button
-                  class="navbar44-action1 thq-button-filled thq-button-animated"
-                >
-                  <span class="thq-body-small">
-                    <a href="/business/create">List Business</a>
-                    <br />
-                  </span>
-                </button>
-                <button
-                  class="navbar44-action1 thq-button-filled thq-button-animated"
-                >
-                  <span class="thq-body-small">
-                    <a href="/users/{{ user.username }}">Profile</a>
-                    <br />
-                  </span>
-                </button>
-              </div>
-              {% else %}
-              <div class="navbar44-buttons">
-                <button
-                  class="navbar44-action1 thq-button-filled thq-button-animated"
-                >
-                  <span class="thq-body-small">
-                    <a href="{% url 'signup' %}">Sign Up</a>
-                    <br />
-                  </span>
-                </button>
-                <button
-                  class="navbar44-action1 thq-button-outline thq-button-animated"
-                >
-                  <span class="thq-body-small">
-                    <a href="{% url 'login' %}">Log In</a>
-                    <br />
-                  </span>
-                </button>
-              </div>
-              {% endif %}
-            </div>
-            <div data-thq="thq-burger-menu" class="navbar44-burger-menu">
-              <svg viewBox="0 0 1024 1024" class="navbar44-icon2">
-                <path
-                  d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
-                ></path>
-              </svg>
-            </div>
-            <div data-thq="thq-mobile-menu" class="navbar44-mobile-menu">
-              <div class="navbar44-nav">
-                <div class="navbar44-top">
-                  <img
-                    alt="E-Commerce Platform Logo"
-                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&amp;force_format=original"
-                    class="navbar44-logo"
-                  />
-                  <div data-thq="thq-close-menu" class="navbar44-close-menu">
-                    <svg viewBox="0 0 1024 1024" class="navbar44-icon4">
-                      <path
-                        d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
-                <nav class="navbar44-links1">
-                  <span class="thq-body-small thq-link">
-                    <span>About</span>
-                  </span>
-                  <span class="thq-body-small thq-link">
-                    <span>Contact Us</span>
-                  </span>
-                  <span class="thq-body-small thq-link">
-                    <span>Businesses</span>
-                  </span>
-                  <span class="thq-body-small thq-link">
-                    <span>Products</span>
-                  </span>
-                </nav>
-              </div>
-              <div class="navbar44-buttons1">
-                <button class="thq-button-filled">Login</button>
-                <button class="thq-button-outline">Register</button>
-              </div>
-            </div>
-          </header>
-        </header>
+    <link href="{% static './index.css' %}" rel="stylesheet" />
+    {% endblock %}
+{% block style %}
+<style data-tag="reset-style-sheet">
+  html {  line-height: 1.15;}
+  body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}
+  p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}
+  button {  background-color: transparent;}
+  button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}
+  button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}
+  button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}
+  input {  padding: 2px 4px;}
+  img {  display: block;}html { scroll-behavior: smooth  }
+</style>
+<style data-tag="default-style-sheet">
+  html {
+    font-family: Inter;
+    font-size: 16px;
+  }
+  body {
+    font-weight: 400;
+    font-style:normal;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    line-height: 1.15;
+    color: var(--dl-color-theme-neutral-dark);
+    background-color: var(--dl-color-theme-neutral-light);
+
+    fill: var(--dl-color-theme-neutral-dark);
+  }
+</style>
+{% endblock %}
+{% block script %}
+<script
+      defer=""
+      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+    ></script>
+{% endblock %}
+{% block content %}
         <div class="hero17-header78">
           <div class="hero17-column thq-section-max-width thq-section-padding">
             <div class="hero17-content">
               <h1 class="hero17-text thq-heading-1">
-                <span>Welcome to Anza</span>
+                <span>Welcome to Bizmob</span>
               </h1>
             </div>
             <div class="hero17-actions">
@@ -518,52 +429,4 @@
             </div>
           </div>
         </div>
-        <footer class="footer4-footer7 thq-section-padding">
-          <div class="footer4-max-width thq-section-max-width">
-            <div class="footer4-content">
-              <div class="footer4-logo">
-                <img
-                  alt="E-commerce Platform Logo"
-                  src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
-                  class="footer4-logo1"
-                />
-              </div>
-              <div class="footer4-links">
-                <span class="thq-body-small"><span>About Us</span></span>
-                <span class="thq-body-small"><span>Contact Us</span></span>
-                <span class="thq-body-small"><span>FAQs</span></span>
-                <span class="thq-body-small">
-                  <span>Terms and Conditions</span>
-                </span>
-                <span class="thq-body-small"><span>Privacy Policy</span></span>
-              </div>
-            </div>
-            <div class="footer4-credits">
-              <div class="thq-divider-horizontal"></div>
-              <div class="footer4-row">
-                <div class="footer4-container">
-                  <span class="thq-body-small">© 2024 TeleportHQ</span>
-                </div>
-                <div class="footer4-footer-links">
-                  <span class="footer4-text6 thq-body-small">
-                    <span>Privacy Policy</span>
-                  </span>
-                  <span class="thq-body-small">
-                    <span>Terms and Conditions</span>
-                  </span>
-                  <span class="thq-body-small">
-                    <span>Cookies Policy</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
-    </div>
-    <script
-      defer=""
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
-  </body>
-</html>
+{% endblock %}

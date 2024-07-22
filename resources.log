@@ -13,3 +13,5 @@ Resetting database on model update:
         # find . -path "*/migrations/*.pyc"  -delete  
 - python manage.py makemigrations 
 - python manage.py migrate
+
+Reset migrations: https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html 
