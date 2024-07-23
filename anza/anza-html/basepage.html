@@ -12,116 +12,112 @@
     {% block style %}{% endblock %}
   </head>
   <body>
-    <div class="home-container">
-        <header class="navbar44-container">
-            <header data-thq="thq-navbar" class="navbar44-navbar-interactive">
-              <img
-                alt="bizmob-logo"
-                src="/media/site_files/bizmob.png"
-                class="navbar44-image1"
-              />
-              <div data-thq="thq-navbar-nav" class="navbar44-desktop-menu">
-                <nav class="navbar44-links">
+    <div class="{% block divclass %}{% endblock %}">
+      <header class="navbar44-container">
+          <header data-thq="thq-navbar" class="navbar44-navbar-interactive">
+            <img
+              alt="bizmob-logo"
+              src="/media/site_files/bizmob.png"
+              class="navbar44-image1"
+            />
+            <div data-thq="thq-navbar-nav" class="navbar44-desktop-menu">
+              <nav class="navbar44-links">
+                <span class="thq-body-small thq-link">
+                  <a href="/about">About</a>
+                </span>
+                <span class="thq-body-small thq-link">
+                  <a href="/contact">Contact Us</a>
+                </span>
+                <span class="thq-body-small thq-link">
+                  <a href="/business/all">Businesses</a>
+                </span>
+                <span class="thq-body-small thq-link">
+                  <a href="/products/all">Products</a>
+                </span>
+              </nav>
+              {% if user.is_authenticated %}
+              <div class="navbar44-buttons">
+                <button
+                  class="navbar44-action1 thq-button-filled thq-button-animated"
+                >
+                  <span class="thq-body-small">
+                    <a href="/business/create">List Business</a>
+                    <br />
+                  </span>
+                </button>
+                <button
+                  class="navbar44-action1 thq-button-filled thq-button-animated"
+                >
+                  <span class="thq-body-small">
+                    <a href="/users/{{ user.username }}">Profile</a>
+                    <br />
+                  </span>
+                </button>
+              </div>
+              {% else %}
+              <div class="navbar44-buttons">
+                <button
+                  class="navbar44-action1 thq-button-filled thq-button-animated"
+                >
+                  <span class="thq-body-small">
+                    <a href="{% url 'signup' %}">Sign Up</a>
+                    <br />
+                  </span>
+                </button>
+                <button
+                  class="navbar44-action1 thq-button-outline thq-button-animated"
+                >
+                  <span class="thq-body-small">
+                    <a href="{% url 'login' %}">Log In</a>
+                    <br />
+                  </span>
+                </button>
+              </div>
+              {% endif %}
+            </div>
+            <div data-thq="thq-burger-menu" class="navbar44-burger-menu">
+              <svg viewBox="0 0 1024 1024" class="navbar44-icon2">
+                <path
+                  d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+                ></path>
+              </svg>
+            </div>
+            <div data-thq="thq-mobile-menu" class="navbar44-mobile-menu">
+              <div class="navbar44-nav">
+                <div class="navbar44-top">
+                  <img
+                    alt="bizmob-logo"
+                    src="/media/site_files/bizmob.png"
+                    class="navbar44-logo"
+                  />
+                  <div data-thq="thq-close-menu" class="navbar44-close-menu">
+                    <svg viewBox="0 0 1024 1024" class="navbar44-icon4">
+                      <path
+                        d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <nav class="navbar44-links1">
                   <span class="thq-body-small thq-link">
-                    <a href="/about">About</a>
+                      <a href="/contact">Contact Us</a>
                   </span>
                   <span class="thq-body-small thq-link">
-                    <a href="/contact">Contact Us</a>
+                      <a href="/about">About</a>
                   </span>
                   <span class="thq-body-small thq-link">
-                    <a href="/business/all">Businesses</a>
+                      <a href="/business/all">Businesses</a>
                   </span>
                   <span class="thq-body-small thq-link">
-                    <a href="/products/all">Products</a>
+                      <a href="/products/all">Products</a>
                   </span>
                 </nav>
-                {% if user.is_authenticated %}
-                <div class="navbar44-buttons">
-                  <button
-                    class="navbar44-action1 thq-button-filled thq-button-animated"
-                  >
-                    <span class="thq-body-small">
-                      <a href="/business/create">List Business</a>
-                      <br />
-                    </span>
-                  </button>
-                  <button
-                    class="navbar44-action1 thq-button-filled thq-button-animated"
-                  >
-                    <span class="thq-body-small">
-                      <a href="/users/{{ user.username }}">Profile</a>
-                      <br />
-                    </span>
-                  </button>
-                </div>
-                {% else %}
-                <div class="navbar44-buttons">
-                  <button
-                    class="navbar44-action1 thq-button-filled thq-button-animated"
-                  >
-                    <span class="thq-body-small">
-                      <a href="{% url 'signup' %}">Sign Up</a>
-                      <br />
-                    </span>
-                  </button>
-                  <button
-                    class="navbar44-action1 thq-button-outline thq-button-animated"
-                  >
-                    <span class="thq-body-small">
-                      <a href="{% url 'login' %}">Log In</a>
-                      <br />
-                    </span>
-                  </button>
-                </div>
-                {% endif %}
               </div>
-              <div data-thq="thq-burger-menu" class="navbar44-burger-menu">
-                <svg viewBox="0 0 1024 1024" class="navbar44-icon2">
-                  <path
-                    d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
-                  ></path>
-                </svg>
-              </div>
-              <div data-thq="thq-mobile-menu" class="navbar44-mobile-menu">
-                <div class="navbar44-nav">
-                  <div class="navbar44-top">
-                    <img
-                      alt="bizmob-logo"
-                      src="/media/site_files/bizmob.png"
-                      class="navbar44-logo"
-                    />
-                    <div data-thq="thq-close-menu" class="navbar44-close-menu">
-                      <svg viewBox="0 0 1024 1024" class="navbar44-icon4">
-                        <path
-                          d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <nav class="navbar44-links1">
-                    <span class="thq-body-small thq-link">
-                        <a href="/contact">Contact Us</a>
-                    </span>
-                    <span class="thq-body-small thq-link">
-                        <a href="/about">About</a>
-                    </span>
-                    <span class="thq-body-small thq-link">
-                        <a href="/business/all">Businesses</a>
-                    </span>
-                    <span class="thq-body-small thq-link">
-                        <a href="/products/all">Products</a>
-                    </span>
-                  </nav>
-                </div>
-              </div>
-            </header>
+            </div>
           </header>
-        {% block content %}
-        <!-- Add your main content here -->
-        {% endblock %}
-
-    </div>
-    <footer class="footer4-footer7 thq-section-padding">
+      </header>
+      {% block content %}{% endblock %}
+      <footer class="footer4-footer7 thq-section-padding">
         <div class="footer4-max-width thq-section-max-width">
           <div class="footer4-content">
             <div class="footer4-logo">
@@ -161,5 +157,8 @@
           </div>
         </div>
       </footer>
+    </div>
+  {% block scripts_end %}
+  {% endblock %}
 </body>
 </html>
