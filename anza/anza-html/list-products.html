@@ -1,221 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>List-Products - Anza</title>
-    <meta property="og:title" content="List-Products - Anza" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-    <meta property="twitter:card" content="summary_large_image" />
+{% extends 'basepage.html' %}
+{% load static %}
 
-    <style data-tag="reset-style-sheet">
-      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
-    </style>
-    <style data-tag="default-style-sheet">
-      html {
-        font-family: Inter;
-        font-size: 16px;
-      }
+{% block title %}
+<title>List-Products - Anza</title>
+{% endblock %}
+{% block meta %}
+<meta property="og:title" content="List-Products - Anza" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+{% endblock %}
+{% block style %}
+<style data-tag="reset-style-sheet">
+  html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+</style>
+<style data-tag="default-style-sheet">
+  html {
+    font-family: Inter;
+    font-size: 16px;
+  }
 
-      body {
-        font-weight: 400;
-        font-style:normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: var(--dl-color-theme-neutral-dark);
-        background-color: var(--dl-color-theme-neutral-light);
+  body {
+    font-weight: 400;
+    font-style:normal;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    line-height: 1.15;
+    color: var(--dl-color-theme-neutral-dark);
+    background-color: var(--dl-color-theme-neutral-light);
 
-        fill: var(--dl-color-theme-neutral-dark);
-      }
-    </style>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/animate.css@4.1.1/animate.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-      data-tag="font"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
-      data-tag="font"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
-      data-tag="font"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
-      data-tag="font"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
-    />
-  </head>
-  <body>
-    {% load static %}
-    <link rel="stylesheet" href="{% static './style.css' %}" />
-    <div>
-      <link href="{% static './list-products.css' %}" rel="stylesheet" />
-      <div class="list-products-container">
-        <header class="navbar42-container">
-          <header data-thq="thq-navbar" class="navbar42-navbar-interactive">
-            <img
-              alt="Anza Logo"
-              src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&amp;force_format=original"
-              class="navbar42-image1"
-            />
-            <div data-thq="thq-navbar-nav" class="navbar42-desktop-menu">
-              <nav class="navbar42-links">
-                <span class="thq-body-small thq-link"><span>Home</span></span>
-                <span class="thq-body-small thq-link">
-                  <span>Discover Businesses</span>
-                </span>
-                <span class="thq-body-small thq-link">
-                  <span>Contact Us</span>
-                </span>
-              </nav>
-              <div class="navbar42-buttons">
-                <button
-                  class="navbar42-action1 thq-button-filled thq-button-animated"
-                >
-                  <span class="thq-body-small">New Business</span>
-                </button>
-                <svg viewBox="0 0 1024 1024" class="navbar42-icon">
-                  <path
-                    d="M512 598q108 0 225 47t117 123v86h-684v-86q0-76 117-123t225-47zM512 512q-70 0-120-50t-50-120 50-121 120-51 120 51 50 121-50 120-120 50z"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-            <div data-thq="thq-burger-menu" class="navbar42-burger-menu">
-              <svg viewBox="0 0 1024 1024" class="navbar42-icon2">
-                <path
-                  d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
-                ></path>
-              </svg>
-            </div>
-            <div data-thq="thq-mobile-menu" class="navbar42-mobile-menu">
-              <div class="navbar42-nav">
-                <div class="navbar42-top">
-                  <img
-                    alt="Anza Logo"
-                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&amp;force_format=original"
-                    class="navbar42-logo"
-                  />
-                  <div data-thq="thq-close-menu" class="navbar42-close-menu">
-                    <svg viewBox="0 0 1024 1024" class="navbar42-icon4">
-                      <path
-                        d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
-                <nav class="navbar42-links1">
-                  <span class="thq-body-small thq-link"><span>Home</span></span>
-                  <span class="thq-body-small thq-link">
-                    <span>Discover Businesses</span>
-                  </span>
-                  <span class="thq-body-small thq-link">
-                    <span>Reviews</span>
-                  </span>
-                  <span class="thq-body-small thq-link">
-                    <span>Sell on Anza</span>
-                  </span>
-                  <span class="thq-body-small thq-link">
-                    <span>Contact Us</span>
-                  </span>
-                </nav>
-              </div>
-              <div class="navbar42-buttons1">
-                <button class="thq-button-filled">Login</button>
-                <button class="thq-button-outline">Register</button>
-              </div>
-            </div>
-          </header>
-        </header>
-        <div class="toast61-container">
-          <div class="toast61-header">
-            <h2 class="toast61-title thq-heading-2">
-              <span>Top Products</span>
-            </h2>
-          </div>
-        </div>
-        {% for product in products %}
-        <div class="list-products-container1">
-          {% with product.is_cover_image as cover_img %}
-          <img
-            alt="business-logo"
-            src="{{ cover_img.image.url|default:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDh8fHByb2R1Y3R8ZW58MHx8fHwxNzIwMTAwNDA5fDA&amp;ixlib=rb-4.0.3&amp;w=300' }}"
-            class="list-products-image"
-          />
-          {% endwith %}
-          <!-- <img
-            alt="business-logo"
-            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDh8fHByb2R1Y3R8ZW58MHx8fHwxNzIwMTAwNDA5fDA&amp;ixlib=rb-4.0.3&amp;w=300"
-            class="list-products-image"
-          /> -->
-          <div class="list-products-container2">
-            <h1 class="list-products-text"><a href=/products/{{ product.product_id }}>{{ product.name }}</a> | Ksh. {{ product.price }}</h1>
-            <span class="list-products-text01">Rating: TBD</span>
-            <span class="list-products-text02">Reviews: TBD</span>
-            <span class="list-products-text02">Business: {{ product.business }}</span>
-            <!-- <span class="list-products-text03">Description: {{ product.description }}</span> -->
-          </div>
-        </div>
-        {% endfor %}
-        <footer class="footer43-footer7 thq-section-padding">
-          <div class="footer43-max-width thq-section-max-width">
-            <div class="footer43-content">
-              <div class="footer43-logo">
-                <img
-                  alt="Anza Logo"
-                  src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
-                  class="footer43-logo1"
-                />
-              </div>
-              <div class="footer43-links">
-                <span class="thq-body-small"><span>About Us</span></span>
-                <span class="thq-body-small"><span>Contact Us</span></span>
-                <span class="thq-body-small"><span>FAQ</span></span>
-                <span class="thq-body-small">
-                  <span>Terms and Conditions</span>
-                </span>
-                <span class="thq-body-small"><span>Privacy Policy</span></span>
-              </div>
-            </div>
-            <div class="footer43-credits">
-              <div class="thq-divider-horizontal"></div>
-              <div class="footer43-row">
-                <div class="footer43-container">
-                  <span class="thq-body-small">© 2024 TeleportHQ</span>
-                </div>
-                <div class="footer43-footer-links">
-                  <span class="footer43-text6 thq-body-small">
-                    <span>Privacy Policy</span>
-                  </span>
-                  <span class="thq-body-small">
-                    <span>Terms and Conditions</span>
-                  </span>
-                  <span class="thq-body-small">
-                    <span>Cookies Policy</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
-    </div>
-    <script
-      defer=""
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
-  </body>
-</html>
+    fill: var(--dl-color-theme-neutral-dark);
+  }
+</style>
+{% endblock %}
+{% block link %}
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@4.1.1/animate.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+/>
+<link href="{% static './list-products.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static './style.css' %}" />
+{% endblock %}
+{% block script %}
+{% endblock %}
+{% block divclass %}list-products-container{% endblock %
+{% block content %}
+<div class="toast61-container">
+  <div class="toast61-header">
+    <h2 class="toast61-title thq-heading-2">
+      <span>Top Products</span>
+    </h2>
+  </div>
+</div>
+{% for product in products %}
+<div class="list-products-container1">
+  {% with product.is_cover_image as cover_img %}
+  <img
+    alt="business-logo"
+    src="{{ cover_img.image.url|default:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDh8fHByb2R1Y3R8ZW58MHx8fHwxNzIwMTAwNDA5fDA&amp;ixlib=rb-4.0.3&amp;w=300' }}"
+    class="list-products-image"
+  />
+  {% endwith %}
+  <!-- <img
+    alt="business-logo"
+    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDh8fHByb2R1Y3R8ZW58MHx8fHwxNzIwMTAwNDA5fDA&amp;ixlib=rb-4.0.3&amp;w=300"
+    class="list-products-image"
+  /> -->
+  <div class="list-products-container2">
+    <h1 class="list-products-text"><a href=/products/{{ product.product_id }}>{{ product.name }}</a> | Ksh. {{ product.price }}</h1>
+    <span class="list-products-text01">Rating: TBD</span>
+    <span class="list-products-text02">Reviews: TBD</span>
+    <span class="list-products-text02">Business: {{ product.business }}</span>
+    <!-- <span class="list-products-text03">Description: {{ product.description }}</span> -->
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
+{% block scripts_end %}
+<script
+  defer=""
+  src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+></script>
+{% endblock %}
