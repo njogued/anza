@@ -69,6 +69,8 @@ class BusinessDetailView(DetailView):
             context['avg_rating'] = avg_rating
             context['reviews'] = reviews
             context['products'] = products
+            print(business.owner)
+            print(self.request.user)
         return context
     
     def render_to_response(self, context, **response_kwargs):
