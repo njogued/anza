@@ -158,7 +158,7 @@
       </div>
       <div class="detail-businesses-container12">
         <span class="detail-businesses-text8">
-          <button id="delete-bs-btn">Delete</button>
+          <button class="delete-bs-btn" id="delete-bs-btn">Delete</button>
         </span>
       </div>
     </div>
@@ -238,7 +238,7 @@
           <div class="banner1-container5" id="confirm-delete-container">
             <button type="submit" class="banner1-action thq-button-filled thq-button-animated">
               <span class="banner1-text1 thq-body-small">
-                <span id="delete-bs-btn">Delete</span>
+                <span class="delete-bs-btn" id="delete-btn-modal">Delete</span>
               </span>
             </button>
             <button type="button" class="close-modal banner1-action thq-button-filled thq-button-animated" id="exit-modal-button">
@@ -327,7 +327,7 @@
         contentType: false,
         success: function(response) {
           console.log(response);
-          window.location = "/business/all";
+          window.location = "/users/{{ request.user.username }}";
         },
         error: function(error) {
           console.log(error);

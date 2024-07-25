@@ -725,7 +725,8 @@
   margin-top: 20px;
 }
 
-#delete-bs-btn {
+.delete-bs-btn {
+  background-color: red;
   color: white;
   border: none;
   border-radius: 5px;
@@ -776,4 +777,16 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#confirm-delete-container button[type="submit"] {
+  background-color: red;
+}
+
+#confirm-delete-container button[type="submit"]:hover {
+  background-color: #23297f;
+}
+
+.banner1-container {
+  z-index: 1;
 }
