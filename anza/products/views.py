@@ -18,13 +18,14 @@ class ProductDetailView(View):
         reviews = Review.objects.filter(product=product)
         self_review_bool = False
         self_review = None
+        product_owner = product.business.owner
         if request.user.is_authenticated:
             self_review = reviews.filter(reviewer=request.user).first()
             if self_review:
                 self.form_class = UpdateReviewForm
                 self_review_bool = True
         rev_count = reviews.count()
-        context = {"product": product, "images": images, "reviews": reviews, "rev_count": rev_count, "form": self.form_class, "self_review": self_review, "self_review_bool": self_review_bool}
+        context = {"product": product, "images": images, "reviews": reviews, "rev_count": rev_count, "form": self.form_class, "self_review": self_review, "self_review_bool": self_review_bool, "product_owner": product_owner}
 
         return render(request, "detail-product.html", context)
     

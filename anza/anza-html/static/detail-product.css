@@ -575,3 +575,27 @@
   color: #f43a0ced;
   background: white;
 }
+
+#edit-pd-btn {
+  background-color: #080a45;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "STIX Two Text";
+  margin-top: 20px;
+}
+
+.delete-pd-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "STIX Two Text";
+  margin-top: 20px;
+}
