@@ -87,6 +87,12 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
             review.product = product
             review.reviewer = curr_user
             review.save()
+            # modify rating and review in business
+            business = product.business
+            business.total_rating_int += int(review.rating)
+            business.reviews += 1
+            business.rating = business.total_rating_int / business.reviews
+            business.save()
             success_url = reverse('detail_product', kwargs={'product_id': product.product_id})
             return redirect(success_url)
         return render(request, self.template_name, {"form": form})
@@ -124,6 +130,13 @@ class UpdateReviewView(UpdateView):
                 return JsonResponse(errors, status=400)
             return self.form_invalid(None)
 
+        # Update the rating in business model
+        old_rating = review.rating
+        business = review.product.business
+        business.total_rating_int += int(rating) - old_rating
+        business.rating = business.total_rating_int / business.reviews
+        business.save()
+        # Update rating in rating model
         review.rating = rating
         review.review = review_text
         review.review_description = review_description
@@ -144,6 +157,14 @@ class DeleteReviewView(DeleteView):
         review = self.get_object()
         self.product_id = review.product.product_id
         success_url = reverse('detail_product', kwargs={'product_id': self.product_id})
+        # update the rating in business model
+        business = review.product.business
+        business.total_rating_int -= review.rating
+        business.reviews -= 1
+        if business.reviews > 0:
+            business.rating = business.total_rating_int / business.reviews
+        else:
+            business.rating = 0
         review.delete()
         return redirect(success_url)
 
