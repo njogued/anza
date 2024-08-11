@@ -55,6 +55,7 @@ class ProductImage(models.Model):
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     reviewer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    upvote = models.IntegerField(default=0)
     rating = models.IntegerField()
     review = models.TextField(blank=True, null=True, default='')
     review_description = models.TextField(blank=True, null=True, default='')
