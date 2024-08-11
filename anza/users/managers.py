@@ -13,14 +13,14 @@ class CustomUserManager(BaseUserManager):
         # Normalize the email address by lowercasing the domain part of the email address
         email = self.normalize_email(email)
         # Create the user
-        user = self.model(email=email, first_name=first_name, last_name=last_name, username=username, phone_number=phone_number, **extra_fields)
+        user = self.model(email=email, username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name, last_name, username, phone_number, password=None):
+    def create_superuser(self, email, username, password=None):
         # Create and return a `User` with superuser (admin) permissions
-        user = self.create_user(email, first_name, last_name, username, phone_number, password)
+        user = self.create_user(email, username, password)
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
