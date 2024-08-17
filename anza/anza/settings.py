@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'business',
     'products',
     'orders',
+    'notifications',
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"
