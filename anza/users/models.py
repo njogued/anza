@@ -40,14 +40,4 @@ class UserBadge(models.Model):
     archived = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.email + ' - ' + self.badge.name
-
-class Notification(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='notifications')
-    message = models.TextField()
-    read = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    archived = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.user.email + ' - ' + self.message
+        return self.user.username + ' - ' + self.badge.name
