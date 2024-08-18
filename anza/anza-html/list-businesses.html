@@ -78,13 +78,18 @@
 <div class="list-businesses-container1">
   <img
     alt="business-logo"
+    {% if business.logo %}
     src="/media/{{ business.logo }}"
+    {% else %}
+    src="/media/business_logos/LOGO.png"
+    {% endif %}
     class="list-businesses-image"
   />
+
   <div class="list-businesses-container2">
     <h1 class="list-businesses-text"><a href=/business/{{ business.business_id }}>{{ business.name }}</a></h1>
     <span class="list-businesses-text01">Rating: {{ business.rating }}</span>
-    <span class="list-businesses-text02">Reviews:</span>
+    <span class="list-businesses-text02">Reviews: {{ business.reviews }}</span>
     <span class="list-businesses-text03">No. of Products/Services: {{ business.products.count }}</span>
   </div>
 </div>

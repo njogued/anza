@@ -276,8 +276,8 @@
   flex-direction: column;
 }
 .list-businesses-container1 {
-  width: 996px;
-  height: 194px;
+  width: 90%;
+  height: 200px;
   display: flex;
   align-self: center;
   margin-top: var(--dl-space-space-unit);
@@ -293,8 +293,8 @@
 }
 .list-businesses-container2 {
   flex: 0 0 auto;
-  width: 783px;
-  height: 193px;
+  width: 80%;
+  height: 200px;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
