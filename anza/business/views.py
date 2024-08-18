@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.http import HttpResponseForbidden, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import Business, Category
 from .forms import CreateBusinessForm, BusinessUpdateForm
 from products.models import Product, ProductImage, Review
@@ -165,3 +165,17 @@ class CreateProductView(LoginRequiredMixin, CreateView):
     template_name = "create_product.html"
     login_url = "/users/login"
     pk_url_kwarg = 'business_id'
+
+class SearchView(ListView):
+    def get(self, request):
+        query = request.GET.get('query')
+        curr_user = request.user
+        businesses = Business.objects.filter(name__icontains=query)
+        return JsonResponse({"message": "Success", "businesses": businesses}, status=200)
+        # return render(request, self.template_name, {"businesses": businesses})
+    
+    def post(self, request):
+        curr_user = request.user
+        query = request.GET.get('query')
+        businesses = Business.objects.filter(name__icontains=query)
+        return JsonResponse({"message": "Success", "businesses": businesses}, status=200)
