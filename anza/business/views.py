@@ -1,3 +1,5 @@
+import json
+from django.core.serializers import serialize
 from django.urls import reverse
 from django.views import View
 from django.urls import reverse_lazy
@@ -12,6 +14,7 @@ from .models import Business, Category
 from .forms import CreateBusinessForm, BusinessUpdateForm
 from products.models import Product, ProductImage, Review
 from products.forms import CreateProductForm, ProductImageForm
+from users.models import CustomUser
 
 # Create your views here.
 class CreateBusinessView(LoginRequiredMixin, CreateView):
@@ -170,12 +173,29 @@ class SearchView(ListView):
     def get(self, request):
         query = request.GET.get('query')
         curr_user = request.user
-        businesses = Business.objects.filter(name__icontains=query)
-        return JsonResponse({"message": "Success", "businesses": businesses}, status=200)
-        # return render(request, self.template_name, {"businesses": businesses})
+        # Use curr user to filter the search results and record as an action
+        return self.get_queryset(query)
+
+    def get_queryset(self, query):
+        businesses = Business.objects.filter(name__icontains=query).order_by('-rating')
+        products = Product.objects.filter(name__icontains=query).order_by('-rating')
+        users = CustomUser.objects.filter(username__icontains=query).order_by('created_at')
+        businesses = serialize('json', businesses)
+        products = serialize('json', products)
+        users = serialize('json', users)
+        try:
+            context = {
+                "businesses": businesses,
+                "products": products,
+                "users": users,
+                "message": "Success"
+            }
+            return JsonResponse(context, status=200, safe=False)
+        except Exception as e:
+            print(e)
+            return JsonResponse({"message": "Failed to fetch"}, status=200)
     
     def post(self, request):
         curr_user = request.user
-        query = request.GET.get('query')
-        businesses = Business.objects.filter(name__icontains=query)
-        return JsonResponse({"message": "Success", "businesses": businesses}, status=200)
+        query = request.POST.get('query')
+        return JsonResponse({"message": "Success"}, status=200)

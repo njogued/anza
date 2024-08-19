@@ -76,11 +76,7 @@ class UserDetailView(DetailView):
             return super().get_object(queryset)
         except CustomUser.DoesNotExist:
             raise Http404("User not found")
-        
-class TestView(auth_views.PasswordResetCompleteView):
-    template_name = "password_reset_confirm.html"
-    success_url = reverse_lazy("password_reset_done")
-
+    
 class CustomPasswordResetView(auth_views.PasswordResetView):
     template_name = "password_reset.html"
     success_url = reverse_lazy("password_reset_done")

@@ -38,3 +38,28 @@ class Business(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def to_dict(self):
+        return {
+            "business_id": self.business_id,
+            "name": self.name,
+            "owner": self.owner.username,
+            "address": self.address,
+            "phone_number": self.phone_number,
+            "email": self.email,
+            "website": self.website,
+            "tiktok_link": self.tiktok_link,
+            "instagram_link": self.instagram_link,
+            "twitter_link": self.twitter_link,
+            "facebook_link": self.facebook_link,
+            "linkedin_link": self.linkedin_link,
+            "description": self.description,
+            "logo": self.logo.url if self.logo else None,
+            "categories": self.categories.name if self.categories else None,
+            "rating": self.rating,
+            "total_rating_int": self.total_rating_int,
+            "reviews": self.reviews,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "archived": self.archived
+        }

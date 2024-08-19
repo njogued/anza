@@ -7,7 +7,6 @@ from .views import (
     SignUpView,
     UserDetailView, 
     LoginView, 
-    TestView, 
     CustomPasswordResetView, 
     CustomPasswordResetDoneView, 
     CustomPasswordResetConfirmView,
@@ -22,6 +21,5 @@ urlpatterns = [
     path("password_reset/done/", CustomPasswordResetDoneView.as_view(), name="password_reset_done"),
     path("password_reset_confirm/<uidb64>/<token>/", CustomPasswordResetConfirmView.as_view(), name="password_reset_confirm"),
     path("password_reset_complete/", CustomPasswordResetCompleteView.as_view(), name="password_reset_complete"),
-    path("test/", TestView.as_view(), name="test"),
     path("<str:username>/", UserDetailView.as_view(), name="details"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
