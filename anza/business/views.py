@@ -178,7 +178,8 @@ class SearchView(ListView):
 
     def get_queryset(self, query):
         businesses = Business.objects.filter(name__icontains=query).order_by('-rating')
-        products = Product.objects.filter(name__icontains=query).order_by('-rating')
+        products = Product.objects.filter(name__icontains=query)
+        products = products.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')
         users = CustomUser.objects.filter(username__icontains=query).order_by('created_at')
         businesses = serialize('json', businesses)
         products = serialize('json', products)

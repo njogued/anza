@@ -14,6 +14,8 @@ class CustomUser(AbstractUser):
     facebook_link = models.URLField(max_length=200, null=True, blank=True)
     linkedin_link = models.URLField(max_length=200, null=True, blank=True)
     website_link = models.URLField(max_length=200, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     banned = models.BooleanField(default=False)
     archived = models.BooleanField(default=False)
