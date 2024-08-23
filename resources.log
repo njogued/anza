@@ -15,3 +15,9 @@ Resetting database on model update:
 - python manage.py migrate
 
 Reset migrations: https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html 
+
+
+To DO: Feature log ***
+- Database indexing on usernames for querying optimization
+- Caching
+- Verify email and phone number for MPesa transactions
