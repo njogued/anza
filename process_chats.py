@@ -1,4 +1,5 @@
 import csv
+import re
 
 def process_chats(file_path):
     # Read the file
@@ -7,20 +8,26 @@ def process_chats(file_path):
 
     # Initialize variables
     participants = {}
+    current_speaker = ""
     
     # Process each line
     for line in lines:
         line = line.strip()
+        if "Reacted to" in line and "with" in line:
+            continue
         if ':' in line:
-            name, message = line.split(':', 1)
-            name = name.strip()
-            message = message.strip()
+            newline = re.sub(r'^\d{2}:\d{2}:\d{2}\s+', '', line)
+            newline = re.sub(r"\s+", " ", newline)
+            if ':' in newline:
+                name, message = newline.split(':', 1)
+                name = name.strip()
+                message = message.strip()
 
-            # Store message under participant's name
-            if name in participants:
-                participants[name].append(message)
-            else:
-                participants[name] = [message]
+                # Store message under participant's name
+                if name in participants:
+                    participants[name].append(message)
+                else:
+                    participants[name] = [message]
 
     # Prepare CSV output
     output_file = 'chats_output.csv'
