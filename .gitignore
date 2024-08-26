@@ -1,2 +1,3 @@
 anza/media/*
 anza/db.sqlite3
+.venv
