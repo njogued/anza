@@ -160,5 +160,23 @@
     </div>
   {% block scripts_end %}
   {% endblock %}
+  <script type="text/javascript">
+    let url = `ws://${window.location.host}/ws/notifications/`;
+    const ws = new WebSocket(url);
+    ws.onopen = function (event) {
+      console.log("Connected to the websocket server");
+    };
+    ws.onmessage = function (event) {
+      console.log("Message received", event.data);
+      let data = JSON.parse(event.data);
+      // let notification = new Notification(data.title, {
+      //   body: data.body,
+      //   icon: data.icon,
+      // });
+      // notification.onclick = function (event) {
+      //   window.location.href = data.url;
+      // };
+    };
+  </script>
 </body>
 </html>
