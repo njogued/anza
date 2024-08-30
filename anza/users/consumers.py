@@ -1,9 +1,13 @@
 import json
 from channels.generic.websocket import WebsocketConsumer
+from asgiref.sync import async_to_sync
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
+        # set up groups and add the user to the group
+
         self.accept()
+
         self.send(text_data=json.dumps({
             'message': 'Connection created'
         }))
