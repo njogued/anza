@@ -1,6 +1,8 @@
 from django.db import models
 from users.models import CustomUser
 from users.consumers import send_user_notification
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your models here.
     
 class NotificationType(models.Model):
@@ -33,6 +35,30 @@ class Notification(models.Model):
     def __str__(self):
         return f"{self.recipient.username}, {self.message}"
     
+def send_email_notification(recipient_email, notification):
+    # Construct the email subject and message
+    subject = f"New Notification: {notification.notification_type.name}"
+    message = f"""
+    Hello {notification.recipient.username},
+
+    You have a new notification:
+
+    {notification.message}
+
+    To view the details, click the link below:
+    {notification.url}
+
+    Best regards,
+    Bizmob Team
+    """
+    send_mail(
+        subject,
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [recipient_email],
+        fail_silently=False,
+    )
+
 def create_notification(creator, recipient, notification_type_name, message, url=None):
     # Get or create notification type
     notification_type, _ = NotificationType.objects.get_or_create(
@@ -58,6 +84,7 @@ def create_notification(creator, recipient, notification_type_name, message, url
                 "message": message
         }
         send_user_notification(info)
+        send_email_notification(recipient.email,notification)
     else:
         pass
 
