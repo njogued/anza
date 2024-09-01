@@ -15,6 +15,8 @@ class NotificationType(models.Model):
     
 class Notification(models.Model):
     # Model that represents a notification
+    # A notification is not only constrained to actions that a user is notified of
+    # Instead, it is a broad term that also includes user activity that the user will not get notified of yet
     notification_id = models.AutoField(primary_key=True)
     creator = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='created_notifications')
     recipient = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='received_notifications', default=None)
