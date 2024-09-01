@@ -7,6 +7,8 @@ from .models import Product, Review, ProductImage
 from .forms import UpdateProductForm, CreateReviewForm, UpdateReviewForm
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseForbidden, JsonResponse
+from notifications.models import create_notification
+
 
 class ProductDetailView(View):
     # A view to display the details of a product
@@ -94,6 +96,14 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
             business.rating = business.total_rating_int / business.reviews
             business.save()
             success_url = reverse('detail_product', kwargs={'product_id': product.product_id})
+            # create notification
+            create_notification(
+                creator=request.user,
+                recipient=product.business.owner,
+                notification_type_name="New Review",
+                message=f"New Review for your product {product.name}",
+                url=success_url
+            )
             return redirect(success_url)
         return render(request, self.template_name, {"form": form})
     
