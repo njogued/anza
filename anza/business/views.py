@@ -15,6 +15,7 @@ from .forms import CreateBusinessForm, BusinessUpdateForm
 from products.models import Product, ProductImage, Review
 from products.forms import CreateProductForm, ProductImageForm
 from users.models import CustomUser
+from users.consumers import send_user_notification
 
 # Create your views here.
 class CreateBusinessView(LoginRequiredMixin, CreateView):
@@ -74,6 +75,11 @@ class BusinessDetailView(DetailView):
             context['products'] = products
             print(business.owner)
             print(self.request.user)
+            info = {
+                "user": business.owner.id,
+                "message": f"new business page visit for {business.name}"
+            }
+            send_user_notification(info)
         return context
     
     def render_to_response(self, context, **response_kwargs):
