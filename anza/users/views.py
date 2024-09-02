@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, views
+from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
@@ -7,6 +7,9 @@ from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from .models import CustomUser
 from django.http import Http404, JsonResponse
 from django.contrib.auth import views as auth_views
+from .serializer import UserSerializer
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 class SignUpView(CreateView):
     model = CustomUser
@@ -94,3 +97,9 @@ class CustomPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     
 class CustomPasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name = "password_reset_complete.html"
+
+class UserListView(generics.ListCreateAPIView):
+    # A view to list all users
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
