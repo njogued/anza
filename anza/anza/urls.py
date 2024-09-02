@@ -23,13 +23,14 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('users/', include('users.urls')), 
-    path('business/', include('business.urls')),
-    path('products/', include('products.urls')),
+    path("admin/", admin.site.urls),
+    path("users/", include('users.urls')), 
+    path("business/", include('business.urls')),
+    path("products/", include('products.urls')),
     path("", TemplateView.as_view(template_name="index.html"), name="home"),
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
     path("contact/", TemplateView.as_view(template_name="contact.html"), name="contact"),
+    path("api/users/", include('users.api_urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
