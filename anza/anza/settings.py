@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'products',
     'orders',
     'notifications',
+    'rest_framework.authtoken',
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"
@@ -156,3 +157,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "njogued@gmail.com"
 EMAIL_HOST_PASSWORD = "smwg ulmu rncg jord"
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
