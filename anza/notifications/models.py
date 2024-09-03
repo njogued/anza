@@ -66,8 +66,6 @@ def create_notification(creator, recipient, notification_type_name, message, url
         defaults={'description': f'{notification_type_name} Notification'}
     )
 
-
-
     notification = Notification.objects.create(
         creator=creator,
         recipient=recipient,

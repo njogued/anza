@@ -97,6 +97,7 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
             business.save()
             success_url = reverse('detail_product', kwargs={'product_id': product.product_id})
             # create notification
+            # to fix: use celery to create a notif async and send back response
             create_notification(
                 creator=request.user,
                 recipient=product.business.owner,
