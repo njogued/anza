@@ -210,7 +210,7 @@ class SearchView(ListView):
         # Use curr user to filter the search results and record as an action
         return self.get_queryset(query)
     
-class APIBusinessList(generics.ListAPIView):
+class APIBusinessListView(generics.ListAPIView):
     # return a list of businesses
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
