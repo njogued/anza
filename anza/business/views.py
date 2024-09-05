@@ -16,6 +16,9 @@ from products.models import Product, ProductImage, Review
 from products.forms import CreateProductForm, ProductImageForm
 from users.models import CustomUser
 from users.consumers import send_user_notification
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from .serializer import BusinessSerializer
 
 # Create your views here.
 class CreateBusinessView(LoginRequiredMixin, CreateView):
@@ -206,3 +209,10 @@ class SearchView(ListView):
         query = request.POST.get('query')
         # Use curr user to filter the search results and record as an action
         return self.get_queryset(query)
+    
+class APIBusinessList(generics.ListAPIView):
+    # return a list of businesses
+    queryset = Business.objects.all()
+    serializer_class = BusinessSerializer
+    permission_classes = [IsAuthenticated]
+    
