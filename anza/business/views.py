@@ -19,6 +19,8 @@ from users.consumers import send_user_notification
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .serializer import BusinessSerializer
+from products.serializer import ProductSerializer
+from rest_framework.exceptions import NotFound
 
 # Create your views here.
 class CreateBusinessView(LoginRequiredMixin, CreateView):
@@ -215,4 +217,66 @@ class APIBusinessListView(generics.ListAPIView):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
     permission_classes = [IsAuthenticated]
+
+class APIBusinessDetailView(generics.RetrieveAPIView):
+    # return a single business
+    lookup_field = 'business_id'
+    serializer_class = BusinessSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Dynamically filter using the business_id from the URL
+        business_id = self.kwargs.get(self.lookup_field)
+        return Business.objects.filter(archived=False, business_id=business_id)
     
+class APIBusinessCreateView(generics.CreateAPIView):
+    # create a new business
+    serializer_class = BusinessSerializer
+    permission_classes = [IsAuthenticated]
+
+class APIBusinessUpdateView(generics.UpdateAPIView):
+    # update a business
+    lookup_field = 'business_id'
+    serializer_class = BusinessSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Dynamically filter using the business_id from the URL
+        business_id = self.kwargs.get(self.lookup_field)
+        return Business.objects.filter(archived=False, business_id=business_id)
+    
+class APIBusinessDeleteView(generics.DestroyAPIView):
+    # delete a business
+    lookup_field = 'business_id'
+    serializer_class = BusinessSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Dynamically filter using the business_id from the URL
+        business_id = self.kwargs.get(self.lookup_field)
+        return Business.objects.filter(archived=False, business_id=business_id)
+    
+class APIBusinessProductsView(generics.ListAPIView):
+    # return a list of products for a business
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Dynamically filter using the business_id from the URL
+        business_id = self.kwargs.get('business_id')
+        try:
+            business = Business.objects.get(business_id=business_id)
+            return Product.objects.filter(business__business_id=business_id)
+        except Business.DoesNotExist:
+            raise NotFound({"message": "Business not found"})
+        
+class APIBusinessProductsCreateView(generics.CreateAPIView):
+    # create a new product for a business
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        # Dynamically set the business based on the URL
+        business_id = self.kwargs.get('business_id')
+        business = Business.objects.get(business_id=business_id)
+        serializer.save(business=business)
