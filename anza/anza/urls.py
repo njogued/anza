@@ -32,6 +32,7 @@ urlpatterns = [
     path("contact/", TemplateView.as_view(template_name="contact.html"), name="contact"),
     path("api/users/", include('users.api_urls')),
     path("api/business/", include('business.api_urls')),
+    path("api/products/", include('products.api_urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

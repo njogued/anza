@@ -8,7 +8,8 @@ from .forms import UpdateProductForm, CreateReviewForm, UpdateReviewForm
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseForbidden, JsonResponse
 from notifications.models import create_notification
-
+from rest_framework import generics
+from .serializer import ProductSerializer
 
 class ProductDetailView(View):
     # A view to display the details of a product
@@ -197,3 +198,13 @@ class ProductListView(ListView):
     context_object_name = 'products'
     def queryset(self):
         return Product.objects.all()
+    
+class APIProductListView(generics.ListAPIView):
+    # A view to list all products
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class APIProductDetailView(generics.RetrieveUpdateDestroyAPIView):
+    # A view to display the details of a product
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
