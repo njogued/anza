@@ -98,8 +98,14 @@ class CustomPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 class CustomPasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name = "password_reset_complete.html"
 
-class UserListView(generics.ListAPIView):
+class APIUserListView(generics.ListAPIView):
     # A view to list all users
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAdminUser]
+
+class APIUserCreateView(generics.CreateAPIView):
+    # A view to create a user
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    
