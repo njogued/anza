@@ -253,6 +253,13 @@ class APIBusinessUpdateView(generics.UpdateAPIView):
         business_id = self.kwargs.get(self.lookup_field)
         return Business.objects.filter(archived=False, business_id=business_id)
     
+    def put(self, request, *args, **kwargs):
+        # Dynamically set the owner based on the current user
+        business = self.get_object()
+        if business.owner != request.user:
+            return HttpResponseForbidden("You are not allowed to update this business")
+        return self.partial_update(request, *args, **kwargs)
+    
 class APIBusinessDeleteView(generics.DestroyAPIView):
     # delete a business
     lookup_field = 'business_id'
@@ -263,6 +270,16 @@ class APIBusinessDeleteView(generics.DestroyAPIView):
         # Dynamically filter using the business_id from the URL
         business_id = self.kwargs.get(self.lookup_field)
         return Business.objects.filter(archived=False, business_id=business_id)
+    
+    def destroy(self, request, *args, **kwargs):
+        # Dynamically set the archived flag to True
+        instance = self.get_object()
+        instance.archived = True
+        instance.save()
+        return JsonResponse({"message": "Success"}, status=200)
+    
+    def post(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
     
 class APIBusinessProductsView(generics.ListAPIView):
     # return a list of products for a business
