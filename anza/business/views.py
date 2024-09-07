@@ -21,6 +21,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .serializer import BusinessSerializer
 from products.serializer import ProductSerializer
 from rest_framework.exceptions import NotFound
+from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 
 # Create your views here.
 class CreateBusinessView(LoginRequiredMixin, CreateView):
@@ -231,8 +232,15 @@ class APIBusinessDetailView(generics.RetrieveAPIView):
     
 class APIBusinessCreateView(generics.CreateAPIView):
     # create a new business
+    queryset = Business.objects.all()
     serializer_class = BusinessSerializer
+    parser_classes = [JSONParser, MultiPartParser, FormParser]
     permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        # Dynamically set the owner based on the current user
+        serializer.save(owner=self.request.user)
+
 
 class APIBusinessUpdateView(generics.UpdateAPIView):
     # update a business
