@@ -282,6 +282,7 @@ class APIBusinessProductsCreateView(generics.CreateAPIView):
     # create a new product for a business
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
+    parser_classes = [JSONParser, MultiPartParser, FormParser]
 
     def perform_create(self, serializer):
         # Dynamically set the business based on the URL
