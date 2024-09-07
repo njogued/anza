@@ -229,8 +229,11 @@ class APIBusinessDetailView(generics.RetrieveAPIView):
     def get_queryset(self):
         # Dynamically filter using the business_id from the URL
         business_id = self.kwargs.get(self.lookup_field)
-        return Business.objects.filter(archived=False, business_id=business_id)
-    
+        business = Business.objects.filter(archived=False, business_id=business_id)
+        if business.exists():
+            return business
+        else:
+            raise NotFound({"message": "Business not found"})    
 class APIBusinessCreateView(generics.CreateAPIView):
     # create a new business
     queryset = Business.objects.all()
@@ -253,7 +256,11 @@ class APIBusinessUpdateView(generics.RetrieveUpdateAPIView):
     def get_queryset(self):
         # Dynamically filter using the business_id from the URL
         business_id = self.kwargs.get(self.lookup_field)
-        return Business.objects.filter(archived=False, business_id=business_id)
+        business = Business.objects.filter(archived=False, business_id=business_id)
+        if business.exists():
+            return business
+        else:
+            raise NotFound({"message": "Business not found"})
     
     def put(self, request, *args, **kwargs):
         # Dynamically set the owner based on the current user
