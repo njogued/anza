@@ -21,6 +21,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .serializer import BusinessSerializer
 from products.serializer import ProductSerializer
 from rest_framework.exceptions import NotFound
+from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 
 # Create your views here.
@@ -242,7 +243,8 @@ class APIBusinessCreateView(generics.CreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class APIBusinessUpdateView(generics.UpdateAPIView):
+# class APIBusinessUpdateView(generics.UpdateAPIView):
+class APIBusinessUpdateView(generics.RetrieveUpdateAPIView):
     # update a business
     lookup_field = 'business_id'
     serializer_class = BusinessSerializer
@@ -257,8 +259,11 @@ class APIBusinessUpdateView(generics.UpdateAPIView):
         # Dynamically set the owner based on the current user
         business = self.get_object()
         if business.owner != request.user:
-            return HttpResponseForbidden("You are not allowed to update this business")
+            return Response({"message": "You are not allowed to update this business"}, status=403)
         return self.partial_update(request, *args, **kwargs)
+    
+    def patch(self, request, *args, **kwargs):
+        return self.put(request, *args, **kwargs)
     
 class APIBusinessDeleteView(generics.DestroyAPIView):
     # delete a business
@@ -273,9 +278,11 @@ class APIBusinessDeleteView(generics.DestroyAPIView):
     
     def destroy(self, request, *args, **kwargs):
         # Dynamically set the archived flag to True
-        instance = self.get_object()
-        instance.archived = True
-        instance.save()
+        business = self.get_object()
+        if business.owner != request.user:
+            return Response({"message": "You are not allowed to delete this business"}, status=403)
+        business.archived = True
+        business.save()
         return JsonResponse({"message": "Success"}, status=200)
     
     def post(self, request, *args, **kwargs):

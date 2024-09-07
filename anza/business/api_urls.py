@@ -2,6 +2,7 @@ from django.urls import path
 from .views import APIBusinessListView, APIBusinessDetailView, APIBusinessCreateView, APIBusinessUpdateView, APIBusinessDeleteView, APIBusinessProductsView, APIBusinessProductsCreateView
 
 urlpatterns = [
+    path('', APIBusinessListView.as_view(), name='business-list'),
     path('all/', APIBusinessListView.as_view(), name='business-list'),
     path('<int:business_id>/', APIBusinessDetailView.as_view(), name='business-detail'),
     path('create/', APIBusinessCreateView.as_view(), name='business-create'),
