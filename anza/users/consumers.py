@@ -7,21 +7,23 @@ class NotificationConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         # set up groups and add the user to the group
         user = self.scope['user']
-        if user.is_authenticated:
+        if user.is_authenticated == True:
             self.user_id = user.id
-            print(user.id)
-            self.group_name = f'notify_{self.user_id}'
-            await self.channel_layer.group_add(
-                self.group_name, # group to add user to
-                self.channel_name # relates to one user
-            )
-            await self.accept()
-            message = f'Connection created for user id: {self.user_id}'
-            await self.send(text_data=json.dumps({
-                'message': message
-            }))
         else:
-            self.user_id = None
+            self.user_id = "anonymous"
+        self.group_name = f'notify_{self.user_id}'
+        await self.channel_layer.group_add(
+            self.group_name, # group to add user to
+            self.channel_name # relates to one user
+        )
+        await self.accept()
+        message = f'Connection created for user id: {self.user_id}'
+        await self.send(text_data=json.dumps({
+            'message': message
+        }))
+        # else:
+        #     self.user_id = None
+        #     # await self.accept()
 
     async def receive(self, data):
         # receive and send messages, typically from FE
@@ -41,10 +43,12 @@ class NotificationConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, close_code):
         # remove the user from the group
-        await self.channel_layer.group_discard(
-            self.group_name,
-            self.channel_name
-        )
+        user = self.scope['user']
+        if self.group_name and self.channel_layer:
+            await self.channel_layer.group_discard(
+                self.group_name,
+                self.channel_name
+            )
     
     async def send_notification(self, data):
         # send a notification
