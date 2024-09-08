@@ -5,8 +5,8 @@ from .serializer import UserSerializer
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
-    path('', APIUserListView.as_view(), name='user-list'),
-    path('all/', APIUserListView.as_view(), name='user-list'),
-    path('api-token-auth/', obtain_auth_token, name='api-token-auth'),
-    path('create/', APIUserCreateView.as_view(), name='user-create'),
+    path('', APIUserListView.as_view(), name='api_user_list'),
+    path('all/', APIUserListView.as_view(), name='api_user_list'),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('create/', APIUserCreateView.as_view(), name='api_user_create'),
 ]
