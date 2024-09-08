@@ -29,7 +29,8 @@ class ProductSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     # create a serializer for the Review model
     product_name = serializers.CharField(source='product.name', read_only=True)
+    reviewer_name = serializers.CharField(source='reviewer.username', read_only=True)
     class Meta:
         model = Review
-        fields = ['id', 'product_name', 'reviewer', 'rating', 'comment', 'upvote', 'created_at']
-        read_only_fields = ['id', 'created_at']
+        fields = ['id', 'product_name', 'reviewer_name', 'rating', 'review', 'review_description', 'upvote', 'created_at']
+        read_only_fields = ['id', 'created_at', 'upvote']

@@ -230,9 +230,14 @@ class APIProductUpdateView(generics.RetrieveUpdateAPIView):
     def get_queryset(self):
         product_id = self.kwargs.get(self.lookup_field)
         product = Product.objects.filter(product_id=product_id)
-        if product.exists():
+        if product.exists() and product.first().business.owner == self.request.user:
             return product
-        raise NotFound ({"message": "Product not found"})
+        raise NotFound ({"message": "Product not found or you're not authorized to update"})
+    
+    def put(self, request, *args, **kwargs):
+        product = self.get_object()
+        if request.user != product.business.owner:
+            return Response({"message": "You're not authorized allowed to update this product"})
     
 class APIProductDeleteView(generics.DestroyAPIView):
     # A view to delete a product
@@ -264,19 +269,20 @@ class APIProductReviewCreateView(generics.CreateAPIView):
         product_id = self.kwargs.get(self.lookup_field)
         product = Product.objects.get(product_id=product_id)
         business = product.business
-        if business.owner == request.user or product.archived:
-            return Response({"message": "You are not allowed to review this product. You either own it or it's deleted."}, status=403)
-        review = Review.objects.create(
-            product=product,
-            reviewer=request.user,
-            **request.data
-        )
-        # modify rating and review in business
-        business.total_rating_int += int(review.rating)
-        business.reviews += 1
-        business.rating = business.total_rating_int / business.reviews
-        business.save()
-        return review
+        if business.owner != self.request.user and product.archived == False:
+            review = Review.objects.create(
+                product=product,
+                reviewer=self.request.user,
+                **request.data
+            )
+            # modify rating and review in business
+            business.total_rating_int += int(review.rating)
+            business.reviews += 1
+            business.rating = business.total_rating_int / business.reviews
+            business.save()
+            return review
+        return Response({"message": "You are not allowed to review this product. You either own it or it's deleted."}, status=403)
+
     
 class APIReviewUpdateView(generics.RetrieveUpdateAPIView):
     # A view to update a review
@@ -348,6 +354,15 @@ class APIReviewDeleteView(generics.DestroyAPIView):
 
 class APIProductReviewListView(generics.ListAPIView):
     # A view to list all reviews for a product
-    queryset = Review.objects.filter(archived=False).order_by('-rating')
+    lookup_field = 'product_id'
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        product_id = self.kwargs.get(self.lookup_field)
+        try:
+            product = Product.objects.get(product_id=product_id)
+            product_reviews = Review.objects.filter(product__product_id=product_id)
+            return product_reviews
+        except Product.DoesNotExist:
+            return NotFound({"message": "Product does not exist"})
