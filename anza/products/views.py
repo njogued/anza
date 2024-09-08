@@ -9,7 +9,7 @@ from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseForbidden, JsonResponse
 from notifications.models import create_notification
 from rest_framework import generics
-from .serializer import ProductSerializer
+from .serializer import ProductSerializer, ReviewSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
@@ -204,7 +204,7 @@ class ProductListView(ListView):
     
 class APIProductListView(generics.ListAPIView):
     # A view to list all products
-    queryset = Product.objects.all()
+    queryset = Product.objects.filter(archived=False).order_by('-created_at')
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
 
@@ -253,4 +253,101 @@ class APIProductDeleteView(generics.DestroyAPIView):
             return Response({"message": "You are not allowed to delete this product"}, status=403)
         product.make_delete()
         return JsonResponse({"message": "Product deleted"}, status=200)
+
+class APIProductReviewCreateView(generics.CreateAPIView):
+    # A view to create a review for a product given product id in url
+    lookup_field = 'product_id'
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, request, *args, **kwargs):
+        product_id = self.kwargs.get(self.lookup_field)
+        product = Product.objects.get(product_id=product_id)
+        business = product.business
+        if business.owner == request.user or product.archived:
+            return Response({"message": "You are not allowed to review this product. You either own it or it's deleted."}, status=403)
+        review = Review.objects.create(
+            product=product,
+            reviewer=request.user,
+            **request.data
+        )
+        # modify rating and review in business
+        business.total_rating_int += int(review.rating)
+        business.reviews += 1
+        business.rating = business.total_rating_int / business.reviews
+        business.save()
+        return review
     
+class APIReviewUpdateView(generics.RetrieveUpdateAPIView):
+    # A view to update a review
+    lookup_field = 'review_id'
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        review_id = self.kwargs.get(self.lookup_field)
+        review = Review.objects.filter(id=review_id)
+        if review.exists():
+            return review
+        raise NotFound ({"message": "Review not found"})
+    
+    def update(self, request, *args, **kwargs):
+        review = self.get_object()
+        rating = request.data.get('rating')
+        review_text = request.data.get('review')
+        review_description = request.data.get('review_description')
+
+        # Validate the input data
+        errors = {}
+        if not rating or not rating.isdigit() or not (1 <= int(rating) <= 10):
+            errors['rating'] = ['Rating must be an integer between 1 and 10.']
+
+        if errors:
+            return Response(errors, status=400)
+
+        # Update the rating in business model
+        old_rating = review.rating
+        business = review.product.business
+        business.total_rating_int += int(rating) - old_rating
+        business.rating = business.total_rating_int / business.reviews
+        business.save()
+        # Update rating in rating model
+        for k, v in request.data.items():
+            if k in ["rating", "review", "review_description"]:
+                setattr(review, k, v)
+        review.save()
+        return Response({"message": "Success"}, status=200)
+    
+class APIReviewDeleteView(generics.DestroyAPIView):
+    # A view to delete a review
+    lookup_field = 'review_id'
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        review_id = self.kwargs.get(self.lookup_field)
+        review = Review.objects.filter(id=review_id)
+        if review.exists():
+            return review
+        raise NotFound ({"message": "Review not found"})
+    
+    def destroy(self, request, *args, **kwargs):
+        review = self.get_object()
+        product = review.product
+        business = product.business
+        business.total_rating_int -= review.rating
+        business.reviews -= 1
+        if business.reviews > 0:
+            # avoid ZeroDivisionError
+            business.rating = business.total_rating_int / business.reviews
+        else:
+            business.rating = 0
+        review.make_delete()
+        return JsonResponse({"message": "Review deleted"}, status=200)
+
+
+class APIProductReviewListView(generics.ListAPIView):
+    # A view to list all reviews for a product
+    queryset = Review.objects.filter(archived=False).order_by('-rating')
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]

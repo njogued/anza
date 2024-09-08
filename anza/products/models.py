@@ -36,6 +36,7 @@ class Product(models.Model):
         return 0
     
     def make_delete(self, *args, **kwargs):
+        # make a delete operation on the product
         self.archived = True
         self.save()
     
@@ -69,6 +70,14 @@ class Review(models.Model):
     def __str__(self):
         return self.product.name + ' - ' + self.reviewer.email
     
+    def make_delete(self, *args, **kwargs):
+        # make a delete operation on the review
+        self.archived=True
+        self.save()
+
+    # def make_update(self, *args, **kwargs):
+    #     setattr(self, **kwargs)
+    #     self.save()
 class Upvote(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name='upvotes')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

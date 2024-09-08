@@ -1,4 +1,4 @@
-from .models import Product, ProductImage
+from .models import Product, ProductImage, Review
 from rest_framework import serializers
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -25,3 +25,11 @@ class ProductSerializer(serializers.ModelSerializer):
     #     for image_data in new_images:
     #         ProductImage.objects.create(product=product, image=image_data)
     #     return product
+
+class ReviewSerializer(serializers.ModelSerializer):
+    # create a serializer for the Review model
+    product_name = serializers.CharField(source='product.name', read_only=True)
+    class Meta:
+        model = Review
+        fields = ['id', 'product_name', 'reviewer', 'rating', 'comment', 'upvote', 'created_at']
+        read_only_fields = ['id', 'created_at']
