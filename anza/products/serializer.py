@@ -11,10 +11,12 @@ class ProductSerializer(serializers.ModelSerializer):
     # Create serializers for the Product model
     # images = ProductImageSerializer(many=True, read_only=True)
     # new_images = serializers.ListField(child=serializers.ImageField(), write_only=True)
+    business_name = serializers.CharField(source='business.name', read_only=True)
+    category_name = serializers.CharField(source='category.name', read_only=True)
     class Meta:
         model = Product
         # add 'new_images' to the fields list
-        fields = ['product_id', 'name', 'description', 'price', 'category', 'created_at', 'quantity', 'archived']
+        fields = ['product_id', 'name', 'description', 'price', 'created_at', 'quantity', 'business_name', 'category_name', 'archived']
         read_only_fields = ['product_id', 'created_at']
 
     # def create(self, validated_data):
