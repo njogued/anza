@@ -229,8 +229,10 @@ class APIBusinessDetailView(generics.RetrieveAPIView):
     def get_queryset(self):
         # Dynamically filter using the business_id from the URL
         business_id = self.kwargs.get(self.lookup_field)
-        business = Business.objects.filter(archived=False, business_id=business_id)
+        business = Business.objects.filter(business_id=business_id)
         if business.exists():
+            if business.first().archived == True:
+                raise NotFound({"message": "Business archived"})
             return business
         else:
             raise NotFound({"message": "Business not found"})    
@@ -258,6 +260,8 @@ class APIBusinessUpdateView(generics.RetrieveUpdateAPIView):
         business_id = self.kwargs.get(self.lookup_field)
         business = Business.objects.filter(archived=False, business_id=business_id)
         if business.exists():
+            if business.first().archived == True:
+                raise NotFound({"message": "Business archived"})
             return business
         else:
             raise NotFound({"message": "Business not found"})
@@ -281,6 +285,8 @@ class APIBusinessDeleteView(generics.DestroyAPIView):
     def get_queryset(self):
         # Dynamically filter using the business_id from the URL
         business_id = self.kwargs.get(self.lookup_field)
+        if not business_id:
+            raise NotFound({"message": "Business not found"})
         return Business.objects.filter(archived=False, business_id=business_id)
     
     def destroy(self, request, *args, **kwargs):
@@ -288,8 +294,7 @@ class APIBusinessDeleteView(generics.DestroyAPIView):
         business = self.get_object()
         if business.owner != request.user:
             return Response({"message": "You are not allowed to delete this business"}, status=403)
-        business.archived = True
-        business.save()
+        business.make_delete()
         return JsonResponse({"message": "Success"}, status=200)
     
     def post(self, request, *args, **kwargs):

@@ -39,6 +39,8 @@ class Business(models.Model):
     def __str__(self):
         return self.name
     
-    def delete(self, *args, **kwargs):
+    def make_delete(self, *args, **kwargs):
         self.archived = True
+        for product in self.products.all():
+            product.make_delete()
         self.save()

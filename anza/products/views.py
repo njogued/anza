@@ -10,6 +10,9 @@ from django.http import HttpResponseForbidden, JsonResponse
 from notifications.models import create_notification
 from rest_framework import generics
 from .serializer import ProductSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import NotFound
+from rest_framework.response import Response
 
 class ProductDetailView(View):
     # A view to display the details of a product
@@ -203,8 +206,51 @@ class APIProductListView(generics.ListAPIView):
     # A view to list all products
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
 
-class APIProductDetailView(generics.RetrieveUpdateDestroyAPIView):
-    # A view to display the details of a product
-    queryset = Product.objects.all()
+class APIProductDetailView(generics.RetrieveAPIView):
+    # A view to display the details of one product
+    lookup_field = 'product_id'
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        product_id = self.kwargs.get(self.lookup_field)
+        product = Product.objects.filter(product_id=product_id)
+        if product.exists():
+            return product
+        raise NotFound ({"message": "Product not found"})
+    
+class APIProductUpdateView(generics.RetrieveUpdateAPIView):
+    # A view to update a product
+    lookup_field = 'product_id'
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        product_id = self.kwargs.get(self.lookup_field)
+        product = Product.objects.filter(product_id=product_id)
+        if product.exists():
+            return product
+        raise NotFound ({"message": "Product not found"})
+    
+class APIProductDeleteView(generics.DestroyAPIView):
+    # A view to delete a product
+    lookup_field = 'product_id'
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        product_id = self.kwargs.get(self.lookup_field)
+        product = Product.objects.filter(product_id=product_id)
+        if product.exists():
+            return product
+        raise NotFound ({"message": "Product not found"})
+    
+    def destroy(self, request, *args, **kwargs):
+        product = self.get_object()
+        if product.business.owner != request.user:
+            return Response({"message": "You are not allowed to delete this product"}, status=403)
+        product.make_delete()
+        return JsonResponse({"message": "Product deleted"}, status=200)
+    
