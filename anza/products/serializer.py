@@ -9,16 +9,17 @@ class ProductImageSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at']
 class ProductSerializer(serializers.ModelSerializer):
     # Create serializers for the Product model
-    images = ProductImageSerializer(many=True, read_only=True)
-    new_images = serializers.ListField(child=serializers.ImageField(), write_only=True)
+    # images = ProductImageSerializer(many=True, read_only=True)
+    # new_images = serializers.ListField(child=serializers.ImageField(), write_only=True)
     class Meta:
         model = Product
-        fields = ['product_id', 'name', 'description', 'price', 'category', 'created_at', 'quantity', 'images', 'new_images']
+        # add 'new_images' to the fields list
+        fields = ['product_id', 'name', 'description', 'price', 'category', 'created_at', 'quantity', 'archived']
         read_only_fields = ['product_id', 'created_at']
 
-    def create(self, validated_data):
-        new_images = validated_data.pop('new_images')
-        product = Product.objects.create(**validated_data)
-        for image_data in new_images:
-            ProductImage.objects.create(product=product, image=image_data)
-        return product
+    # def create(self, validated_data):
+    #     new_images = validated_data.pop('new_images')
+    #     product = Product.objects.create(**validated_data)
+    #     for image_data in new_images:
+    #         ProductImage.objects.create(product=product, image=image_data)
+    #     return product
