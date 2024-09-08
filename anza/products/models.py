@@ -35,6 +35,9 @@ class Product(models.Model):
             return reviews.count()
         return 0
     
+    def delete(self, *args, **kwargs):
+        self.archived = True
+        self.save()
     
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
