@@ -6,10 +6,10 @@ class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='orders')
     product = models.ManyToManyField(Product, through='OrderItem')
     status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('Shipped', 'Shipped'), ('Delivered', 'Delivered')])
-    delivery_address = models.TextField()
-    delivery_date = models.DateField()
+    delivery_address = models.CharField(max_length=100, default='Nairobi')
+    delivery_date = models.DateField(default=None)
     payment_method = models.CharField(max_length=50, choices=[('Cash', 'Cash'), ('Card', 'Card'), ('Mobile Money', 'Mobile Money')])
-    mobile_payment_number = models.CharField(max_length=50)
+    mobile_payment_number = models.CharField(max_length=50, default=None)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -33,25 +33,6 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.product.name} in order {self.order.id}"
     
-class CartItem(models.Model):
-    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return f"{self.quantity} of {self.product.name} in cart {self.cart.id}"
-    
-    def calculate_price(self):
-        self.price = self.product.price * self.quantity
-        self.save()
-
-    def save(self, *args, **kwargs):
-        # Automatically calculate price on save
-        if self.price is None:
-            self.calculate_price()
-        super().save(*args, **kwargs)
-    
 class Cart(models.Model):
     # need to validate that the user has only one active cart at a time
     # need to check if all items in cart are from the same shop
@@ -73,7 +54,26 @@ class Cart(models.Model):
             OrderItem.objects.create(order=order, product=item, quantity=1, price=item.price)
         order.calculate_total()
         return order
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.product.name} in cart {self.cart.id}"
     
+    def calculate_price(self):
+        self.price = self.product.price * self.quantity
+        self.save()
+
+    def save(self, *args, **kwargs):
+        # Automatically calculate price on save
+        if self.price is None:
+            self.calculate_price()
+        super().save(*args, **kwargs)
+
 class Payment(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='payments')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
