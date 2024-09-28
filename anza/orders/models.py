@@ -38,7 +38,7 @@ class Cart(models.Model):
     # need to check if all items in cart are from the same shop
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='carts')
     items = models.ManyToManyField(Product, through='CartItem')
-    total_price = models.IntegerField(blank=True, null=True)
+    total_price = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     archived = models.BooleanField(default=False)
@@ -51,14 +51,17 @@ class Cart(models.Model):
         self.save()
         order = Order.objects.create(user=self.user)
         for item in self.items.all():
-            OrderItem.objects.create(order=order, product=item, quantity=1, price=item.price)
+            OrderItem.objects.create(order=order, product=item, quantity=item.quantity, price=item.price)
         order.calculate_total()
         return order
+    
+    def update_price_total(self, cart_item_price):
+        self.update_price_total += cart_item_price
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
@@ -67,6 +70,7 @@ class CartItem(models.Model):
     def calculate_price(self):
         self.price = self.product.price * self.quantity
         self.save()
+        return self.price
 
     def save(self, *args, **kwargs):
         # Automatically calculate price on save
