@@ -38,7 +38,7 @@ class Cart(models.Model):
     # need to check if all items in cart are from the same shop
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='carts')
     items = models.ManyToManyField(Product, through='CartItem')
-    total_price = models.IntegerField()
+    total_price = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     archived = models.BooleanField(default=False)

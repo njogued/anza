@@ -35,7 +35,7 @@ class ProductDetailView(View):
 
         return render(request, "detail-product.html", context)
     
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     # A view to update a product
     model = Product
     form_class = UpdateProductForm
@@ -57,7 +57,7 @@ class ProductUpdateView(UpdateView):
         product.save()
         return redirect(self.get_success_url())
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     # A view to delete a product
     model = Product
     template_name = 'delete_product.html'
@@ -112,7 +112,7 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
             return redirect(success_url)
         return render(request, self.template_name, {"form": form})
     
-class UpdateReviewView(UpdateView):
+class UpdateReviewView(LoginRequiredMixin, UpdateView):
     # A view to update a review
     model = Review
     context_object_name = 'review'
@@ -160,7 +160,7 @@ class UpdateReviewView(UpdateView):
             return JsonResponse({"message": "Success"}, status=200)
         return redirect(self.get_success_url())
     
-class DeleteReviewView(DeleteView):
+class DeleteReviewView(LoginRequiredMixin, DeleteView):
     # A view to delete a review
     model = Review
     template_name = 'delete_review.html'
