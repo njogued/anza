@@ -42,6 +42,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "update_product.html"
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
+    login_url = '/users/login'
 
     def get_success_url(self):
         return reverse_lazy('detail_product', kwargs={'product_id': self.object.product_id})
@@ -64,6 +65,7 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'product'
     success_url = reverse_lazy('home')
     pk_url_kwarg = 'product_id'
+    login_url = '/users/login'
 
     def dispatch(self, request, *args, **kwargs):
         product = self.get_object()
@@ -117,7 +119,8 @@ class UpdateReviewView(LoginRequiredMixin, UpdateView):
     model = Review
     context_object_name = 'review'
     pk_url_kwarg = 'review_id'
-    
+    login_url = '/users/login'
+
     def get_success_url(self):
         return reverse_lazy('detail_product', kwargs={'product_id': self.object.product.product_id})
     
@@ -167,6 +170,7 @@ class DeleteReviewView(LoginRequiredMixin, DeleteView):
     context_object_name = 'review'
     pk_url_kwarg = 'review_id'
     product_id = None
+    login_url = '/users/login'
     
     def post(self, request, review_id):
         review = self.get_object()
