@@ -26,7 +26,7 @@ class AddToCartView(LoginRequiredMixin, View):
         cart.update_price_total(total_items_cost)
         return JsonResponse({"message": f"{quantity} of {product.name} added to cart"}, status=200)     
 
-# Create a cart
+# Create a cart - may not be very useful tbh
 class CreateCartView(LoginRequiredMixin, CreateView):
     # A view to create a new cart in back-end
     model = Cart
@@ -53,10 +53,9 @@ class DeleteCartView(LoginRequiredMixin, DeleteView):
             return JsonResponse({"message": "Cart cleared"}, status=200)
 
 # Update a cart
-class UpdateCartView(LoginRequiredMixin, DeleteView):
+class UpdateCartView(LoginRequiredMixin, View):
     # A view to create a new cart in back-end
     login_url = '/users/login'
-    model = CartItem
 
     def delete(self, request, *args, **kwargs):
         product_id = request.POST.get("product_id")
@@ -79,3 +78,27 @@ class UpdateCartView(LoginRequiredMixin, DeleteView):
 
 
 # Create an order and notify seller
+class CreateOrderView(LoginRequiredMixin, View):
+    # On cart submission, create new order
+    login_url = '/users/login'
+    success_url = '/users/orders'
+
+    def post(self, request, *args, **kwargs):
+        # get user cart and create order
+        cart, created_cart = Cart.objects.get_or_create(user=request.user, archived=False)
+        status = "Pending"
+        delivery_address = request.POST.get("delivery_address")
+        delivery_date = request.POST.get("delivery_date")
+        payment_method = request.POST.get("payment_method")
+        mobile_payment_number = request.POST.get("payment_number")
+        if created_cart:
+            return JsonResponse({"message":"Add items to cart first"}, message=404)
+        else:
+            new_order = cart.archive_and_create_order()
+            new_order.status = status
+            new_order.delivery_address = delivery_address
+            new_order.delivery_date = delivery_date
+            new_order.payment_method = payment_method
+            new_order.mobile_payment_number = mobile_payment_number
+            new_order.save()
+            return self.success_url

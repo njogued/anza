@@ -4,7 +4,7 @@ from products.models import Product
 
 class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='orders')
-    product = models.ManyToManyField(Product, through='OrderItem')
+    products = models.ManyToManyField(Product, through='OrderItem')
     status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('Shipped', 'Shipped'), ('Delivered', 'Delivered')])
     delivery_address = models.CharField(max_length=100, default='Nairobi')
     delivery_date = models.DateField(default=None)
@@ -13,15 +13,13 @@ class Order(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    paid_at = models.DateTimeField(default=False)
     archived = models.BooleanField(default=False)
     shipped_at = models.DateTimeField(null=True)
     delivered_at = models.DateTimeField(null=True)
-
-    def __str__(self):
-        return self.product.name + ' - ' + self.user.email
     
     def calculate_total(self):
-        self.total_price = sum(item.price * item.quantity for item in self.orderitem_set.all())
+        self.total_price = sum(item.price * item.quantity for item in self.products.all())
         self.save()
     
 class OrderItem(models.Model):
