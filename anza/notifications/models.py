@@ -46,7 +46,7 @@ def send_email_notification(recipient_email, notification):
     {notification.message}
 
     To view the details, click the link below:
-    {notification.url}
+    http://127.0.0.1:8000/notifications
 
     Best regards,
     Bizmob Team
@@ -61,6 +61,12 @@ def send_email_notification(recipient_email, notification):
 
 def create_notification(creator, recipient, notification_type_name, message, url=None):
     # Get or create notification type
+    # proposed notification types:
+    # new_business_view
+    # new_product_view
+    # new_order
+    # new_payment
+    # order_shipped
     notification_type, _ = NotificationType.objects.get_or_create(
         name=notification_type_name,
         defaults={'description': f'{notification_type_name} Notification'}
@@ -85,5 +91,4 @@ def create_notification(creator, recipient, notification_type_name, message, url
         send_email_notification(recipient.email,notification)
     else:
         pass
-
-    return
+    return notification

@@ -28,6 +28,7 @@ urlpatterns = [
     path("business/", include('business.urls')),
     path("products/", include('products.urls')),
     path("order/", include('orders.urls')),
+    path("notifications/", include('notifications.urls')),
     path("", TemplateView.as_view(template_name="index.html"), name="home"),
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
     path("contact/", TemplateView.as_view(template_name="contact.html"), name="contact"),

@@ -3,11 +3,13 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views import View
-from .models import Notification, NotificationType
+from .models import Notification, NotificationType, create_notification
 from .forms import NotificationForm
 import json
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from users.models import CustomUser
+from users.consumers import send_user_notification
 # Create your views here.
 
 
@@ -20,7 +22,9 @@ class NotificationListView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Notification.objects.filter(recipient=self.request.user)
+        queryset = Notification.objects.filter(recipient=self.request.user)
+        queryset.filter(read=False).update(read=True)
+        return queryset
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,19 +34,13 @@ class NotificationListView(ListView):
 class NotificationCreateView(CreateView):
     # A view to create a notification
     model = Notification
+    success_url = "/notifications/"
     form_class = NotificationForm
-    template_name = "create_notification.html"
-    success_url = "/activity/"
-    
-    def get(self, request):
-        form = self.form_class()
-        return render(request, self.template_name, {"form": form})
 
     def post(self, request):
         # Check if request is an AJAX request
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             data = json.loads(request.body)
-            recipient = data['recipient']    
             form = self.form_class(data)
             if form.is_valid():
                 notification = form.save(commit=False)
@@ -61,3 +59,16 @@ class NotificationCreateView(CreateView):
                 return redirect(self.success_url)
             else:
                 return render(request, self.template_name, {"form": form})
+            
+class SendNotificationView(LoginRequiredMixin, View):
+    login_url = "/users/login"
+
+    def post(self, request, *args, **kwargs):
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            data = json.loads(request.body)
+            new_notification = create_notification(data.creator, data.recipient, data.notification_type_name, data.message)
+            return new_notification
+        else:
+            data = request.POST
+            new_notification = create_notification(data['creator'], data['recipient'], data['notification_type_name'], data['message'])
+            return new_notification
