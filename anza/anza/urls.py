@@ -35,6 +35,8 @@ urlpatterns = [
     path("api/users/", include('users.api_urls')),
     path("api/business/", include('business.api_urls')),
     path("api/products/", include('products.api_urls')),
+    # path("research/", ResearchView.as_view(), name="research"),
+    # path("refer/<int:pk>", ReferView.as_view(), name="refer"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

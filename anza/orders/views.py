@@ -101,4 +101,5 @@ class CreateOrderView(LoginRequiredMixin, View):
             new_order.payment_method = payment_method
             new_order.mobile_payment_number = mobile_payment_number
             new_order.save()
+            # return JsonResponse({"message":"New order created"}, message=404)
             return self.success_url
