@@ -1,0 +1,190 @@
+.btn-blue {
+    position: relative;
+    background-color: #2123a8;
+    border-color: #2123a8;
+    color: #fff;
+    border-radius: 50px;
+    padding: 8px 20px;
+    border-width: 2px;
+    line-height: 1;
+    font-size: 16px;
+    font-family: Bricolage Grotesque;
+    font-weight: 600;
+    overflow:hidden;
+    transition: color 0.4s ease-in-out;
+}
+
+.btn-blue::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    transition: left 0.4s ease-in-out;
+    background-color: #ffffff;
+}
+
+.btn-blue:hover {
+    border-color: #2123a8;
+    color: #2123a8;
+    border-radius: 50px;
+    border-width: 2px;
+}
+
+.btn-blue span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-blue:hover::before {
+    left: 0; /* Move background into place on hover */
+}
+
+.btn-hover-blue {
+    position: relative;
+    background-color: #ffffff;
+    border-color: #2123a8;
+    color: #2123a8;
+    border-radius: 50px;
+    padding: 8px 20px;
+    border-width: 2px;
+    line-height: 1;
+    font-size: 16px;
+    font-family: Bricolage Grotesque;
+    font-weight: 600;
+    overflow:hidden;
+    transition: color 0.4s ease-in-out;
+}
+
+.btn-hover-blue::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #2123a8; /* Blue background for hover */
+    z-index: 0; /* Ensure it's behind the text */
+    transition: left 0.4s ease-in-out; /* Animate the background */
+}
+
+.btn-hover-blue:hover {
+    border-color: #2123a8;
+    color: #ffffff;
+    border-radius: 50px;
+    border-width: 2px;
+}
+
+.btn-hover-blue span {
+    position: relative;
+    z-index: 1; /* Ensure text is above the background */
+}
+
+.btn-hover-blue:hover::before {
+    left: 0; /* Move background into place on hover */
+}
+
+body {
+    font-size: 16px;
+    font-family: Bricolage Grotesque;
+    line-height: 1.5;
+}
+
+.navbar-nav {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.nav-item button {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+nav {
+    border-bottom: 2px solid #dee2e6;
+}
+
+@media (max-width: 576px) {
+    .profile-card {
+        width: 90%;
+    }
+    .deetz-container {
+        width: 90%;
+    }
+}
+@media (max-width: 768px) {
+    footer img {
+        width: 60px;
+        height: 100%;
+        align-items: right;
+        padding: 10px 10px;
+    }
+    #year-company-bottom, #logo-bottom, #links-bottom {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.grey-border {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.card-full {
+    max-width: 280px;
+}
+
+.card-body h5 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+header h3 {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.btn-just-blue {
+    background-color: #2123a8;
+    border-color: #000255;
+    color: #fff;
+}
+
+.btn-just-blue:hover {
+    background-color: #000255;
+    border-color: #000255;
+    color: #fff;
+}
+
+.popover {
+    margin: 10px 10px 10px -20px !important;
+}
+
+.popover .popover-arrow {
+    display: none; /* Completely hides the arrow */
+}
+
+.popover .popover-body {
+    padding: 5px; /* Removes padding from the body */
+}
+
+textarea {
+    overflow-y: auto;
+    max-height: calc(1.5em * 4);
+}
+
+.figure-caption {
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+}
+
+.profile-round-img {
+    width: 150px;
+    height: 150px;
+}
