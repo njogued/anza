@@ -1,192 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <!-- bootstrap is mobile first, this approach will make the website responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Anza | Start Growing</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="static/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap" data-tag="font">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" data-tag="font">
-</head>
-<body>    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <div class="container-fluid w-100 m-0 p-0">
-        <nav class="navbar navbar-expand-md bg-body-tertiary w-100">
-            <div class="container-fluid w-100">
-                <a class="navbar-brand" href="#">
-                    <img src="../basic/static/bizmob.png" alt="Bizmob" width="50" height="50">
-                </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
-                        <!-- <span class="navbar-toggler-icon"></span> -->
-                        <svg id="collapsed-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-menu-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5"/>
-                        </svg>
-                    
-                        <svg id="expanded-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16" style="display: none;">
-                            <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1z"/>
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                        </svg>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item p-2 mx-auto my-auto">
-                                <a class="nav-link py-0" href="#">About</a>
-                            </li>
-                            <li class="nav-item p-2 mx-auto my-auto">
-                                <a class="nav-link py-0" href="#">Contact</a>
-                            </li>
-                            <li class="nav-item p-2 mx-auto my-auto">
-                                <a class="nav-link py-0" href="#">Businesses</a>
-                            </li>
-                            <li class="nav-item p-2 mx-auto my-auto">
-                                <a class="nav-link py-0" href="#">Products</a>
-                            </li>
-                            <li class="nav-item p-2 mx-auto my-auto">
-                                <button type="button" class="btn btn-primary position-relative py-0">
-                                    Inbox
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                      99+
-                                      <span class="visually-hidden">unread messages</span>
-                                    </span>
-                                  </button>
-                            </li>
-                            <li class="nav-item p-2 mx-auto my-auto">
-                                <button type="button" class="btn btn-primary position-relative py-0">
-                                    Cart
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                      5
-                                      <span class="visually-hidden">items in cart</span>
-                                    </span>
-                                  </button>
-                            </li>
-                            <li class="nav-item p-2 mx-auto my-auto">
-                                <div id="popover-content" class="d-none">
-                                    <button type="button" class="btn-close float-end" aria-label="Close"></button>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <a href="http://127.0.0.1:8000/">Your Profile</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <a href="http://127.0.0.1:8000/">
-                                                Your Settings
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <a href="http://127.0.0.1:8000/">
-                                                Logout
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a tabindex="0" id="profile-icon-link" class="popover-dismiss text-center" role="button" data-bs-toggle="popover" data-bs-trigger="manual" data-bs-title="You" data-bs-content="">
-                                <svg id="profile-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                                </svg>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
+{% extends 'new_base.html' %}
+{% load static %}
+{% block title %}
+<title>Anza | Create Business</title>
+{% endblock %}
+{% block meta %}
+<meta property="og:title" content="Anza | Create Business" />
+{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{% static './new-styles.css' %}" />
+{% endblock %}
+{% block divclass %}container-fluid w-100 m-0 p-0{% endblock %}  
+{% block content %}
+<div class="container">
+    <header class="row p-1 m-1">
+        <h3 class="text-center my-auto">Create a Business
+        </h3>
+    </header>
+    <div class="row">
+        <form method="post" enctype="multipart/form-data">
+            <div class="row g-3 align-items-center">
+                <div class="mb-3 col-md-6">
+                    <label for="id_name" class="form-label">Business Name</label>
+                    <input type="text" name="name" class="form-control" id="id_name">
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="id_phone_number" class="form-label">Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control" id="id_phone_number">
+                </div>
             </div>
-        </nav>
-        <div class="container">
-            <header class="row p-1 m-1">
-                <h3 class="text-center my-auto">Create a Business
-                </h3>
-            </header>
-            <div class="row">
-                <form method="post" enctype="multipart/form-data">
-                    <div class="row g-3 align-items-center">
-                        <div class="mb-3 col-md-6">
-                            <label for="id_name" class="form-label">Business Name</label>
-                            <input type="text" name="name" class="form-control" id="id_name">
-                        </div>
-                        <div class="mb-3 col-md-6">
-                            <label for="id_phone_number" class="form-label">Phone Number</label>
-                            <input type="text" name="phone_number" class="form-control" id="id_phone_number">
-                        </div>
-                    </div>
-                    <!-- <div class="mb-3">
-                        <label for="formFile" class="form-label">Default file input example</label>
-                        <input class="form-control" type="file" id="formFile">
-                    </div> -->
-                    <div class="mb-3">
-                        <label for="id_description" class="form-label">Description</label>
-                        <textarea class="form-control" id="id_description" name="description" rows="3"></textarea>
-                    </div>
-                    <div class="row g-3 align-items-center">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label" for="id_category">Category</label>
-                            <select class="form-select" id="id_category" name="category">
-                                <option selected>Category</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="id_image" class="form-label">Upload Business Logo (Optional)</label>
-                            <input class="form-control" type="file" id="id_image" accept="image/*" multiple>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-just-blue w-100">Create Business</button>
-                  </form>
+            <!-- <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" id="formFile">
+            </div> -->
+            <div class="mb-3">
+                <label for="id_description" class="form-label">Description</label>
+                <textarea class="form-control" id="id_description" name="description" rows="3"></textarea>
             </div>
-        </div>
-        <footer class="d-flex flex-wrap justify-content-center align-items-center p-3 m-2 border-top m-2">
-            <p class="col-md-4 mb-0 text-muted">© 2024 Anza</p>
-        
-            <a href="/" class="col-md-4 d-flex align-items-center justify-content-center my-auto mb-md-0 me-md-auto link-dark text-decoration-none">
-                <img src="../basic/static/bizmob.png" alt="bizmob logo" width="40px" height="40px">
-            </a>
-        
-            <ul class="nav col-md-4 justify-content-end">
-              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contact</a></li>
-            </ul>
-          </footer>
+            <div class="row g-3 align-items-center">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="id_category">Category</label>
+                    <select class="form-select" id="id_category" name="category">
+                        <option selected>Category</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="id_image" class="form-label">Upload Business Logo (Optional)</label>
+                    <input class="form-control" type="file" id="id_image" accept="image/*" multiple>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-just-blue w-100">Create Business</button>
+            </form>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the hidden div content
-            const popoverContent = document.getElementById('popover-content').innerHTML;
-
-            // Initialize the popover
-            const popoverTriggerEl = document.getElementById('profile-icon-link');
-            const popover = new bootstrap.Popover(popoverTriggerEl, {
-                trigger: 'manual',
-                html: true,
-                content: popoverContent
-            });
-
-            popoverTriggerEl.addEventListener('click', function () {
-                popover.toggle();
-            });
-
-            document.addEventListener('click', function (e) {
-                // Check if the click is outside of the popover and not on the icon
-                if (!popoverTriggerEl.contains(e.target) && !document.querySelector('.popover')?.contains(e.target)) {
-                    popover.hide();
-                }
-
-                // Check if the close button inside the popover is clicked
-                if (e.target.classList.contains('btn-close')) {
-                    popover.hide();
-                }
-            });
-            // popoverTriggerEl.addEventListener('shown.bs.popover', function () {
-            //     // Use JavaScript to set custom header content
-            //     document.querySelector('.popover-header').innerHTML = `
-            //         <p class="text-center">You</p>
-            //         <button type="button" class="btn-close" aria-label="Close"></button>
-            //     `;
-            // });
-    });
-    </script>
-</body>
-<script src="static/allscript.js"></script>
-</html>
+</div>
+{% endblock %}
