@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from users.views import MyProfileView
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -35,6 +36,7 @@ urlpatterns = [
     path("api/users/", include('users.api_urls')),
     path("api/business/", include('business.api_urls')),
     path("api/products/", include('products.api_urls')),
+    path("profile/", MyProfileView.as_view(template_name="user_profile.html"), name="profile"),
     # path("research/", ResearchView.as_view(), name="research"),
     # path("refer/<int:pk>", ReferView.as_view(), name="refer"),
 ]
