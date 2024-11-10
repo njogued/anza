@@ -188,3 +188,9 @@ textarea {
     width: 150px;
     height: 150px;
 }
+
+.profile-bs-logos {
+    aspect-ratio: 1 / 1; 
+    width: 100%;
+    /* object-fit: cover; */
+}
