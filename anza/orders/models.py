@@ -13,7 +13,7 @@ class Order(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    paid_at = models.DateTimeField(default=False)
+    paid_at = models.DateTimeField(default=None)
     archived = models.BooleanField(default=False)
     shipped_at = models.DateTimeField(null=True)
     delivered_at = models.DateTimeField(null=True)
