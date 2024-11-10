@@ -10,6 +10,7 @@ from django.contrib.auth import views as auth_views
 from .serializer import UserSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class SignUpView(CreateView):
     model = CustomUser
@@ -76,9 +77,22 @@ class UserDetailView(DetailView):
     slug_url_kwarg = 'username'
     def get_object(self, queryset=None):
         try:
+            print(self.request)
             return super().get_object(queryset)
         except CustomUser.DoesNotExist:
             raise Http404("User not found")
+        
+class MyProfileView(LoginRequiredMixin, DetailView):
+    model = CustomUser
+    template_name = "user_profile.html"
+    context_object_name = 'user_profile'
+    login_url = '/users/login'
+    def get_object(self, queryset=None):
+        try:
+            user_profile = { "user_profile": CustomUser.objects.get(email=self.request.user) }
+            return user_profile
+        except CustomUser.DoesNotExist:
+            raise Http404("Profile not found")
     
 class CustomPasswordResetView(auth_views.PasswordResetView):
     template_name = "password_reset.html"

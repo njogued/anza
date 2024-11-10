@@ -5,6 +5,8 @@ from .managers import CustomUserManager
 # Create your models here.
 class CustomUser(AbstractUser):
     email = models.EmailField(max_length=254, unique=True)
+    # first_name = models.CharField(max_length=150, null=False, blank=False)
+    # last_name = models.CharField(max_length=150, null=False, blank=False)
     username = models.CharField(max_length=150, unique=True, null=False, blank=False)
     phone_number = models.CharField(max_length=255, null=True, blank=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
@@ -13,6 +15,7 @@ class CustomUser(AbstractUser):
     twitter_link = models.URLField(max_length=200, null=True, blank=True)
     facebook_link = models.URLField(max_length=200, null=True, blank=True)
     linkedin_link = models.URLField(max_length=200, null=True, blank=True)
+    # whatsapp_link = models.URLField(max_length=200, null=True, blank=True)
     website_link = models.URLField(max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
