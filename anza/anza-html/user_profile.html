@@ -9,6 +9,10 @@
 {% block link %}
 <link rel="stylesheet" href="{% static './new-styles.css' %}" />
 {% endblock %}
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
 {% block divclass %}container-fluid w-100 m-0 p-0{% endblock %}  
 {% block content %}
 <div class="container-fluid">
@@ -17,7 +21,7 @@
         <div class="col-lg-2"></div>
         <h3 class="text-center my-2 col-lg-8">Profile info</h3>
         <div class="col-xl-2 d-flex justify-content-center align-items-center">
-            <button class="btn btn-primary">Edit Profile</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
         </div>
         {% else %}
         <h3 class="text-center my-2 col-12">Profile info</h3>
@@ -170,5 +174,125 @@
         {% endfor %}
         {% endif %}
     </div>
-</div>
+    {% if user_profile.user_profile == request.user %}
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Edit Your Profile</h5>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="profile_picture">Profile Picture</label>
+                  <input type="file" class="form-control-file" accept="image/*" id="profile_picture" name="profile_picture">
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="first_name">First Name</label>
+                      <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name|default_if_none:'' }}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="last_name">Last Name</label>
+                      <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name|default_if_none:'' }}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="phone_number">Phone Number</label>
+                      <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ user.phone_number|default_if_none:'' }}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="tiktok_link">TikTok Link</label>
+                      <input type="url" class="form-control" id="tiktok_link" name="tiktok_link" value="{{ user.tiktok_link|default_if_none:'' }}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="instagram_link">Instagram Link</label>
+                      <input type="url" class="form-control" id="instagram_link" name="instagram_link" value="{{ user.instagram_link|default_if_none:'' }}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="twitter_link">Twitter Link</label>
+                      <input type="url" class="form-control" id="twitter_link" name="twitter_link" value="{{ user.twitter_link|default_if_none:'' }}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="facebook_link">Facebook Link</label>
+                      <input type="url" class="form-control" id="facebook_link" name="facebook_link" value="{{ user.facebook_link|default_if_none:'' }}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="linkedin_link">LinkedIn Link</label>
+                      <input type="url" class="form-control" id="linkedin_link" name="linkedin_link" value="{{ user.linkedin_link|default_if_none:'' }}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="whatsapp_link">WhatsApp Link</label>
+                      <input type="url" class="form-control" id="whatsapp_link" name="whatsapp_link" value="{{ user.whatsapp_link|default_if_none:'' }}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="website_link">Website Link</label>
+                      <input type="url" class="form-control" id="website_link" name="website_link" value="{{ user.website_link|default_if_none:'' }}">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>      
+    {% endif %}      
+{% endblock %}
+{% block scripts_end %}
+<script type="text/javascript">
+    $(document).ready(function() {
+    $("#edit-profile-form").submit(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const formData = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                console.log(response);
+                alert(response.message); // Handle success, similar to the fetch example
+            },
+            error: function(error) {
+                console.error(error); // Handle errors
+            }
+        });
+        });
+    });
+</script>
 {% endblock %}
