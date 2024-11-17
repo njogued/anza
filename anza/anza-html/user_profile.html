@@ -286,7 +286,12 @@
             contentType: false,
             success: function(response) {
                 console.log(response);
-                alert(response.message); // Handle success, similar to the fetch example
+                $('#editProfileModal').modal('hide');  // Close modal by ID
+                if (response.message == "Success"){
+                    setTimeout(function() {
+                        alert(response.message);  // You can adjust how the message is displayed
+                    }, 500);
+                }
             },
             error: function(error) {
                 console.error(error); // Handle errors

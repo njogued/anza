@@ -119,8 +119,8 @@ class MyProfileView(LoginRequiredMixin, DetailView):
         print(request.headers.get('X-Requested-With'))
         if form.is_valid():
             form.save()
-            return redirect("profile")
-            # return JsonResponse({"message": "Success"}, status=200)
+            # return redirect("profile")
+            return JsonResponse({"message": "Success"}, status=200)
         else:
             errors = form.errors.get_json_data()
             print(errors)
