@@ -11,6 +11,8 @@ from .serializer import UserSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 class SignUpView(CreateView):
     model = CustomUser
@@ -78,7 +80,6 @@ class UserDetailView(DetailView):
     form_class = CustomUserUpdateForm
     def get_object(self, queryset=None):
         try:
-            print(self.request)
             return { "user_profile": super().get_object(queryset), "form": CustomUserUpdateForm() }
         except CustomUser.DoesNotExist:
             raise Http404("User not found")
@@ -88,17 +89,19 @@ class UserDetailView(DetailView):
         form = self.form_class(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Profile updated successfully')
             # need headers to detect ajax request
             # if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             #     return JsonResponse({"message": "Success"}, status=200)
-            return JsonResponse({"message": "Success"}, status=200)
+            return HttpResponseRedirect(self.request.path_info)
         else:
             errors = form.errors.get_json_data()
-            print(errors)
+            for error in errors:
+                messages.error(request, error)
             # need headers to detect ajax request
             # if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             #     return JsonResponse(errors, status=400, safe=False)
-            return JsonResponse(errors, status=400, safe=False)
+            return HttpResponseRedirect(self.request.path_info)
         
 class MyProfileView(LoginRequiredMixin, DetailView):
     model = CustomUser
@@ -119,11 +122,13 @@ class MyProfileView(LoginRequiredMixin, DetailView):
         print(request.headers.get('X-Requested-With'))
         if form.is_valid():
             form.save()
-            # return redirect("profile")
-            return JsonResponse({"message": "Success"}, status=200)
+            messages.success(request, 'Profile updated successfully')
+            return redirect("profile")
+            # return JsonResponse({"message": "Success"}, status=200)
         else:
             errors = form.errors.get_json_data()
-            print(errors)
+            for error in errors:
+                messages.error(request, error)
             return JsonResponse(errors, status=400, safe=False)
     
 class CustomPasswordResetView(auth_views.PasswordResetView):

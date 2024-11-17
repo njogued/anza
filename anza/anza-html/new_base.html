@@ -22,7 +22,7 @@
     <div class="{% block divclass %}{% endblock %}">
         <nav class="navbar navbar-expand-md bg-body-tertiary w-100">
             <div class="container-fluid w-100">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img src="/media/site_files/bizmob.png" alt="anza logo" width="50" height="50">
                 </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
@@ -45,17 +45,17 @@
                                 <a class="nav-link py-0" href="#">Contact</a>
                             </li> -->
                             <li class="nav-item p-2 mx-auto my-auto">
-                                <a class="nav-link py-0" href="#">Businesses</a>
+                                <a class="nav-link py-0" href="/business/all">Businesses</a>
                             </li>
                             <li class="nav-item p-2 mx-auto my-auto">
-                                <a class="nav-link py-0" href="#">Products</a>
+                                <a class="nav-link py-0" href="/products/all">Products</a>
                             </li>
                             {% if user.is_authenticated %}
                             <li class="nav-item p-2 mx-auto my-auto">
                                 <button type="button" class="btn btn-primary position-relative py-0">
                                     Inbox
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                      99+
+                                      9
                                       <span class="visually-hidden">unread messages</span>
                                     </span>
                                   </button>
@@ -107,6 +107,22 @@
                     </div>
             </div>
         </nav>
+        {% if messages %}
+        <ul class="messages list-unstyled">
+            {% for message in messages %}
+            <div{% if message.tags %} class="row {{ message.tags }} justify-content-center align-items-center"{% endif %}>
+            <div class="col-1">
+            </div>
+            <div class="col-10">
+                <li>{{ message }}</li>
+            </div>
+            <div class="col-1">
+                <span class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+            </div>
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
         {% block content %}{% endblock %}
         <footer class="d-flex flex-wrap justify-content-center align-items-center p-3 mb-2 m-2 border-top m-2 mt-auto">
             <p id="year-company-bottom" class="col-md-4 mb-0 text-muted">© 2024 Anza</p>
