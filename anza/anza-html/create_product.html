@@ -11,13 +11,14 @@
 {% endblock %}
 {% block divclass %}container-fluid w-100 m-0 p-0{% endblock %}  
 {% block content %}
-<div class="container">
+<div class="container mb-4">
     <header class="row p-1 m-1">
         <h3 class="text-center my-auto">Create a Product
         </h3>
     </header>
     <div class="row">
-        <form>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="row g-3 align-items-center">
                 <div class="mb-3 col-md-6">
                     <label for="id_name" class="form-label">Product Name</label>
@@ -36,10 +37,9 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="id_category">Category</label>
                     <select class="form-select" id="id_category" name="category">
-                        <option selected>Category</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        {% for value, label in product_form.fields.category.choices %}
+                            <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -49,12 +49,40 @@
             </div>
             
             <div class="mb-3">
+                <div id="image-previews" style="margin-top: 10px;"></div> <!-- Placeholder for image previews -->
                 <label for="id_image" class="form-label">Upload Product Cover Image</label>
-                <input class="form-control" type="file" id="id_image" accept="image/*" multiple>
+                <input class="form-control" type="file" name="image" id="id_image" accept="image/*" multiple>
             </div>
             
             <button type="submit" class="btn btn-just-blue w-100">Create Product</button>
             </form>
     </div>
 </div>
+{% endblock %}
+{% block scripts_end %}
+<script>
+    document.getElementById("id_image").addEventListener("change", function(event) {
+        var previewContainer = document.getElementById("image-previews");
+        previewContainer.innerHTML = ''; // Clear any previous previews
+        
+        // Loop through all the selected files
+        Array.from(event.target.files).forEach(function(file) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                // Create an image element for each selected file
+                var img = document.createElement("img");
+                img.src = reader.result;
+                img.style.maxWidth = "150px";  // Size of the thumbnail
+                img.style.margin = "5px";
+                img.style.border = "1px solid #ccc";
+                img.style.padding = "5px";
+                img.style.borderRadius = "5px";
+
+                // Append the image to the preview container
+                previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
 {% endblock %}

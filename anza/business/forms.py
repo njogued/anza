@@ -5,7 +5,7 @@ class CreateBusinessForm(forms.ModelForm):
     # A custom form to handle business creation
     class Meta:
         model = Business
-        fields = ('name', 'phone_number', 'description', 'categories')
+        fields = ('name', 'phone_number', 'description', 'categories', 'logo')
     
     # def save(self, curr_user, commit=True):
     #     business = super(CreateBusinessForm, self).save(commit=False)

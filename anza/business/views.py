@@ -28,6 +28,8 @@ from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 class CreateBusinessView(LoginRequiredMixin, CreateView):
     def get(self, request):
         form = self.form_class()
+        print(form.__dict__.items())
+        print(form)
         return render(request, self.template_name, {"form": form})
     def post(self, request):
         curr_user = request.user
