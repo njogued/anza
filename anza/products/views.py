@@ -13,10 +13,12 @@ from .serializer import ProductSerializer, ReviewSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
+from django.contrib import messages
 
 class ProductDetailView(View):
     # A view to display the details of a product
     form_class = CreateReviewForm
+
 
     def get(self, request, product_id):
         product = Product.objects.get(product_id=product_id)
@@ -70,7 +72,8 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     def dispatch(self, request, *args, **kwargs):
         product = self.get_object()
         if product.business.owner != self.request.user:
-            return HttpResponseForbidden("You are not allowed to update business")
+            return HttpResponseForbidden("You are not allowed to delete business")
+        messages.success(request, 'Product deleted successfully')
         return super().dispatch(request, *args, **kwargs)
 
 class CreateReviewView(LoginRequiredMixin, CreateView):

@@ -1,7 +1,7 @@
 {% extends 'new_base.html' %}
 {% load static %}
 {% block title %}
-<title>{{ product.name }} - Bizmob</title>
+<title>{{ product.name }} - Anza</title>
 {% endblock %}
 {% block meta %}
 <meta property="og:title" content="Anza | Detail Product" />
@@ -19,12 +19,20 @@
   <header class="row p-1 mt-1">
       {% if product_owner == request.user %}
       <div class="col-lg-2"></div>
-      <h3 class="text-center my-2 col-lg-8">Business info</h3>
+      <h3 class="text-center my-2 col-lg-8">Product Information</h3>
       <div class="col-lg-1 d-flex justify-content-center align-items-center">
-          <button type="button" class="btn btn-primary" data-bs-toggle="editModal" data-bs-target="#editProductModal">Edit</button>
-      </div>
+        <button type="button" id="editProductModalTrigger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal" 
+            data-product-id="{{ product.product_id }}" 
+            data-name="{{ product.name }}" 
+            data-description="{{ product.description }}" 
+            data-price="{{ product.price }}" 
+            data-quantity="{{ product.quantity }}" 
+            data-category="{{ product.category.id }}">
+            Edit
+        </button>
+    </div>
       <div class="col-lg-1 d-flex justify-content-center align-items-center">
-        <button type="button" class="btn btn-danger" data-bs-toggle="deleteModal" data-bs-target="#deleteProductModal">Delete</button>
+        <button type="button" id="deleteProductModalTrigger" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-product="{{ product.product_id }}">Delete</button>
       </div>
       {% else %}
       <h3 class="text-center my-2 col-12">Business info</h3>
@@ -39,7 +47,7 @@
           class="detail-product-image"
         />
         {% endwith %}
-        <figcaption class="figure-caption">{{ product.name }}</figcaption>
+        <figcaption class="mt-2 figure-caption">{{ product.name }}</figcaption>
       </div>
       <div class="col-sm-4 d-flex align-items-top justify-content-center">
               <ul class="list-group list-group-flush border-top border-bottom">
@@ -93,98 +101,6 @@
   </div>
   </div>
 
-
-{% if product_owner == request.user %}
-<!-- Edit modal -->
-<div id="edit-pd-modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form id="update-review-form" action="" method="post">
-      {% csrf_token %}
-      <!-- Form content here -->
-      <div class="banner1-container2">
-        <div class="banner1-container3">
-          <label for="id_rating" class="banner1-text thq-heading-3">
-            <span>Rating</span>
-          </label>
-          <select
-            name="rating"
-            id="id_rating"
-            class="banner1-input thq-input"
-            required
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-        </div>
-        <div class="banner1-container4">
-          <label for="id_review" class="banner1-text thq-heading-3">
-            <span>Review Title</span>
-          </label>
-          <textarea
-            name="review"
-            id="id_review"
-            class="banner1-input thq-input banner1-input1"
-          ></textarea>
-        </div>
-        <div class="banner1-container4">
-          <label for="id_review_description" class="banner1-text thq-heading-3">
-            <span>Review Description</span>
-          </label>
-          <textarea
-            name="review_description"
-            id="id_review_description"
-            class="banner1-input thq-input banner1-input1"
-          ></textarea>
-        </div>
-        <input type="hidden" name="review_id" id="id_review_id" value="">
-        <input type="hidden" name="product_id" id="id_product_id" value="{{ product.product_id }}">
-        <div class="banner1-container5">
-          <button
-            type="submit"
-            class="banner1-action thq-button-filled thq-button-animated"
-          >
-            <span class="banner1-text1 thq-body-small">
-              <span>Submit</span>
-            </span>
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-<!-- Delete product modal -->
-<div id="delete-pd-modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form id="delete-pd-form" action="" method="post">
-      {% csrf_token %}
-      <p>Are you sure you want to delete this product?</p>
-      <div class="banner1-container5" id="confirm-delete-container">
-        <button type="submit" class="banner1-action thq-button-filled thq-button-animated">
-          <span class="banner1-text1 thq-body-small">
-            <span class="delete-bs-btn" id="delete-btn-modal">Delete</span>
-          </span>
-        </button>
-        <button type="button" class="close-modal banner1-action thq-button-filled thq-button-animated" id="exit-pd-modal-button">
-          <span class="banner1-text1 thq-body-small">
-            <span>Cancel</span>
-          </span>
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-{% endif %}
-
 <header class="row p-1 mt-2" style="border-top: 1px black">
   <h3 class="text-center my-2 col-12">Description</h3>
 </header>
@@ -222,16 +138,16 @@
               class="banner1-input thq-input"
               required
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
               <option value="10">10</option>
+              <option value="9">9</option>
+              <option value="8">8</option>
+              <option value="7">7</option>
+              <option value="6">6</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
             </select>
           </div>
           <div class="banner1-container4">
@@ -379,20 +295,74 @@
 <h4>{{ review.review }} | Rated: {{ review.rating }}</h4>
 <span>{{ review.review_description }}</span>
 {% endfor %}
+{% if product_owner == request.user %}
+<!-- Product edit modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Product Update Form -->
+              <form id="updateProductForm" method="post" action="">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                      <label for="id_name" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="id_name" name="name" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="id_description" class="form-label">Description</label>
+                      <textarea class="form-control" id="id_description" name="description" rows="3" required></textarea>
+                  </div>
+                  <div class="mb-3">
+                      <label for="id_price" class="form-label">Price</label>
+                      <input type="number" class="form-control" id="id_price" name="price" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="id_quantity" class="form-label">Quantity</label>
+                      <input type="number" class="form-control" id="id_quantity" name="quantity" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="id_category" class="form-label">Category</label>
+                      <select class="form-select" id="id_category" name="category" required>
+                          <option value="" selected>Select a category</option>
+                          {% for category in categories %}
+                              <option value="{{ category.id }}">{{ category.name }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Delete product modal -->
+<div class="modal fade" id="deleteProductModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete product?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="delete-pd-form" method="post">
+          {% csrf_token %}
+          <p>Are you sure you want to delete this product?</p>
+          <div class="d-flex justify-content-around">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 {% endblock %}
 {% block scripts_end %}
-<script
-  defer=""
-  src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var form = document.getElementById("review-form");
-    if (form) {
-      form.action = window.location.pathname + "review/create/";
-    }
-  });
-</script>
 <script>
   $(document).ready(function() {
     $("#review-form").submit(function(e) {
@@ -417,9 +387,9 @@
     });
   })
 </script>
-<script>
+<!-- <script>
   // Get the modal
-  var editModal = document.getElementById("reviewModal");
+  var editreviewModal = document.getElementById("reviewModal");
 
   // Get the button that opens the modal
   var editBtn = document.getElementById("edit-review-btn");
@@ -452,7 +422,7 @@
       editModal.style.display = "none";
     }
   }
-</script>
+</script> -->
 <script>
   // Get the modal
   var delModal = document.getElementById("deleteReviewModal");
@@ -481,33 +451,6 @@
   }
 </script>
 <script>
-  // Get the modal
-  var deletePDmodal = document.getElementById("delete-pd-modal");
-
-  // Get the button that opens the modal
-  var deletePDbtn = document.getElementById("delete-pd-btn");
-
-  // Get the <span> element that closes the modal
-  var closeSpan = document.getElementsByClassName("close")[0];
-  const closeModalBtn = document.getElementById("exit-pd-modal-button");
-
-  deletePDbtn.onclick = function() {
-    deletePDmodal.style.display = "block";
-    document.getElementById("delete-pd-form").action = "/products/{{ product.id }}/delete/";
-  }
-  closeSpan.onclick = function() {
-    deletePDmodal.style.display = "none";
-  }
-  closeModalBtn.onclick = function() {
-    deletePDmodal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == deletePDmodal) {
-      deletePDmodal.style.display = "none";
-    }
-  }
-</script>
-<script>
   $(document).ready(function() {
     $("#update-review-form").submit(function(e) {
       e.preventDefault();
@@ -530,5 +473,35 @@
       });
     });
   })
+</script>
+<script>
+  // Pre-fill the form when the modal is triggered
+  const editModal = document.getElementById('editProductModal');
+  const deletePDmodal = document.getElementById('deleteProductModal');
+  const editProductModalTrigger = document.getElementById('editProductModalTrigger');
+  const deleteProductModalTrigger = document.getElementById('deleteProductModalTrigger');
+  editProductModalTrigger.addEventListener('click', function (event) {
+      const button = editProductModalTrigger // Button that triggered the modal
+      const productId = button.getAttribute('data-product-id');
+      const productName = button.getAttribute('data-name');
+      const productDescription = button.getAttribute('data-description');
+      const productPrice = button.getAttribute('data-price');
+      const productQuantity = button.getAttribute('data-quantity');
+      const productCategory = button.getAttribute('data-category');
+      // Populate the form fields with the current product data
+      document.getElementById('id_name').value = productName;
+      document.getElementById('id_description').value = productDescription;
+      document.getElementById('id_price').value = productPrice;
+      document.getElementById('id_quantity').value = productQuantity;
+      document.getElementById('id_category').value = productCategory;
+      document.getElementById('updateProductForm').action = `/products/update/${productId}/`;
+      // find a way to fix this later
+      document.getElementsByClassName("modal-backdrop")[0].hidden = true;
+  });
+  deleteProductModalTrigger.addEventListener('click', function (event) {
+      const productId = this.getAttribute('data-bs-product');
+      document.getElementById('delete-pd-form').action = `/products/delete/${productId}/`;
+      document.getElementsByClassName("modal-backdrop")[0].hidden = true;
+  });
 </script>
 {% endblock %}
