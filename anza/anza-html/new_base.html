@@ -146,7 +146,7 @@
     {% block scripts_end %}
     {% endblock %}
     <script type="text/javascript">
-      let url = `ws://${window.location.host}/ws/notifications/`;
+      let url = `wss://${window.location.host}/ws/notifications/`;
       const ws = new WebSocket(url);
       ws.onopen = function (event) {
         console.log("Connected to the websocket server");
