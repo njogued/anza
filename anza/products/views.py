@@ -19,22 +19,32 @@ class ProductDetailView(View):
     # A view to display the details of a product
     form_class = CreateReviewForm
 
-
     def get(self, request, product_id):
         product = Product.objects.get(product_id=product_id)
         images = ProductImage.objects.filter(product=product)
         reviews = Review.objects.filter(product=product)
+        rev_count = reviews.count()
         self_review_bool = False
         self_review = None
         product_owner = product.business.owner
         if request.user.is_authenticated:
-            self_review = reviews.filter(reviewer=request.user).first()
-            if self_review:
-                self.form_class = UpdateReviewForm
-                self_review_bool = True
-        rev_count = reviews.count()
-        context = {"product": product, "images": images, "reviews": reviews, "rev_count": rev_count, "form": self.form_class, "self_review": self_review, "self_review_bool": self_review_bool, "product_owner": product_owner}
-
+            if product_owner == request.user:
+                self.form_class = UpdateProductForm()
+            else:
+                self_review = reviews.filter(reviewer=request.user).first()
+                if self_review:
+                    self.form_class = UpdateReviewForm
+                    self_review_bool = True
+        context = {
+            "product": product,
+            "images": images,
+            "reviews": reviews,
+            "rev_count": rev_count,
+            "form": self.form_class,
+            "self_review": self_review,
+            "self_review_bool": self_review_bool,
+            "product_owner": product_owner
+        }
         return render(request, "detail-product.html", context)
     
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
@@ -200,7 +210,6 @@ class DeleteReviewView(LoginRequiredMixin, DeleteView):
     # def get_success_url(self):
     #     reverse_lazy('detail_product', kwargs={'product_id': self.product_id})
     
-
 class ProductListView(ListView):
     # A view to list all products
     model = Product
@@ -289,8 +298,7 @@ class APIProductReviewCreateView(generics.CreateAPIView):
             business.save()
             return review
         return Response({"message": "You are not allowed to review this product. You either own it or it's deleted."}, status=403)
-
-    
+   
 class APIReviewUpdateView(generics.RetrieveUpdateAPIView):
     # A view to update a review
     lookup_field = 'review_id'

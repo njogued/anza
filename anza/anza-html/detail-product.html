@@ -38,7 +38,7 @@
       <h3 class="text-center my-2 col-12">Business info</h3>
       {% endif %}
   </header>
-  <div class="row d-flex justify-content-center mt-1">
+  <div class="row d-flex justify-content-center m-2 pb-2">
       <div class="col-sm-4 text-center">
         {% with product.is_cover_image as cover_image %}
         <img
@@ -101,8 +101,8 @@
   </div>
   </div>
 
-<header class="row p-1 mt-2" style="border-top: 1px black">
-  <h3 class="text-center my-2 col-12">Description</h3>
+<header class="row mt-2">
+  <h4 class="border-bottom border-top border-success text-center mx-4 col-12 py-2">Description</h4>
 </header>
 <div class="d-flex">
   <div class="col-12">
@@ -115,7 +115,7 @@
 </div>
 
 <header class="row p-1 mt-1">
-  <h3 class="text-center my-2 col-12">Reviews</h3>
+  <h4 class="border-bottom border-top border-success text-center my-2 mx-4 col-12 py-2">Reviews</h4>
 </header>
 <div class="w-100">
 {% if product_owner != request.user %}
@@ -328,8 +328,8 @@
                       <label for="id_category" class="form-label">Category</label>
                       <select class="form-select" id="id_category" name="category" required>
                           <option value="" selected>Select a category</option>
-                          {% for category in categories %}
-                              <option value="{{ category.id }}">{{ category.name }}</option>
+                          {% for value, label in form.fields.category.choices %}
+                          <option value="{{ value }}">{{ label }}</option>
                           {% endfor %}
                       </select>
                   </div>

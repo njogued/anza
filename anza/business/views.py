@@ -128,7 +128,6 @@ class BusinessUpdateView(UpdateView):
         business.save()
         return redirect(self.get_success_url())
 
-
 class BusinessDeleteView(View):
     template_name = "delete_business.html"
     success_url = reverse_lazy("home")
@@ -237,7 +236,8 @@ class APIBusinessDetailView(generics.RetrieveAPIView):
                 raise NotFound({"message": "Business archived"})
             return business
         else:
-            raise NotFound({"message": "Business not found"})    
+            raise NotFound({"message": "Business not found"})
+
 class APIBusinessCreateView(generics.CreateAPIView):
     # create a new business
     queryset = Business.objects.all()
@@ -249,10 +249,8 @@ class APIBusinessCreateView(generics.CreateAPIView):
         # Dynamically set the owner based on the current user
         serializer.save(owner=self.request.user)
 
-
-# class APIBusinessUpdateView(generics.UpdateAPIView):
 class APIBusinessUpdateView(generics.RetrieveUpdateAPIView):
-    # update a business
+    # class APIBusinessUpdateView(generics.UpdateAPIView):
     lookup_field = 'business_id'
     serializer_class = BusinessSerializer
     permission_classes = [IsAuthenticated]
