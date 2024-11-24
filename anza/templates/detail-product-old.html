@@ -1,0 +1,629 @@
+{% extends 'basepage.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ product.name }} - Bizmob</title>
+{% endblock %}
+{% block meta %}
+<meta property="og:title" content="Detail-Product - Anza" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+{% endblock %}
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{% endblock %}
+{% block style %}
+<style data-tag="reset-style-sheet">
+  html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+</style>
+<style data-tag="default-style-sheet">
+  html {
+    font-family: Inter;
+    font-size: 16px;
+  }
+
+  body {
+    font-weight: 400;
+    font-style:normal;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    line-height: 1.15;
+    color: var(--dl-color-theme-neutral-dark);
+    background-color: var(--dl-color-theme-neutral-light);
+
+    fill: var(--dl-color-theme-neutral-dark);
+  }
+</style>
+{% endblock %}
+{% block link %}
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/animate.css@4.1.1/animate.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
+  data-tag="font"
+/>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+/>
+<link rel="stylesheet" href="{% static './style.css' %}" />
+<link href="{% static './detail-product.css'%}" rel="stylesheet" />
+{% endblock %}
+{% block divclass %}detail-product-container{% endblock %}
+{% block content %}
+<div class="detail-product-container01">
+  <div class="detail-product-container02">
+    {% with product.is_cover_image as cover_image %}
+    <img
+      alt="image"
+      src="{{ cover_image.image.url|default:'https://images.unsplash.com/photo-1605548230624-8d2d0419c517?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE0fHxjb2tlfGVufDB8fHx8MTcyMDEwNzE5MHww&amp;ixlib=rb-4.0.3&amp;w=200' }}"
+      class="detail-product-image"
+    />
+    {% endwith %}
+  </div>
+  <div class="detail-product-container03">
+    <h1 class="detail-product-text">{{ product.name }}</h1>
+    <div class="detail-product-container04">
+      <div class="detail-product-container05">
+        <svg
+          viewBox="0 0 865.7188571428571 1024"
+          class="detail-product-icon"
+        >
+          <path
+            d="M256 256c0-40.571-32.571-73.143-73.143-73.143s-73.143 32.571-73.143 73.143 32.571 73.143 73.143 73.143 73.143-32.571 73.143-73.143zM865.714 585.143c0 19.429-8 38.286-21.143 51.429l-280.571 281.143c-13.714 13.143-32.571 21.143-52 21.143s-38.286-8-51.429-21.143l-408.571-409.143c-29.143-28.571-52-84-52-124.571v-237.714c0-40 33.143-73.143 73.143-73.143h237.714c40.571 0 96 22.857 125.143 52l408.571 408c13.143 13.714 21.143 32.571 21.143 52z"
+          ></path>
+        </svg>
+        <span class="detail-product-text01">Price: Ksh. {{ product.price }}</span>
+      </div>
+      <div class="detail-product-container06">
+        <svg
+          viewBox="0 0 950.8571428571428 1024"
+          class="detail-product-icon02"
+        >
+          <path
+            d="M649.714 573.714l174.857-169.714-241.143-35.429-108-218.286-108 218.286-241.143 35.429 174.857 169.714-41.714 240.571 216-113.714 215.429 113.714zM950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 15.429-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+          ></path>
+        </svg>
+        <span class="detail-product-text02">Average rating: {{ product.get_rating }}</span>
+      </div>
+    </div>
+    <div class="detail-product-container07">
+      <div class="detail-product-container08">
+        <svg viewBox="0 0 1024 1024" class="detail-product-icon04">
+          <path
+            d="M768 598v-86h-234l-86 86h320zM256 598h106l294-294q16-16 0-30l-76-76q-16-14-30 0l-294 294v106zM854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z"
+          ></path>
+        </svg>
+        <span class="detail-product-text03">
+          <span>Reviews: {{ rev_count }}</span>
+          <br />
+        </span>
+      </div>
+      <div class="detail-product-container09">
+        <svg viewBox="0 0 1024 1024" class="detail-product-icon06">
+          <path
+            d="M768 686q52 0 88 37t36 87q0 52-37 89t-87 37-87-37-37-89q0-20 2-28l-302-176q-38 34-88 34-52 0-90-38t-38-90 38-90 90-38q50 0 88 34l300-174q-4-20-4-30 0-52 38-90t90-38 90 38 38 90-38 90-90 38q-48 0-88-36l-300 176q4 20 4 30t-4 30l304 176q36-32 84-32z"
+          ></path></svg>
+          <svg
+          viewBox="0 0 877.7142857142857 1024"
+          class="detail-product-icon08"
+        >
+          <path
+            d="M713.143 73.143c90.857 0 164.571 73.714 164.571 164.571v548.571c0 90.857-73.714 164.571-164.571 164.571h-107.429v-340h113.714l17.143-132.571h-130.857v-84.571c0-38.286 10.286-64 65.714-64l69.714-0.571v-118.286c-12-1.714-53.714-5.143-101.714-5.143-101.143 0-170.857 61.714-170.857 174.857v97.714h-114.286v132.571h114.286v340h-304c-90.857 0-164.571-73.714-164.571-164.571v-548.571c0-90.857 73.714-164.571 164.571-164.571h548.571z"
+          ></path></svg>
+        <svg
+          viewBox="0 0 950.8571428571428 1024"
+          class="detail-product-icon10"
+        >
+          <path
+            d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    {% if product_owner == request.user %}
+    <div class="detail-product-container07">
+      <div class="detail-product-container08">
+        <span class="edit-pd-btn"><button id="edit-pd-btn">Edit</button></span>
+      </div>
+      <div class="detail-product-container09">
+        <button class="delete-pd-btn" id="delete-pd-btn">Delete</button>
+      </div>
+    </div>
+    <!-- Edit modal -->
+    <div id="edit-pd-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="update-review-form" action="" method="post">
+          {% csrf_token %}
+          <!-- Form content here -->
+          <div class="banner1-container2">
+            <div class="banner1-container3">
+              <label for="id_rating" class="banner1-text thq-heading-3">
+                <span>Rating</span>
+              </label>
+              <select
+                name="rating"
+                id="id_rating"
+                class="banner1-input thq-input"
+                required
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div class="banner1-container4">
+              <label for="id_review" class="banner1-text thq-heading-3">
+                <span>Review Title</span>
+              </label>
+              <textarea
+                name="review"
+                id="id_review"
+                class="banner1-input thq-input banner1-input1"
+              ></textarea>
+            </div>
+            <div class="banner1-container4">
+              <label for="id_review_description" class="banner1-text thq-heading-3">
+                <span>Review Description</span>
+              </label>
+              <textarea
+                name="review_description"
+                id="id_review_description"
+                class="banner1-input thq-input banner1-input1"
+              ></textarea>
+            </div>
+            <input type="hidden" name="review_id" id="id_review_id" value="">
+            <input type="hidden" name="product_id" id="id_product_id" value="{{ product.product_id }}">
+            <div class="banner1-container5">
+              <button
+                type="submit"
+                class="banner1-action thq-button-filled thq-button-animated"
+              >
+                <span class="banner1-text1 thq-body-small">
+                  <span>Submit</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Delete product modal -->
+    <div id="delete-pd-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="delete-pd-form" action="" method="post">
+          {% csrf_token %}
+          <p>Are you sure you want to delete this product?</p>
+          <div class="banner1-container5" id="confirm-delete-container">
+            <button type="submit" class="banner1-action thq-button-filled thq-button-animated">
+              <span class="banner1-text1 thq-body-small">
+                <span class="delete-bs-btn" id="delete-btn-modal">Delete</span>
+              </span>
+            </button>
+            <button type="button" class="close-modal banner1-action thq-button-filled thq-button-animated" id="exit-pd-modal-button">
+              <span class="banner1-text1 thq-body-small">
+                <span>Cancel</span>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<div class="banner1-container thq-section-padding">
+  <div class="banner1-max-width thq-section-max-width">
+    <div class="banner1-container1">
+      <h2 class="banner1-title thq-heading-2">
+        <span>Description</span>
+      </h2>
+      <h3 class="banner1-text thq-heading-3">
+        <span>
+          {{ product.description }}
+        </span>
+      </h3>
+    </div>
+  </div>
+</div>
+<div class="banner1-container thq-section-padding">
+  <div class="banner1-max-width thq-section-max-width">
+    <div class="banner1-container1">
+      <h2 class="banner1-title thq-heading-2">
+        <span>Reviews</span>
+      </h2>
+    </div>
+  </div>
+</div>
+<div class="banner1-container" style="width: 100%">
+  {% if product_owner != request.user %}
+  {% if self_review_bool is not True %}
+  <form method="post" id="review-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="banner1-max-width thq-section-max-width">
+      <div class="banner1-container1">
+        <h2 class="banner1-title thq-heading-2">
+          <span>Leave a Review</span>
+        </h2>
+        <div class="banner1-container2">
+          <div class="banner1-container3">
+            <label for="id_rating" class="banner1-text thq-heading-3">
+              <span>Rating</span>
+            </label>
+            <select
+              name="rating"
+              id="id_rating"
+              class="banner1-input thq-input"
+              required
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <div class="banner1-container4">
+            <label for="id_review" class="banner1-text thq-heading-3">
+              <span>Review Title</span>
+            </label>
+            <textarea
+              name="review"
+              id="id_review"
+              class="banner1-input thq-input banner1-input1"
+            ></textarea>
+          </div>
+          <div class="banner1-container4">
+            <label for="id_review_description" class="banner1-text thq-heading-3">
+              <span>Review Description</span>
+            </label>
+            <textarea
+              name="review_description"
+              id="id_review_description"
+              class="banner1-input thq-input banner1-input1"
+            ></textarea>
+          </div>
+          <div class="banner1-container5">
+            <button
+              type="submit"
+              class="banner1-action thq-button-filled thq-button-animated"
+            >
+              <span class="banner1-text1 thq-body-small">
+                <span>Submit</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  {% else %}
+  <div class="banner1-max-width thq-section-max-width">
+    <div class="banner1-container1">
+      <h2 class="banner1-title thq-heading-2">
+        <span>Your review:</span>
+      </h2>
+        <h1 class="detail-product-text06">
+          <span class="detail-product-text07">
+            {{ self_review.review }} | Rated: {{ self_review.rating }}
+          </span>
+          <br />
+        </h1>
+        <span class="detail-product-text09">
+          <span class="detail-product-text10">
+            {{ self_review.review_description }}
+          </span>
+          <span></span>
+        </span>
+        <div class="banner1-container5">
+          <button
+            class="banner1-action thq-button-filled thq-button-animated" id="edit-review-btn"
+          >
+            <span class="banner1-text1 thq-body-small">
+              <span>Edit Review</span>
+            </span>
+          </button>
+        </div>
+        <div class="banner1-container5">
+          <button
+            class="banner1-action thq-button-outline thq-button-animated" id="delete-review-btn"
+          >
+            <span class="banner1-text1 thq-body-small">
+              <span id="delete-btn-1">Delete Review</span>
+            </span>
+          </button>
+        </div>
+    </div>
+    <div id="reviewModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="update-review-form" action="" method="post">
+          {% csrf_token %}
+          <!-- Form content here -->
+          <div class="banner1-container2">
+            <div class="banner1-container3">
+              <label for="id_rating" class="banner1-text thq-heading-3">
+                <span>Rating</span>
+              </label>
+              <select
+                name="rating"
+                id="id_rating"
+                class="banner1-input thq-input"
+                required
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div class="banner1-container4">
+              <label for="id_review" class="banner1-text thq-heading-3">
+                <span>Review Title</span>
+              </label>
+              <textarea
+                name="review"
+                id="id_review"
+                class="banner1-input thq-input banner1-input1"
+              ></textarea>
+            </div>
+            <div class="banner1-container4">
+              <label for="id_review_description" class="banner1-text thq-heading-3">
+                <span>Review Description</span>
+              </label>
+              <textarea
+                name="review_description"
+                id="id_review_description"
+                class="banner1-input thq-input banner1-input1"
+              ></textarea>
+            </div>
+            <input type="hidden" name="review_id" id="id_review_id" value="">
+            <input type="hidden" name="product_id" id="id_product_id" value="{{ product.product_id }}">
+            <div class="banner1-container5">
+              <button
+                type="submit"
+                class="banner1-action thq-button-filled thq-button-animated"
+              >
+                <span class="banner1-text1 thq-body-small">
+                  <span>Submit</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Delete Review Modal -->
+    <div id="deleteReviewModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="delete-review-form" action="" method="post">
+          {% csrf_token %}
+          <p>Are you sure you want to delete this review?</p>
+          <div class="banner1-container5" id="confirm-delete-container">
+            <button type="submit" class="banner1-action thq-button-filled thq-button-animated">
+              <span class="banner1-text1 thq-body-small">
+                <span id="delete-btn-2">Delete</span>
+              </span>
+            </button>
+            <button type="button" class="close-modal banner1-action thq-button-filled thq-button-animated" id="exit-modal-button">
+              <span class="banner1-text1 thq-body-small">
+                <span>Cancel</span>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+  {% endif %}
+  {% endif %}
+</div>
+{% for review in reviews %}
+<div class="detail-product-container10">
+  <h1 class="detail-product-text06">
+    <span class="detail-product-text07">
+      {{ review.review }} | Rated: {{ review.rating }}
+    </span>
+    <br />
+  </h1>
+  <span class="detail-product-text09">
+    <span class="detail-product-text10">
+      {{ review.review_description }}
+    </span>
+    <span></span>
+  </span>
+</div>
+{% endfor %}
+{% endblock %}
+{% block scripts_end %}
+<script
+  defer=""
+  src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById("review-form");
+    if (form) {
+      form.action = window.location.pathname + "review/create/";
+    }
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $("#review-form").submit(function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const formData = new FormData(this)
+      $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          console.log(response);
+          var currentUrl = window.location.pathname;
+          window.location = currentUrl;
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    });
+  })
+</script>
+<script>
+  // Get the modal
+  var editModal = document.getElementById("reviewModal");
+
+  // Get the button that opens the modal
+  var editBtn = document.getElementById("edit-review-btn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal & update text fields
+  editBtn.onclick = function() {
+    editModal.style.display = "block";
+    const id_rating = document.getElementById("id_rating");
+    id_rating.value = "{{ self_review.rating }}";
+    const id_review = document.getElementById("id_review");
+    id_review.value = "{{ self_review.review }}";
+    const id_review_description = document.getElementById("id_review_description");
+    id_review_description.value = "{{ self_review.review_description }}";
+    const review_id = document.getElementById("id_review_id");
+    review_id.value = "{{ self_review.id }}";
+    document.getElementById("update-review-form").action = "/products/review/{{ self_review.id }}/update/";
+  }
+
+  // When the user clicks on <span> (x) close the modal
+  span.onclick = function() {
+    editModal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == editModal) {
+      editModal.style.display = "none";
+    }
+  }
+</script>
+<script>
+  // Get the modal
+  var delModal = document.getElementById("deleteReviewModal");
+
+  // Get the button that opens the modal
+  var delBtn = document.getElementById("delete-review-btn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[1];
+  const closeBtn = document.getElementById("exit-modal-button");
+
+  delBtn.onclick = function() {
+    delModal.style.display = "block";
+    document.getElementById("delete-review-form").action = "/products/review/{{ self_review.id }}/delete/";
+  }
+  span.onclick = function() {
+    delModal.style.display = "none";
+  }
+  closeBtn.onclick = function() {
+    delModal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == delModal) {
+      delModal.style.display = "none";
+    }
+  }
+</script>
+<script>
+  // Get the modal
+  var deletePDmodal = document.getElementById("delete-pd-modal");
+
+  // Get the button that opens the modal
+  var deletePDbtn = document.getElementById("delete-pd-btn");
+
+  // Get the <span> element that closes the modal
+  var closeSpan = document.getElementsByClassName("close")[0];
+  const closeModalBtn = document.getElementById("exit-pd-modal-button");
+
+  deletePDbtn.onclick = function() {
+    deletePDmodal.style.display = "block";
+    document.getElementById("delete-pd-form").action = "/products/{{ product.id }}/delete/";
+  }
+  closeSpan.onclick = function() {
+    deletePDmodal.style.display = "none";
+  }
+  closeModalBtn.onclick = function() {
+    deletePDmodal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == deletePDmodal) {
+      deletePDmodal.style.display = "none";
+    }
+  }
+</script>
+<script>
+  $(document).ready(function() {
+    $("#update-review-form").submit(function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const formData = new FormData(this)
+      $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          console.log(response);
+          var currentUrl = window.location.pathname;
+          window.location = currentUrl;
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    });
+  })
+</script>
+{% endblock %}
