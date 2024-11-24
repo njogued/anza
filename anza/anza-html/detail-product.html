@@ -35,7 +35,7 @@
         <button type="button" id="deleteProductModalTrigger" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-bs-product="{{ product.product_id }}">Delete</button>
       </div>
       {% else %}
-      <h3 class="text-center my-2 col-12">Business info</h3>
+      <h3 class="text-center my-2 col-12">Product Information</h3>
       {% endif %}
   </header>
   <div class="row d-flex justify-content-center m-2 pb-2">
@@ -45,7 +45,8 @@
           alt="image"
           src="{{ cover_image.image.url|default:'https://images.unsplash.com/photo-1605548230624-8d2d0419c517?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE0fHxjb2tlfGVufDB8fHx8MTcyMDEwNzE5MHww&amp;ixlib=rb-4.0.3&amp;w=200' }}"
           class="detail-product-image"
-        />
+          style="max-width: 100%; max-height: 300px; object-fit: contain;"
+          />
         {% endwith %}
         <figcaption class="mt-2 figure-caption">{{ product.name }}</figcaption>
       </div>
@@ -101,87 +102,53 @@
   </div>
   </div>
 
-<header class="row mt-2">
-  <h4 class="border-bottom border-top border-success text-center mx-4 col-12 py-2">Description</h4>
+<header class="row mt-2 mx-4">
+  <h4 class="col-12 border-bottom border-top border-success text-center px-4 py-2">Description</h4>
 </header>
-<div class="d-flex">
-  <div class="col-12">
-    <h5 class="text-center align-items-center justify-content-center">
-      <span class="text-center align-items-center justify-content-center">
-        {{ product.description }}
-      </span>
-    </h5>
-  </div>
+<div class="d-flex mx-4 align-items-center justify-content-center">
+  <h5 class="text-center">
+    {{ product.description }}
+  </h5>
 </div>
 
-<header class="row p-1 mt-1">
-  <h4 class="border-bottom border-top border-success text-center my-2 mx-4 col-12 py-2">Reviews</h4>
+<header class="row p-1 mt-1 mx-4">
+  <h4 class="col-12 border-bottom border-top border-success text-center my-2 px-4 py-2">Reviews</h4>
 </header>
+
 <div class="w-100">
 {% if product_owner != request.user %}
 {% if self_review_bool is not True %}
-  <form method="post" id="review-form" enctype="multipart/form-data">
+  <form class="mx-4" method="post" id="create-review-form" action="/products/{{ product.product_id }}/review/create/" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="banner1-max-width thq-section-max-width">
-      <div class="banner1-container1">
-        <h2 class="banner1-title thq-heading-2">
-          <span>Leave a Review</span>
-        </h2>
-        <div class="banner1-container2">
-          <div class="banner1-container3">
-            <label for="id_rating" class="banner1-text thq-heading-3">
-              <span>Rating</span>
-            </label>
-            <select
-              name="rating"
-              id="id_rating"
-              class="banner1-input thq-input"
-              required
-            >
-              <option value="10">10</option>
-              <option value="9">9</option>
-              <option value="8">8</option>
-              <option value="7">7</option>
-              <option value="6">6</option>
-              <option value="5">5</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-            </select>
-          </div>
-          <div class="banner1-container4">
-            <label for="id_review" class="banner1-text thq-heading-3">
-              <span>Review Title</span>
-            </label>
-            <textarea
-              name="review"
-              id="id_review"
-              class="banner1-input thq-input banner1-input1"
-            ></textarea>
-          </div>
-          <div class="banner1-container4">
-            <label for="id_review_description" class="banner1-text thq-heading-3">
-              <span>Review Description</span>
-            </label>
-            <textarea
-              name="review_description"
-              id="id_review_description"
-              class="banner1-input thq-input banner1-input1"
-            ></textarea>
-          </div>
-          <div class="banner1-container5">
-            <button
-              type="submit"
-              class="banner1-action thq-button-filled thq-button-animated"
-            >
-              <span class="banner1-text1 thq-body-small">
-                <span>Submit</span>
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
+    <h5 class="text-center">Leave a Review</h5>
+    <div class="mb-3">
+      <label for="id_rating" class="form-label">Rating</label>
+      <select type="email" class="form-control" id="id_rating" name="rating" aria-describedby="emailHelp">
+        <option value="10">10</option>
+        <option value="9">9</option>
+        <option value="8">8</option>
+        <option value="7">7</option>
+        <option value="6">6</option>
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+        </select>
+      <div id="rating-help" class="form-text">10 means excellent, 1 means mediocre.</div>
+    </div>
+    <div class="mb-3">
+      <label for="id_review" class="form-label">Review Title</label>
+      <input type="text" class="form-control" id="id_review" name="review">
+      <div id="review-help" class="form-text">Keep it short and sweet.</div>
+    </div>
+    <div class="mb-3">
+      <label for="id_review_description" class="form-label">Review Description</label>
+      <textarea class="form-control" id="id_review_description" name="review_description" rows="2"></textarea>
+      <div id="review-desc-help" class="form-text">Let it all out, say it as it is.</div>
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary w-100">Submit</button>
     </div>
   </form>
   {% else %}
@@ -193,12 +160,10 @@
 <p>
 {{ self_review.review_description }}
 </p>
-<button class="banner1-action thq-button-filled thq-button-animated" id="edit-review-btn">
+<button class="btn btn-primary" id="edit-review-btn">
     <span>Edit Review</span>
 </button>
-<button class="banner1-action thq-button-outline thq-button-animated" id="delete-review-btn">
-    <span id="delete-btn-1">Delete Review</span>
-</button>
+<button type="button" class="btn btn-danger" id="deleteReviewModalTrigger" data-bs-toggle="modal" data-bs-target="#deleteReviewModal" data-bs-review="{{ self_review.id }}">Delete Review</button>
 
 <div id="reviewModal" class="modal">
   <div class="modal-content">
@@ -265,26 +230,25 @@
     </form>
   </div>
 </div>
-<!-- Delete Review Modal -->
-<div id="deleteReviewModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form id="delete-review-form" action="" method="post">
-      {% csrf_token %}
-      <p>Are you sure you want to delete this review?</p>
-      <div class="banner1-container5" id="confirm-delete-container">
-        <button type="submit" class="banner1-action thq-button-filled thq-button-animated">
-          <span class="banner1-text1 thq-body-small">
-            <span id="delete-btn-2">Delete</span>
-          </span>
-        </button>
-        <button type="button" class="close-modal banner1-action thq-button-filled thq-button-animated" id="exit-modal-button">
-          <span class="banner1-text1 thq-body-small">
-            <span>Cancel</span>
-          </span>
-        </button>
+
+<div class="modal fade" id="deleteReviewModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete your review?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    </form>
+      <div class="modal-body">
+        <form id="delete-review-form" action="" method="post">
+          {% csrf_token %}
+          <p>Are you sure you want to delete this review?</p>
+          <div class="d-flex justify-content-around">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -363,30 +327,6 @@
 {% endif %}
 {% endblock %}
 {% block scripts_end %}
-<script>
-  $(document).ready(function() {
-    $("#review-form").submit(function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const formData = new FormData(this)
-      $.ajax({
-        type: "POST",
-        url: $(this).attr("action"),
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-          console.log(response);
-          var currentUrl = window.location.pathname;
-          window.location = currentUrl;
-        },
-        error: function(error) {
-          console.log(error);
-        }
-      });
-    });
-  })
-</script>
 <!-- <script>
   // Get the modal
   var editreviewModal = document.getElementById("reviewModal");
@@ -424,33 +364,6 @@
   }
 </script> -->
 <script>
-  // Get the modal
-  var delModal = document.getElementById("deleteReviewModal");
-
-  // Get the button that opens the modal
-  var delBtn = document.getElementById("delete-review-btn");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[1];
-  const closeBtn = document.getElementById("exit-modal-button");
-
-  delBtn.onclick = function() {
-    delModal.style.display = "block";
-    document.getElementById("delete-review-form").action = "/products/review/{{ self_review.id }}/delete/";
-  }
-  span.onclick = function() {
-    delModal.style.display = "none";
-  }
-  closeBtn.onclick = function() {
-    delModal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == delModal) {
-      delModal.style.display = "none";
-    }
-  }
-</script>
-<script>
   $(document).ready(function() {
     $("#update-review-form").submit(function(e) {
       e.preventDefault();
@@ -480,28 +393,40 @@
   const deletePDmodal = document.getElementById('deleteProductModal');
   const editProductModalTrigger = document.getElementById('editProductModalTrigger');
   const deleteProductModalTrigger = document.getElementById('deleteProductModalTrigger');
-  editProductModalTrigger.addEventListener('click', function (event) {
-      const button = editProductModalTrigger // Button that triggered the modal
-      const productId = button.getAttribute('data-product-id');
-      const productName = button.getAttribute('data-name');
-      const productDescription = button.getAttribute('data-description');
-      const productPrice = button.getAttribute('data-price');
-      const productQuantity = button.getAttribute('data-quantity');
-      const productCategory = button.getAttribute('data-category');
-      // Populate the form fields with the current product data
-      document.getElementById('id_name').value = productName;
-      document.getElementById('id_description').value = productDescription;
-      document.getElementById('id_price').value = productPrice;
-      document.getElementById('id_quantity').value = productQuantity;
-      document.getElementById('id_category').value = productCategory;
-      document.getElementById('updateProductForm').action = `/products/update/${productId}/`;
-      // find a way to fix this later
-      document.getElementsByClassName("modal-backdrop")[0].hidden = true;
-  });
-  deleteProductModalTrigger.addEventListener('click', function (event) {
-      const productId = this.getAttribute('data-bs-product');
-      document.getElementById('delete-pd-form').action = `/products/delete/${productId}/`;
-      document.getElementsByClassName("modal-backdrop")[0].hidden = true;
-  });
+  const deleteReviewModalTrigger = document.getElementById('deleteReviewModalTrigger');
+  if (editProductModalTrigger) {
+    editProductModalTrigger.addEventListener('click', function (event) {
+        const button = editProductModalTrigger // Button that triggered the modal
+        const productId = button.getAttribute('data-product-id');
+        const productName = button.getAttribute('data-name');
+        const productDescription = button.getAttribute('data-description');
+        const productPrice = button.getAttribute('data-price');
+        const productQuantity = button.getAttribute('data-quantity');
+        const productCategory = button.getAttribute('data-category');
+        // Populate the form fields with the current product data
+        document.getElementById('id_name').value = productName;
+        document.getElementById('id_description').value = productDescription;
+        document.getElementById('id_price').value = productPrice;
+        document.getElementById('id_quantity').value = productQuantity;
+        document.getElementById('id_category').value = productCategory;
+        document.getElementById('updateProductForm').action = `/products/update/${productId}/`;
+        // find a way to fix this later
+        document.getElementsByClassName("modal-backdrop")[0].hidden = true;
+    });
+  }
+  if (deleteProductModalTrigger) {
+    deleteProductModalTrigger.addEventListener('click', function (event) {
+        const productId = this.getAttribute('data-bs-product');
+        document.getElementById('delete-pd-form').action = `/products/delete/${productId}/`;
+        document.getElementsByClassName("modal-backdrop")[0].hidden = true;
+    });
+  }
+  if (deleteReviewModalTrigger) {
+    deleteReviewModalTrigger.addEventListener('click', function (event) {
+        const reviewId = this.getAttribute('data-bs-review');
+        document.getElementsByClassName("modal-backdrop")[0].hidden = true;
+        document.getElementById('delete-review-form').action = `/products/review/${reviewId}/delete/`;
+    });
+  }
 </script>
 {% endblock %}
