@@ -75,12 +75,12 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'delete_product.html'
     context_object_name = 'product'
-    success_url = reverse_lazy('home')
     pk_url_kwarg = 'product_id'
     login_url = '/users/login'
 
     def dispatch(self, request, *args, **kwargs):
         product = self.get_object()
+        self.success_url = "/business/" + str(product.business.business_id)
         if product.business.owner != self.request.user:
             return HttpResponseForbidden("You are not allowed to delete business")
         messages.success(request, 'Product deleted successfully')
@@ -134,8 +134,8 @@ class UpdateReviewView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'review_id'
     login_url = '/users/login'
 
-    def get_success_url(self):
-        return reverse_lazy('detail_product', kwargs={'product_id': self.object.product.product_id})
+    def get_success_url(self, product_id):
+        return reverse_lazy('detail_product', kwargs={'product_id': product_id})
     
     def form_invalid(self, form):
         if form.errors:
@@ -174,7 +174,7 @@ class UpdateReviewView(LoginRequiredMixin, UpdateView):
         review.save()
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({"message": "Success"}, status=200)
-        return redirect(self.get_success_url())
+        return redirect(self.get_success_url(review.product.product_id))
     
 class DeleteReviewView(LoginRequiredMixin, DeleteView):
     # A view to delete a review

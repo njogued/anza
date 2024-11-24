@@ -106,128 +106,110 @@
   <h4 class="col-12 border-bottom border-top border-success text-center px-4 py-2">Description</h4>
 </header>
 <div class="d-flex mx-4 align-items-center justify-content-center">
-  <h5 class="text-center">
+  <h5 class="text-center my-2">
     {{ product.description }}
   </h5>
 </div>
 
-<header class="row p-1 mt-1 mx-4">
-  <h4 class="col-12 border-bottom border-top border-success text-center my-2 px-4 py-2">Reviews</h4>
+<header class="row p-1 mx-4">
+  <h4 class="col-12 border-bottom border-top border-success text-center mb-2 px-4 py-2">Reviews</h4>
 </header>
 
 <div class="w-100">
 {% if product_owner != request.user %}
 {% if self_review_bool is not True %}
-  <form class="mx-4" method="post" id="create-review-form" action="/products/{{ product.product_id }}/review/create/" enctype="multipart/form-data">
-    {% csrf_token %}
-    <h5 class="text-center">Leave a Review</h5>
-    <div class="mb-3">
-      <label for="id_rating" class="form-label">Rating</label>
-      <select type="email" class="form-control" id="id_rating" name="rating" aria-describedby="emailHelp">
-        <option value="10">10</option>
-        <option value="9">9</option>
-        <option value="8">8</option>
-        <option value="7">7</option>
-        <option value="6">6</option>
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
-        </select>
-      <div id="rating-help" class="form-text">10 means excellent, 1 means mediocre.</div>
-    </div>
-    <div class="mb-3">
-      <label for="id_review" class="form-label">Review Title</label>
-      <input type="text" class="form-control" id="id_review" name="review">
-      <div id="review-help" class="form-text">Keep it short and sweet.</div>
-    </div>
-    <div class="mb-3">
-      <label for="id_review_description" class="form-label">Review Description</label>
-      <textarea class="form-control" id="id_review_description" name="review_description" rows="2"></textarea>
-      <div id="review-desc-help" class="form-text">Let it all out, say it as it is.</div>
-    </div>
-    <div class="mb-3">
-      <button type="submit" class="btn btn-primary w-100">Submit</button>
-    </div>
-  </form>
+<form class="mx-4  border-bottom border-success pb-2" method="post" id="create-review-form" action="/products/{{ product.product_id }}/review/create/" enctype="multipart/form-data">
+  {% csrf_token %}
+  <h5 class="text-center">Leave a Review</h5>
+  <div class="mb-3">
+    <label for="id_rating" class="form-label">Rating</label>
+    <select type="email" class="form-control" id="id_rating" name="rating" aria-describedby="emailHelp">
+      <option value="10">10</option>
+      <option value="9">9</option>
+      <option value="8">8</option>
+      <option value="7">7</option>
+      <option value="6">6</option>
+      <option value="5">5</option>
+      <option value="4">4</option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+      <option value="1">1</option>
+      </select>
+    <div id="rating-help" class="form-text">10 means excellent, 1 means mediocre.</div>
+  </div>
+  <div class="mb-3">
+    <label for="id_review" class="form-label">Review Title</label>
+    <input type="text" class="form-control" id="id_review" name="review">
+    <div id="review-help" class="form-text">Keep it short and sweet.</div>
+  </div>
+  <div class="mb-3">
+    <label for="id_review_description" class="form-label">Review Description</label>
+    <textarea class="form-control" id="id_review_description" name="review_description" rows="2"></textarea>
+    <div id="review-desc-help" class="form-text">Let it all out, say it as it is.</div>
+  </div>
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary w-100">Submit</button>
+  </div>
+</form>
   {% else %}
-<h5>
-  Your review:
-</h5>
-<p>{{ self_review.review }} | Rated: {{ self_review.rating }}
-</p>
-<p>
-{{ self_review.review_description }}
-</p>
-<button class="btn btn-primary" id="edit-review-btn">
-    <span>Edit Review</span>
-</button>
-<button type="button" class="btn btn-danger" id="deleteReviewModalTrigger" data-bs-toggle="modal" data-bs-target="#deleteReviewModal" data-bs-review="{{ self_review.id }}">Delete Review</button>
+<div class="col-12 mx-4 border-bottom border-success pb-2">
+  <h5>Your review:</h5>
+  <p>{{ self_review.review }} | Rated: {{ self_review.rating }}</p>
+  <p>{{ self_review.review_description }}</p>
+  <button type="button" id="editReviewModalTrigger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editReviewModal" 
+    data-review-id="{{ self_review.id }}" 
+    data-review-title="{{ self_review.review }}" 
+    data-review-description="{{ self_review.review_description }}" 
+    data-review-rating="{{ self_review.rating }}">
+    Edit Review
+  </button>
+  <button type="button" class="btn btn-danger mx-2" id="deleteReviewModalTrigger" data-bs-toggle="modal" data-bs-target="#deleteReviewModal" data-bs-review="{{ self_review.id }}">Delete Review</button>
+</div>
 
-<div id="reviewModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form id="update-review-form" action="" method="post">
-      {% csrf_token %}
-      <!-- Form content here -->
-      <div class="banner1-container2">
-        <div class="banner1-container3">
-          <label for="id_rating" class="banner1-text thq-heading-3">
-            <span>Rating</span>
-          </label>
-          <select
-            name="rating"
-            id="id_rating"
-            class="banner1-input thq-input"
-            required
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-        </div>
-        <div class="banner1-container4">
-          <label for="id_review" class="banner1-text thq-heading-3">
-            <span>Review Title</span>
-          </label>
-          <textarea
-            name="review"
-            id="id_review"
-            class="banner1-input thq-input banner1-input1"
-          ></textarea>
-        </div>
-        <div class="banner1-container4">
-          <label for="id_review_description" class="banner1-text thq-heading-3">
-            <span>Review Description</span>
-          </label>
-          <textarea
-            name="review_description"
-            id="id_review_description"
-            class="banner1-input thq-input banner1-input1"
-          ></textarea>
-        </div>
-        <input type="hidden" name="review_id" id="id_review_id" value="">
-        <input type="hidden" name="product_id" id="id_product_id" value="{{ product.product_id }}">
-        <div class="banner1-container5">
-          <button
-            type="submit"
-            class="banner1-action thq-button-filled thq-button-animated"
-          >
-            <span class="banner1-text1 thq-body-small">
-              <span>Submit</span>
-            </span>
-          </button>
-        </div>
+<div class="modal fade" id="editReviewModal" tabindex="-1" aria-labelledby="editReviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editReviewModalLabel">Edit Review</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Review Update Form -->
+              <form method="post" id="edit-review-form" action="">
+                {% csrf_token %}
+                <h5 class="text-center">Leave a Review</h5>
+                <div class="mb-3">
+                  <label for="id_edit_rating" class="form-label">Rating</label>
+                  <select type="email" class="form-control" id="id_edit_rating" name="rating" aria-describedby="emailHelp">
+                    <option value="10">10</option>
+                    <option value="9">9</option>
+                    <option value="8">8</option>
+                    <option value="7">7</option>
+                    <option value="6">6</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                    </select>
+                  <div id="rating-help" class="form-text">10 means excellent, 1 means mediocre.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="id_edit_review" class="form-label">Review Title</label>
+                  <input type="text" class="form-control" id="id_edit_review" name="review">
+                  <div id="review-help" class="form-text">Keep it short and sweet.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="id_edit_review_description" class="form-label">Review Description</label>
+                  <textarea class="form-control" id="id_edit_review_description" name="review_description" rows="2"></textarea>
+                  <div id="review-desc-help" class="form-text">Let it all out, say it as it is.</div>
+                </div>
+                <div class="mb-3">
+                  <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </div>
+              </form>
+          </div>
       </div>
-    </form>
   </div>
 </div>
 
@@ -255,10 +237,12 @@
 {% endif %}
 {% endif %}
 </div>
+<div class="px-4 py-2">
 {% for review in reviews %}
 <h4>{{ review.review }} | Rated: {{ review.rating }}</h4>
-<span>{{ review.review_description }}</span>
+<p class="py-2 border-bottom border-success">{{ review.review_description }}</p>
 {% endfor %}
+</div>
 {% if product_owner == request.user %}
 <!-- Product edit modal -->
 <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
@@ -327,66 +311,6 @@
 {% endif %}
 {% endblock %}
 {% block scripts_end %}
-<!-- <script>
-  // Get the modal
-  var editreviewModal = document.getElementById("reviewModal");
-
-  // Get the button that opens the modal
-  var editBtn = document.getElementById("edit-review-btn");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks the button, open the modal & update text fields
-  editBtn.onclick = function() {
-    editModal.style.display = "block";
-    const id_rating = document.getElementById("id_rating");
-    id_rating.value = "{{ self_review.rating }}";
-    const id_review = document.getElementById("id_review");
-    id_review.value = "{{ self_review.review }}";
-    const id_review_description = document.getElementById("id_review_description");
-    id_review_description.value = "{{ self_review.review_description }}";
-    const review_id = document.getElementById("id_review_id");
-    review_id.value = "{{ self_review.id }}";
-    document.getElementById("update-review-form").action = "/products/review/{{ self_review.id }}/update/";
-  }
-
-  // When the user clicks on <span> (x) close the modal
-  span.onclick = function() {
-    editModal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == editModal) {
-      editModal.style.display = "none";
-    }
-  }
-</script> -->
-<script>
-  $(document).ready(function() {
-    $("#update-review-form").submit(function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const formData = new FormData(this)
-      $.ajax({
-        type: "POST",
-        url: $(this).attr("action"),
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-          console.log(response);
-          var currentUrl = window.location.pathname;
-          window.location = currentUrl;
-        },
-        error: function(error) {
-          console.log(error);
-        }
-      });
-    });
-  })
-</script>
 <script>
   // Pre-fill the form when the modal is triggered
   const editModal = document.getElementById('editProductModal');
@@ -394,6 +318,7 @@
   const editProductModalTrigger = document.getElementById('editProductModalTrigger');
   const deleteProductModalTrigger = document.getElementById('deleteProductModalTrigger');
   const deleteReviewModalTrigger = document.getElementById('deleteReviewModalTrigger');
+  const editReviewModalTrigger = document.getElementById('editReviewModalTrigger');
   if (editProductModalTrigger) {
     editProductModalTrigger.addEventListener('click', function (event) {
         const button = editProductModalTrigger // Button that triggered the modal
@@ -426,6 +351,19 @@
         const reviewId = this.getAttribute('data-bs-review');
         document.getElementsByClassName("modal-backdrop")[0].hidden = true;
         document.getElementById('delete-review-form').action = `/products/review/${reviewId}/delete/`;
+    });
+  }
+  if (editReviewModalTrigger) {
+    editReviewModalTrigger.addEventListener('click', function (event) {
+        const reviewId = this.getAttribute('data-review-id');
+        const reviewTitle = this.getAttribute('data-review-title');
+        const reviewDescription = this.getAttribute('data-review-description');
+        const reviewRating = this.getAttribute('data-review-rating');
+        document.getElementById('id_edit_review').value = reviewTitle;
+        document.getElementById('id_edit_review_description').value = reviewDescription;
+        document.getElementById('id_edit_rating').value = reviewRating;
+        document.getElementById('edit-review-form').action = `/products/review/${reviewId}/update/`;
+        document.getElementsByClassName("modal-backdrop")[0].hidden = true;
     });
   }
 </script>
