@@ -18,4 +18,19 @@ class BusinessUpdateForm(forms.ModelForm):
     # A custom form to handle business updates
     class Meta:
         model = Business
-        fields = ('name', 'address', 'phone_number', 'email', 'website', 'description', 'logo', 'categories', 'facebook_link', 'twitter_link', 'instagram_link', 'linkedin_link', 'tiktok_link')
+        fields = (
+            'name', 'address', 'phone_number', 'email', 'website', 
+            'description', 'logo', 'categories', 'facebook_link', 
+            'twitter_link', 'instagram_link', 'linkedin_link', 'tiktok_link'
+        )
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set fields to optional
+        optional_fields = [
+            'address', 'phone_number', 'email', 'website', 
+            'description', 'logo', 'categories', 'facebook_link', 
+            'twitter_link', 'instagram_link', 'linkedin_link', 'tiktok_link'
+        ]
+        for field in optional_fields:
+            self.fields[field].required = False

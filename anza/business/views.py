@@ -23,6 +23,7 @@ from products.serializer import ProductSerializer
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
+from django.contrib import messages
 
 # Create your views here.
 class CreateBusinessView(LoginRequiredMixin, CreateView):
@@ -34,6 +35,9 @@ class CreateBusinessView(LoginRequiredMixin, CreateView):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             business = form.save(commit=False)
+            categories = form.cleaned_data.get('categories')
+            if categories is not None:
+                business.categories.set(categories)
             business.owner = curr_user
             business.save()
             success_url = reverse('detail_business', kwargs={'business_id': business.business_id})
@@ -50,6 +54,7 @@ class BusinessDetailView(DetailView):
     template_name = "detail-businesses.html"
     context_object_name = "business"
     pk_url_kwarg = 'business_id'
+    form_class = BusinessUpdateForm
     
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
@@ -77,9 +82,11 @@ class BusinessDetailView(DetailView):
             num_reviews = rating_info['num_reviews'] or 0
             context['num_products'] = num_products
             context['num_reviews'] = num_reviews
-            context['avg_rating'] = avg_rating
+            context['avg_rating'] = round(avg_rating,2)
             context['reviews'] = reviews
             context['products'] = products
+            context['form'] = self.form_class
+            print(business.categories)
             info = {
                 "user": business.owner.id,
                 "message": f"new business page visit for {business.name}"
@@ -103,26 +110,52 @@ class BusinessListView(ListView):
     def get_queryset(self):
         return Business.objects.filter(archived=False)
 
-class BusinessUpdateView(UpdateView):
+class BusinessUpdateView(LoginRequiredMixin, UpdateView):
     model = Business
     form_class = BusinessUpdateForm
     template_name = "update_business.html"
     context_object_name = 'business'
     pk_url_kwarg = 'business_id'
+    login_url = '/users/login'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj.archived:
+            obj = None
+        return obj
 
     def get_success_url(self):
         return reverse_lazy('detail_business', kwargs={'business_id': self.object.business_id})
     
     def dispatch(self, request, *args, **kwargs):
         business = self.get_object()
+        if business is None:
+            return HttpResponseForbidden("You are not allowed to update this business")
         if business.owner != self.request.user:
             return HttpResponseForbidden("You are not allowed to update business")
+        self.success_url = "/business/" + str(business.business_id)
         return super().dispatch(request, *args, **kwargs)
     
-    def form_valid(self, form):
-        business = form.save()
-        business.save()
-        return redirect(self.get_success_url())
+    def post(self, request, *args, **kwargs):
+        business = self.get_object()
+        form = self.form_class(request.POST, request.FILES, instance=business)
+        if form.is_valid():
+            business = form.save()
+            print(business)
+            # categories = form.cleaned_data.get('categories')
+            # if categories is not None:
+            #     business.categories.set(categories)
+            business.save()
+            messages.success(request, 'Business has been updated')
+            return redirect(self.success_url)
+        for error in form.errors:
+            messages.error(request, error)
+        return redirect(self.success_url)
+    
+    # def form_valid(self, form):
+    #     business = form.save()
+    #     business.save()
+    #     return redirect(self.success_url)
 
 class BusinessDeleteView(View):
     template_name = "delete_business.html"
