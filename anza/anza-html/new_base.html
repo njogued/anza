@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -139,14 +140,14 @@
           </footer>
     </div>
     </body>
-    <script src="/static/allscript.js"></script>
+    <script src="{% static 'allscript.js' %}"></script>
     {% if user.is_authenticated %}
-    <script src="/static/authScript.js"></script>
+    <script src="{% static 'authScript.js' %}"></script>
     {% endif %}
     {% block scripts_end %}
     {% endblock %}
     <script type="text/javascript">
-      let url = `wss://${window.location.host}/ws/notifications/`;
+      let url = `ws://${window.location.host}/ws/notifications/`;
       const ws = new WebSocket(url);
       ws.onopen = function (event) {
         console.log("Connected to the websocket server");

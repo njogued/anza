@@ -113,3 +113,495 @@ Traceback (most recent call last):
   File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 513, in stored_name
     raise ValueError(
 ValueError: Missing staticfiles manifest entry for './style.css'
+Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/Documents/Code/anza/anza/users/views.py", line 58, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/decorators/debug.py", line 92, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/auth/views.py", line 90, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/Documents/Code/anza/anza/users/views.py", line 53, in get
+    return render(request, self.template_name, {"form": self.form_class})
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 116, in render
+    url = self.url(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 113, in url
+    return self.handle_simple(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for './style.css'
+Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/Documents/Code/anza/anza/users/views.py", line 58, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/decorators/debug.py", line 92, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/auth/views.py", line 90, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/Documents/Code/anza/anza/users/views.py", line 53, in get
+    return render(request, self.template_name, {"form": self.form_class})
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 116, in render
+    url = self.url(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 113, in url
+    return self.handle_simple(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for './style.css'
+Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/Documents/Code/anza/anza/users/views.py", line 58, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/decorators/debug.py", line 92, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/auth/views.py", line 90, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/Users/edwardmuriuki/Documents/Code/anza/anza/users/views.py", line 53, in get
+    return render(request, self.template_name, {"form": self.form_class})
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 116, in render
+    url = self.url(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 113, in url
+    return self.handle_simple(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for './style.css'
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 116, in render
+    url = self.url(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 113, in url
+    return self.handle_simple(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for './style.css'
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 116, in render
+    url = self.url(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 113, in url
+    return self.handle_simple(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for './style.css'
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 116, in render
+    url = self.url(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 113, in url
+    return self.handle_simple(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for './style.css'
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 116, in render
+    url = self.url(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 113, in url
+    return self.handle_simple(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for './style.css'
+Internal Server Error: /products/all/
+Traceback (most recent call last):
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 116, in render
+    url = self.url(context)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 113, in url
+    return self.handle_simple(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/templatetags/static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "/Users/edwardmuriuki/.pyenv/versions/3.9.6/lib/python3.9/site-packages/django/contrib/staticfiles/storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for './list-products.css'
+Internal Server Error: /ws/notifications/
+Internal Server Error: /media/site_files/site.webmanifest
